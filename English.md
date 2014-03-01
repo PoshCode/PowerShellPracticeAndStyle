@@ -187,7 +187,44 @@ it is not C# so there is no need to add it to the line endings.
     
   }
   ```
-* For Advanced Functions always use cmlet
+* For Advanced Functions always use CmdletBinding attribute shoudl always 
+  have at least a Process {} code block if any parameters takes values
+  from the Pipeline.
+
+* Try to include in Advanced Function a OutputType attribute if it returns
+  an object or collection of objects. If the function returns different
+  object types depending on the parameter set provide one per parameter set
+
+  ```PowerShell
+  [OutputType([<TypeLiteral>], ParameterSetName="<Name>")]
+  [OutputType("<TypeNameString>", ParameterSetName="<Name>")]
+  ```
+
+* If ParameterSetName is used in any of the parameter provide alwats a
+  DefaultParameterSetName in the CmdletBinding attribute.
+  
+  ```PowerShell
+   function Get-User
+   {
+       [CmdletBinding(DefaultParameterSetName="ID")]
+  
+       [OutputType("System.Int32", ParameterSetName="ID")]
+       [OutputType([String], ParameterSetName="Name")]
+  
+       Param (      
+           [parameter(Mandatory=$true, ParameterSetName="ID")]
+           [Int[]]
+           $UserID,
+  
+           [parameter(Mandatory=$true, ParameterSetName="Name")]
+           [String[]]
+           $UserName
+       )     
+              
+     <function body>
+   }
+  ```
+  
 
 ###PowerShell Supported Version
 
