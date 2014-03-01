@@ -193,7 +193,7 @@ it is not C# so there is no need to add it to the line endings.
   inside the `Process {}` block and not in `Begin {}` or `End {}` since it
   defeats the advantage of the pipeline.
 
-  '''PowerShell
+  ```PowerShell
   
   # Bad
   function Get-USCitizenCapability
@@ -273,8 +273,7 @@ it is not C# so there is no need to add it to the line endings.
       {
       }
   }
-
-```
+ ```
 * For Advanced Functions always use CmdletBinding attribute shoudl always 
   have at least a Process {} code block if any parameters takes values
   from the Pipeline.
