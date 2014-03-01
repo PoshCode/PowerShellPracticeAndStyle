@@ -13,6 +13,15 @@ community has developed.
 
 ###Code Layout
 
+* Avoid using aliases for cmdlets and advanced functions since aliases can change
+  and make the code hard to read and understand for people not familiar with the
+  alias.
+
+* Avoid using positional parameters or abreviations of the parameter names since
+  it may make it hard to understand for a person maintaining the code. It may
+  introduce bugs in the code since a different parameter set may be in play instead
+  of the intended one.
+
 * Comment your code where it makes sense so as to make it more maintenable by
   a third party. Try to avoid over commenting the code.
   
