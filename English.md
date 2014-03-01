@@ -74,6 +74,8 @@ it is not C# so there is no need to add it to the line endings.
   ```
 * No spaces after `(`, `[` or before `]`, `)`.
 
+* * Avoid line continuation ``` where not required. In practice, avoid using
+  line continuations
 
 ###Script and Function Naming
 
