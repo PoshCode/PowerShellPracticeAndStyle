@@ -141,6 +141,29 @@ it is not C# so there is no need to add it to the line endings.
   line. When aligning parameters is not appropriate due to line-length
   constraints, single indent for the lines after the first is also
   acceptable.
+  
+  ```PowerShell
+  # Bad double indentation
+  $MyObj.GetData(Param1,
+        param2,
+        Param3,
+        Param4)
+    
+
+  # Good  
+	$MyObj.GetData(
+	     Param1,
+         param2,
+         Param3,
+         Param4
+   )
+   
+  # Good
+  $MyObj.GetData(Param1,
+                   Param2,
+                   Param3,
+                   Param4)
+  ```
 
 
 * Limit lines to 80 characters when possible.
