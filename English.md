@@ -165,10 +165,11 @@ it is not C# so there is no need to add it to the line endings.
                  Param4)
   ```
 
-
 * Limit lines to 80 characters when possible.
+
 * Avoid trailing whitespace.
-* End each file with a newline.
+*
+*End each file with a newline.
  
 
 ###Script and Function Naming
@@ -187,6 +188,93 @@ it is not C# so there is no need to add it to the line endings.
     
   }
   ```
+* Avoid using the `return` keyword in jur functions, just place the onject 
+  variable on its own. In the case of Advanced Functions do not retun values
+  inside the `Process {}` block and not in `Begin {}` or `End {}` since it
+  defeats the advantage of the pipeline.
+
+  '''PowerShell
+  
+  # Bad
+  function Get-USCitizenCapability
+  {
+      [CmdletBinding()]
+      [OutputType([int])]
+      Param
+      (
+          # Param1 help description
+          [Parameter(Mandatory=$true,
+                     ValueFromPipelineByPropertyName=$true,
+                     Position=0)]
+          [int16]
+          $Age
+      )
+  
+      Begin
+      {
+  
+      }
+      Process
+      {
+  
+          $Capabilities = @{MilitaryService = $salse
+                            DrinkAlcohol = $false
+                            Vote = $false}
+          if ($Age -ge 18)
+          {
+              $Capabilities['MilitaryService'] = $true
+              $Capabilities['Vote'] = $true
+          }
+  
+          $Obj = New-Object -Property $Capabilities -TypeName psobject
+          Return $Obj
+      }
+      End
+      {
+      }
+  }
+  
+  # Good
+  
+   function Get-USCitizenCapability
+  {
+      [CmdletBinding()]
+      [OutputType([int])]
+      Param
+      (
+          # Param1 help description
+          [Parameter(Mandatory=$true,
+                     ValueFromPipelineByPropertyName=$true,
+                     Position=0)]
+          [int16]
+          $Age
+      )
+  
+      Begin
+      {
+  
+      }
+      Process
+      {
+  
+          $Capabilities = @{MilitaryService = $salse
+                            DrinkAlcohol = $false
+                            Vote = $false}
+          if ($Age -ge 18)
+          {
+              $Capabilities['MilitaryService'] = $true
+              $Capabilities['Vote'] = $true
+          }
+  
+          $Obj = New-Object -Property $Capabilities -TypeName psobject
+          $Obj
+      }
+      End
+      {
+      }
+  }
+
+```
 * For Advanced Functions always use CmdletBinding attribute shoudl always 
   have at least a Process {} code block if any parameters takes values
   from the Pipeline.
