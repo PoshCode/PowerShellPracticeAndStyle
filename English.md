@@ -16,6 +16,20 @@ community has developed.
 * Don't use `;`  at the end of each line. Even do PowerShell will not complain 
 it is not C# so there is no need to add it to the line endings.
 
+  This is common when declaring hashes where each element is one per line also:
+  ```PowerShell
+  # Not neccesary the ;
+  
+  $MyHash = @{one = 1;
+            two = 2;
+            three = 3;}
+            
+  # Prefered
+  $MyHash = @{one = 1
+            two = 2
+            three = 3}
+  ```
+
 * Use four **spaces** per indentation level (aka soft tabs). No hard tabs.
 
     ```PowerShell
@@ -74,7 +88,7 @@ it is not C# so there is no need to add it to the line endings.
   ```
 * No spaces after `(`, `[` or before `]`, `)`.
 
-* * Avoid line continuation '`' where not required. In practice, avoid using
+* * Avoid line continuation back tick where not required. In practice, avoid using
   line continuations. In the case of multiple parameters for a Cmdlet or 
   function it is better to use a technique called splatting (more info can 
   be obtained by running  `help about_Splatting`
