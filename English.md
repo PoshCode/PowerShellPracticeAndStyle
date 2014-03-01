@@ -145,24 +145,24 @@ it is not C# so there is no need to add it to the line endings.
   ```PowerShell
   # Bad double indentation
   $MyObj.GetData(Param1,
-        param2,
-        Param3,
-        Param4)
+      param2,
+      Param3,
+      Param4)
     
 
   # Good  
-	$MyObj.GetData(
-	     Param1,
-         param2,
-         Param3,
-         Param4
+  $MyObj.GetData(
+      Param1,
+      param2,
+      Param3,
+      Param4
    )
    
   # Good
   $MyObj.GetData(Param1,
-                   Param2,
-                   Param3,
-                   Param4)
+                 Param2,
+                 Param3,
+                 Param4)
   ```
 
 
