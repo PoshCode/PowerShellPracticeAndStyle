@@ -74,8 +74,26 @@ it is not C# so there is no need to add it to the line endings.
   ```
 * No spaces after `(`, `[` or before `]`, `)`.
 
-* * Avoid line continuation ``` where not required. In practice, avoid using
-  line continuations
+* * Avoid line continuation `` where not required. In practice, avoid using
+  line continuations. In the case of multiple parameters for a Cmdlet or 
+  function it is better to use a technique called splatting (more info can 
+  be obtained by running  `help about_Splatting`
+
+  ```PowerShell
+  # Hard to read and troubleshoot
+  Get-WmiObject `
+      -Class win32_service `
+      -Filter "name = 'BITS'" `
+      -ComputerName "FS01"
+      
+  # Easier to read and troubleshoot
+  
+  $Params = @{Class = win32_service 
+              Filter = "name = 'BITS'"
+              ComputerName = "FS01"}
+  
+  Get-WmiObject @Params
+  ```
 
 ###Script and Function Naming
 
