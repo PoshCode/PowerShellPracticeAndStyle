@@ -63,13 +63,13 @@ it is not C# so there is no need to add it to the line endings.
 
     ```PowerShell
     # Good 4 spaces
-    if ($Age -gt 21 )
+    if ($Age -gt 21)
     {
         $Person = "Adult"
     }
     
     # Bad hard Tabs
-    if ($Age -gt 21 )
+    if ($Age -gt 21)
     {
       $Person = "Adult"
     }
