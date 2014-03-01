@@ -40,7 +40,8 @@ it is not C# so there is no need to add it to the line endings.
     ```bash
     $ git config --global core.autocrlf false
     ```
-    
+*  Use spaces around the `=` operator.
+
 * Use spaces around operators, after commas, colons and semicolons, around `{`
   and before `}`. Whitespace might be (mostly) irrelevant to  PowerShell, 
   but its proper use is the key to writing easily
@@ -50,8 +51,17 @@ it is not C# so there is no need to add it to the line endings.
   $Animal = @('dog', 'cat')
   ```
   In the case of `{` and `}` when declaring a hash there should be no space after of before
-  but for script blocks it is acceptable since it makes it more readable. In the case of `(`
-  and `)` in string expesions a space is recommended since it makes it more readable.
+  but for script blocks it is acceptable since it makes it more readable. 
+  
+  ```PowerShell
+  # Spacing in a hash
+  $Numbers = @{one = 1; two = 2, three = 3}
+
+  # Script Block
+  Invoke-Command -ScriptBlock { Get-Service -Name BITS }
+  ```
+  
+  In the case of `(` and `)` in string expesions a space is recommended since it makes it more readable.
   
   ```PowerShell
   # Bad Spacing
@@ -62,6 +72,8 @@ it is not C# so there is no need to add it to the line endings.
   $FirstName = 'Carlos'
   'Message' = "Hello $( $FirstName )"
   ```
+* No spaces after `(`, `[` or before `]`, `)`.
+
 
 ###Script and Function Naming
 
