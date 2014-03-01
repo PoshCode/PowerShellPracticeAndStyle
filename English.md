@@ -13,6 +13,35 @@ community has developed.
 
 ###Code Layout
 
+* Comment your code where it makes sense so as to make it more maintenable by
+  a third party. Try to avoid over commenting the code.
+  
+  Over comment:
+  ```PowerShell
+  # We get the service BITS object to process
+  $BitsObj = Get-Service -Name BITS
+  ```
+
+* When commenting leave a space between the `#` and the start of the comment.
+
+  ```PowerShell
+  #This is a bad style of commenting
+  
+  # This is more readable
+  ```
+* If for ever reason the comment needs to span more than 2 lines use a comment 
+  block.
+
+  ```PowerShell
+    <#  
+        This is a very
+        long comment block
+        that would span more than
+        two lines.
+    #>
+  ```
+
+
 * Don't use `;`  at the end of each line. Even do PowerShell will not complain 
 it is not C# so there is no need to add it to the line endings.
 
@@ -108,8 +137,34 @@ it is not C# so there is no need to add it to the line endings.
   
   Get-WmiObject @Params
   ```
+* Align the parameters of a method call if they span more than one
+  line. When aligning parameters is not appropriate due to line-length
+  constraints, single indent for the lines after the first is also
+  acceptable.
+
+
+* Limit lines to 80 characters when possible.
+* Avoid trailing whitespace.
+* End each file with a newline.
+ 
 
 ###Script and Function Naming
+
+* For Advanced Functions and scripts use the format of <verb-<noun> for
+  naming. For a list of approved verbs the cmdlet `Get-Verb` will list
+  them. On the noun side it can be composed of more than one joined word
+  using Camel Case and only singular nouns.
+
+* When declaring simple functions leave a space between the function
+  name and the parameters.
+  
+  ```PowerShell
+  function MyFunction ($param1, $param2)
+  {
+    
+  }
+  ```
+* For Advanced Functions always use cmlet
 
 ###PowerShell Supported Version
 
