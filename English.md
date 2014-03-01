@@ -199,10 +199,9 @@ it is not C# so there is no need to add it to the line endings.
   function Get-USCitizenCapability
   {
       [CmdletBinding()]
-      [OutputType([int])]
+      [OutputType([psobject])]
       Param
       (
-          # Param1 help description
           [Parameter(Mandatory=$true,
                      ValueFromPipelineByPropertyName=$true,
                      Position=0)]
@@ -210,10 +209,7 @@ it is not C# so there is no need to add it to the line endings.
           $Age
       )
   
-      Begin
-      {
-  
-      }
+      Begin {}
       Process
       {
   
@@ -229,20 +225,16 @@ it is not C# so there is no need to add it to the line endings.
           $Obj = New-Object -Property $Capabilities -TypeName psobject
           Return $Obj
       }
-      End
-      {
-      }
+      End {}
   }
   
   # Good
-  
    function Get-USCitizenCapability
   {
       [CmdletBinding()]
-      [OutputType([int])]
+      [OutputType([psobject])]
       Param
       (
-          # Param1 help description
           [Parameter(Mandatory=$true,
                      ValueFromPipelineByPropertyName=$true,
                      Position=0)]
@@ -250,10 +242,7 @@ it is not C# so there is no need to add it to the line endings.
           $Age
       )
   
-      Begin
-      {
-  
-      }
+      Begin {}
       Process
       {
   
@@ -269,9 +258,7 @@ it is not C# so there is no need to add it to the line endings.
           $Obj = New-Object -Property $Capabilities -TypeName psobject
           $Obj
       }
-      End
-      {
-      }
+      End {}
   }
  ```
 * For Advanced Functions always use CmdletBinding attribute shoudl always 
