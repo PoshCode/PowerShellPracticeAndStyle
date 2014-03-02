@@ -68,7 +68,7 @@ it is not C# so there is no need to add it to the line endings.
             three = 3}
   ```
 
-* Use four **spaces** per indentation level (aka soft tabs). No hard tabs.
+* Use four **spaces** per indentation level. No hard tabs.
 
     ```PowerShell
     # Good 4 spaces
@@ -106,8 +106,8 @@ it is not C# so there is no need to add it to the line endings.
   but for script blocks it is acceptable since it makes it more readable. 
   
   ```PowerShell
-  # Spacing in a hash
-  $Numbers = @{one = 1; two = 2, three = 3}
+  # Spacing in a Hash
+  $Numbers = @{one = 1; two = 2; three = 3}
 
   # Script Block
   Invoke-Command -ScriptBlock { Get-Service -Name BITS }
@@ -177,13 +177,13 @@ it is not C# so there is no need to add it to the line endings.
 * Limit lines to 80 characters when possible.
 
 * Avoid trailing whitespace.
-*
-*End each file with a newline.
+
+* End each file with a newline.
  
 
 ###Script and Function Naming
 
-* For Advanced Functions and scripts use the format of <verb-<noun> for
+* For advanced functions and scripts use the format of **<verb-<noun>** for
   naming. For a list of approved verbs the cmdlet `Get-Verb` will list
   them. On the noun side it can be composed of more than one joined word
   using Camel Case and only singular nouns.
