@@ -552,3 +552,5 @@ TODO
 ###Error Handling
 
 TODO
+* Why avoid `$?`
+* Why not rely on $Error[0]
