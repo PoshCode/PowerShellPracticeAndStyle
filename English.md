@@ -549,3 +549,6 @@ TODO
 * Give example of casting as a gaster method
 * Give example the where-object is slower than .where() on PS v3.0 and above.
 
+###Error Handling
+
+TODO
