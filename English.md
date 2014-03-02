@@ -502,22 +502,26 @@ TODO
           ) 
         ```
 TODO
+
 * Control what gets exported in a module
 * Specify when to use a Manifest for a module
-*
+
 ###PowerShell Supported Version
+
 TODO
 * Specify prefered version on Scripts.
 * Specify prefered version on Modules with a manifest.
 * Why not use in a manifest a specified CLR.
 
 ###Formating
+
 TODO
 * When to use fomat file.
 * why avoid format cmdlets in functions and scripts
 
 
 ###Loading Third Party .Net Libraries
+
 TODO
 * Use of Add-Type in PS v2.0 and above instead of reflective loading.
 * When embeding C# code makes sense and when it is better to just compile it
@@ -525,12 +529,15 @@ TODO
 * How to set assemblies in module manifest instead of hand loading
 
 ###Comment Based Help
+
 TODO
 * leave a newline between comment based help and function declaration
 * What should be the least required information in a comment based help
 * When to use comment help vs MAML XML files
 * When to create about contextual help files
+
 ###Performance
+
 TODO
 * Proper selection of ForEach method and Foreach-Object Cmdlet
 * Give examples of where using .Net API calls is faster than Cmdlets.
