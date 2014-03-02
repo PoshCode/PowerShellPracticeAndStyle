@@ -10,6 +10,9 @@ The practices in the guide are just recommendations so as to allow a scriptiers
 and programers to write PowerShell code that can easyly be maintained in the 
 real world and at the same time help enforce the best practices that the 
 community has developed.
+##Table of Content
+
+ ADD TABLE OF CONTENT HERE WHE FIRST DRAFT IS FINISHED
 
 ###Code Layout
 
