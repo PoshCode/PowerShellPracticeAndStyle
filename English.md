@@ -181,12 +181,13 @@ it is not C# so there is no need to add it to the line endings.
 * End each file with a newline.
  
 
-###Script and Function Naming
+###Scripts, Modules, Functions and Advanced Functions
+TODO
+* When to use eacch and how they differ
 
-* For advanced functions and scripts use the format of **<verb-<noun>** for
-  naming. For a list of approved verbs the cmdlet `Get-Verb` will list
-  them. On the noun side it can be composed of more than one joined word
-  using Camel Case and only singular nouns.
+####Functions
+* Avoid using the `return` keyword in jur functions, just place the onject 
+  variable on its own.
 
 * When declaring simple functions leave a space between the function
   name and the parameters.
@@ -197,10 +198,17 @@ it is not C# so there is no need to add it to the line endings.
     
   }
   ```
-* Avoid using the `return` keyword in jur functions, just place the onject 
-  variable on its own. In the case of Advanced Functions do not retun values
-  inside the `Process {}` block and not in `Begin {}` or `End {}` since it
-  defeats the advantage of the pipeline.
+####Advanced Functions
+
+* For advanced functions and scripts use the format of **<verb-<noun>** for
+  naming. For a list of approved verbs the cmdlet `Get-Verb` will list
+  them. On the noun side it can be composed of more than one joined word
+  using Camel Case and only singular nouns.
+
+*  In  Advanced Functions do not use the keyword `retun` to retur an object.
+
+*  In Advanced Functions you return objects inside the `Process {}` block 
+   and not in `Begin {}` or `End {}` since it defeats the advantage of the pipeline.
 
   ```PowerShell
   
@@ -493,10 +501,41 @@ it is not C# so there is no need to add it to the line endings.
             $UserName
           ) 
         ```
-
+TODO
+* Control what gets exported in a module
+* Specify when to use a Manifest for a module
+*
 ###PowerShell Supported Version
+TODO
+* Specify prefered version on Scripts.
+* Specify prefered version on Modules with a manifest.
+* Why not use in a manifest a specified CLR.
+
+###Formating
+TODO
+* When to use fomat file.
+* why avoid format cmdlets in functions and scripts
+
 
 ###Loading Third Party .Net Libraries
+TODO
+* Use of Add-Type in PS v2.0 and above instead of reflective loading.
+* When embeding C# code makes sense and when it is better to just compile it
+ in to a DLL and load it as a Type.
+* How to set assemblies in module manifest instead of hand loading
 
 ###Comment Based Help
+TODO
+* leave a newline between comment based help and function declaration
+* What should be the least required information in a comment based help
+* When to use comment help vs MAML XML files
+* When to create about contextual help files
+###Performance
+TODO
+* Proper selection of ForEach method and Foreach-Object Cmdlet
+* Give examples of where using .Net API calls is faster than Cmdlets.
+* Use of wrapper functions around .Net API
+* Give examples for the fastes way to create objects in PS v2.0 and PS v3.0 and above.
+* Give example of casting as a gaster method
+* Give example the where-object is slower than .where() on PS v3.0 and above.
 
