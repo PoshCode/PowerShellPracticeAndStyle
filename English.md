@@ -4,7 +4,11 @@
 
 In the Python world developers have a great programming style reference (PEP-8), 
 on the PowerShell world there is no document to follow officaly from Microsoft, 
-but the community it self has come up with several rules they follow. 
+but the community it self has come up with several rules they follow.
+
+The guide is written following the power of the "Default" which is to cover
+mainly those versions of PowerShell that come pre-installed by default with
+Windows (PS v.2.0, PS v3.0 and PSv4.0).
 
 The practices in the guide are just recommendations so as to allow a scriptiers
 and programers to write PowerShell code that can easyly be maintained in the 
