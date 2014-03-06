@@ -1,6 +1,6 @@
-#The PowerShell Style Guide
+# The PowerShell Style Guide
 
-##Introduction
+## Introduction
 
 In the Python world developers have a great programming style reference (PEP-8), 
 on the PowerShell world there is no document to follow officaly from Microsoft, 
@@ -14,22 +14,26 @@ The practices in the guide are just recommendations so as to allow a scriptiers
 and programers to write PowerShell code that can easyly be maintained in the 
 real world and at the same time help enforce the best practices that the 
 community has developed.
-##Table of Content
+## Table of Content
 
  ADD TABLE OF CONTENT HERE WHE FIRST DRAFT IS FINISHED
 
-###Code Layout
+### Code Layout
 
 * Avoid using aliases for cmdlets and advanced functions since aliases can change
   and make the code hard to read and understand for people not familiar with the
   alias.
 
-* Avoid using positional parameters or abreviations of the parameter names since
+* Avoid using positional parameters or abbreviations of the parameter names since
   it may make it hard to understand for a person maintaining the code. It may
   introduce bugs in the code since a different parameter set may be in play instead
   of the intended one.
 
-* Comment your code where it makes sense so as to make it more maintenable by
+* Avoid in scripts the use of `~` to represent the home folder since it changes depending on the provider the user is located at the time of execution, also it can be changed representing a whole other path.
+
+* when working with scripts always use full paths instead of relative paths since depending if using cmdlets or .Net API calls may use different paths as their default path. 
+
+* Comment your code where it makes sense so as to make it more maintainable by
   a third party. Try to avoid over commenting the code.
   
   Over comment:
@@ -63,13 +67,13 @@ it is not C# so there is no need to add it to the line endings.
 
   This is common when declaring hashes where each element is one per line also:
   ```PowerShell
-  # Not neccesary the ;
+  # Not necessary the ;
   
   $MyHash = @{one = 1;
             two = 2;
             three = 3;}
             
-  # Prefered
+  # Preferred
   $MyHash = @{one = 1
             two = 2
             three = 3}
@@ -102,7 +106,7 @@ it is not C# so there is no need to add it to the line endings.
 *  Use spaces around the `=` operator.
 
 * Use spaces around operators, after commas, colons and semicolons, around `{`
-  and before `}`. Whitespace might be (mostly) irrelevant to  PowerShell, 
+  and before `}`. White-space might be (mostly) irrelevant to  PowerShell, 
   but its proper use is the key to writing easily
   readable code.
   
@@ -168,13 +172,13 @@ it is not C# so there is no need to add it to the line endings.
 
   # Good  
   $MyObj.GetData(
-      Param1,
-      param2,
-      Param3,
-      Param4
+         Param1,
+         param2,
+         Param3,
+         Param4
    )
    
-  # Good
+  # Better
   $MyObj.GetData(Param1,
                  Param2,
                  Param3,
@@ -188,12 +192,12 @@ it is not C# so there is no need to add it to the line endings.
 * End each file with a newline.
  
 
-###Scripts, Modules, Functions and Advanced Functions
+### Scripts, Modules, Functions and Advanced Functions
 TODO
-* When to use eacch and how they differ
+* When to use each and how they differ
 
-####Functions
-* Avoid using the `return` keyword in jur functions, just place the onject 
+#### Functions
+* Avoid using the `return` keyword in your functions, just place the object 
   variable on its own.
 
 * When declaring simple functions leave a space between the function
@@ -205,14 +209,15 @@ TODO
     
   }
   ```
-####Advanced Functions
+
+#### Advanced Functions
 
 * For advanced functions and scripts use the format of **<verb-<noun>** for
   naming. For a list of approved verbs the cmdlet `Get-Verb` will list
   them. On the noun side it can be composed of more than one joined word
   using Camel Case and only singular nouns.
 
-*  In  Advanced Functions do not use the keyword `retun` to retur an object.
+*  In  Advanced Functions do not use the keyword `return` to return an object.
 
 *  In Advanced Functions you return objects inside the `Process {}` block 
    and not in `Begin {}` or `End {}` since it defeats the advantage of the pipeline.
@@ -285,8 +290,8 @@ TODO
       End {}
   }
  ```
-* For Advanced Functions always use CmdletBinding attribute shoudl always 
-  have at least a Process {} code block if any parameters takes values
+* For Advanced Functions always use CmdletBinding attribute should always 
+  have at least a `Process {}` code block if any parameters takes values
   from the Pipeline.
 
 * When possible use in advanced functions a OutputType attribute if it returns
@@ -298,7 +303,7 @@ TODO
   [OutputType("<TypeNameString>", ParameterSetName="<Name>")]
   ```
 
-* If ParameterSetName is used in any of the parameter provide alwats a
+* If ParameterSetName is used in any of the parameter provide always a
   DefaultParameterSetName in the CmdletBinding attribute.
   
   ```PowerShell
@@ -508,26 +513,27 @@ TODO
             $UserName
           ) 
         ```
+
 TODO
 
 * Control what gets exported in a module
 * Specify when to use a Manifest for a module
 
-###PowerShell Supported Version
+### PowerShell Supported Version
 
 TODO
 * Specify prefered version on Scripts.
 * Specify prefered version on Modules with a manifest.
 * Why not use in a manifest a specified CLR.
 
-###Formating
+### Formating
 
 TODO
 * When to use fomat file.
 * why avoid format cmdlets in functions and scripts
 
 
-###Loading Third Party .Net Libraries
+### Loading Third Party .Net Libraries
 
 TODO
 * Use of Add-Type in PS v2.0 and above instead of reflective loading.
@@ -535,7 +541,7 @@ TODO
  in to a DLL and load it as a Type.
 * How to set assemblies in module manifest instead of hand loading
 
-###Comment Based Help
+### Comment Based Help
 
 TODO
 * leave a newline between comment based help and function declaration
@@ -543,7 +549,7 @@ TODO
 * When to use comment help vs MAML XML files
 * When to create about contextual help files
 
-###Performance
+### Performance
 
 TODO
 * Proper selection of ForEach method and Foreach-Object Cmdlet
@@ -553,7 +559,7 @@ TODO
 * Give example of casting as a gaster method
 * Give example the where-object is slower than .where() on PS v3.0 and above.
 
-###Error Handling
+### I do not but it is niceError Handling
 
 TODO
 * Why avoid `$?`
