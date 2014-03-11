@@ -18,10 +18,13 @@ community has developed.
 
 * [Code Layout](#code-layout)
 * [Security](#security)
-* [Scripts, Modules, Functions and Advanced Functions](#Scripts-Modules-Functions-and-Advanced-Functions)
+* [Functions](#Functions)
+* [Advanced Functions](#advanced-functions)
 * [PowerShell Supported Version](#powershell-supported-version)
 * [Formatting](#formatting)
-
+* [Comment Based Help](#comment-based-help)
+* [Performance](#performance)
+* [Error Handling](#error-handling)
 ### Code Layout
 
 * Avoid using aliases for cmdlets and advanced functions since aliases can change
@@ -228,10 +231,6 @@ it is not C# so there is no need to add it to the line endings.
 
 * End each file with a newline.
  
-
-### Scripts, Modules, Functions and Advanced Functions
-TODO
-* When to use each and how they differ
 
 #### Functions
 * Avoid using the `return` keyword in your functions, just place the object 
@@ -580,7 +579,7 @@ TODO
 * Specify preferred version on Modules with a manifest.
 * Why not use in a manifest a specified CLR.
 
-### Formating
+### Formatting
 
 TODO
 * When to use format file.
