@@ -16,7 +16,11 @@ real world and at the same time help enforce the best practices that the
 community has developed.
 ## Table of Content
 
- ADD TABLE OF CONTENT HERE WHE FIRST DRAFT IS FINISHED
+* [Code Layout](#code-layout)
+* [Security](#security)
+* [Scripts, Modules, Functions and Advanced Functions](#Scripts-Modules-Functions-and-Advanced-Functions)
+* [PowerShell Supported Version](#powershell-supported-version)
+* [Formatting](#formatting)
 
 ### Code Layout
 
@@ -24,12 +28,40 @@ community has developed.
   and make the code hard to read and understand for people not familiar with the
   alias.
 
+  ```PowerShell
+  # Bad
+  gwmi -Class win32_service
+
+  #Good
+  Get-WmiObject -Class Win32_Service
+  ```
+
 * Avoid using positional parameters or abbreviations of the parameter names since
   it may make it hard to understand for a person maintaining the code. It may
   introduce bugs in the code since a different parameter set may be in play instead
   of the intended one.
+  ```PowerShell
+  # Bad
+  Get-WmiObject win32_service name,state
+
+  # Good
+  Get-WmiObject -Class win32_service -Property name,state
+  ```
 
 * Avoid in scripts the use of `~` to represent the home folder since it changes depending on the provider the user is located at the time of execution, also it can be changed representing a whole other path.
+
+  ```PowerShell
+  PS C:\Windows\system32> cd ~
+  PS C:\Users\Carlos> cd HKCU:\Software
+  PS HKCU:\Software> cd ~
+  cd : Home location for this provider is not set. To set the home location, call "(get-psprovider 'Registry').Home = 'path'".
+  At line:1 char:1
+  + cd ~
+  + ~~~~
+      + CategoryInfo          : InvalidOperation: (:) [Set-Location], PSInvalidOperationException
+      + FullyQualifiedErrorId : InvalidOperation,Microsoft.PowerShell.Commands.SetLocationCommand
+
+  ```
 
 * when working with scripts always use full paths instead of relative paths since depending if using cmdlets or .Net API calls may use different paths as their default path. 
 
@@ -39,6 +71,9 @@ community has developed.
   Over comment:
   ```PowerShell
   # We get the service BITS object to process
+  # The service is also known as Background Intelligent Transfer Service
+  # the service is used for the transfer of files in a intelligent manner
+  # in networks where congestion may be a problem.
   $BitsObj = Get-Service -Name BITS
   ```
 
@@ -68,7 +103,6 @@ it is not C# so there is no need to add it to the line endings.
   This is common when declaring hashes where each element is one per line also:
   ```PowerShell
   # Not necessary the ;
-  
   $MyHash = @{one = 1;
             two = 2;
             three = 3;}
@@ -88,10 +122,11 @@ it is not C# so there is no need to add it to the line endings.
         $Person = "Adult"
     }
     
-    # Bad hard Tabs
+    # Bad hard Tabs, depending on the application being seen this space can be
+    # in 4 spaces or 8 spaces.
     if ($Age -gt 21)
     {
-      $Person = "Adult"
+    	$Person = "Adult"
     }
     ```
 * Do not use Unix-style line endings.
@@ -187,7 +222,9 @@ it is not C# so there is no need to add it to the line endings.
 
 * Limit lines to 80 characters when possible.
 
-* Avoid trailing whitespace.
+* Avoid trailing whitespace, this could cause in the use of source control software
+  to have lines shown as modified where only a space was added or removed making the
+  analysis of the changes more difficult in some cases.
 
 * End each file with a newline.
  
@@ -519,17 +556,34 @@ TODO
 * Control what gets exported in a module
 * Specify when to use a Manifest for a module
 
+### Security
+
+* Try to use PSCredential object for credentials since by requiring it as a
+  parameter it allows for not showing passwords on screen, history or
+  exposing password to generic memory scrapper malware.
+
+* For strings that may be sensitive in a parameter use the SecureString type so 
+  as to protect the value of the string. When using parameters the string can be
+  provided by a user using `Read-Host -AsSecureString` it can be turned to a 
+  plain text string back if needed.
+
+```PowerShell
+ # Decrypt the secure string.
+ $SecureStringToBSTR = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecString)
+ $PlainText = [Runtime.InteropServices.Marshal]::PtrToStringAuto($SecureStringToBSTR)
+```
+
 ### PowerShell Supported Version
 
 TODO
-* Specify prefered version on Scripts.
-* Specify prefered version on Modules with a manifest.
+* Specify preferred version on Scripts.
+* Specify preferred version on Modules with a manifest.
 * Why not use in a manifest a specified CLR.
 
 ### Formating
 
 TODO
-* When to use fomat file.
+* When to use format file.
 * why avoid format cmdlets in functions and scripts
 
 
@@ -537,7 +591,7 @@ TODO
 
 TODO
 * Use of Add-Type in PS v2.0 and above instead of reflective loading.
-* When embeding C# code makes sense and when it is better to just compile it
+* When embedding C# code makes sense and when it is better to just compile it
  in to a DLL and load it as a Type.
 * How to set assemblies in module manifest instead of hand loading
 
@@ -555,11 +609,11 @@ TODO
 * Proper selection of ForEach method and Foreach-Object Cmdlet
 * Give examples of where using .Net API calls is faster than Cmdlets.
 * Use of wrapper functions around .Net API
-* Give examples for the fastes way to create objects in PS v2.0 and PS v3.0 and above.
-* Give example of casting as a gaster method
+* Give examples for the fastest way to create objects in PS v2.0 and PS v3.0 and above.
+* Give example of casting as a faster method
 * Give example the where-object is slower than .where() on PS v3.0 and above.
 
-### I do not but it is niceError Handling
+### Error Handling
 
 TODO
 * Why avoid `$?`
