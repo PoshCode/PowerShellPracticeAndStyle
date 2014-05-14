@@ -561,6 +561,22 @@ TODO
   parameter it allows for not showing passwords on screen, history or
   exposing password to generic memory scrapper malware.
 
+* If you need to use a credential in clear text like passing it to .Net API call or a third party library it is better to decrypt the credential as it is being passed instead of saving it in a variable.
+
+```PowerShell
+# create a credential object.
+$cred = (Get-Credential "acmelabs\carlos")
+
+# Get the cleartext username.
+$cred.GetNetworkCredential().username
+
+# Get the domain for the account.
+$cred.GetNetworkCredential().domain
+
+# Get the cleartext password. 
+$cred.GetNetworkCredential().password
+```
+
 * For strings that may be sensitive in a parameter use the SecureString type so 
   as to protect the value of the string. When using parameters the string can be
   provided by a user using `Read-Host -AsSecureString` it can be turned to a 
@@ -574,10 +590,17 @@ TODO
 
 ### PowerShell Supported Version
 
-TODO
-* Specify preferred version on Scripts.
-* Specify preferred version on Modules with a manifest.
-* Why not use in a manifest a specified CLR.
+* When working in an environment where there are multiple versions of PowerShell make sure to specify the lowest version your script will support by prividing a Requires statement at the top of the script.
+
+```PowerShell
+#Requires -Version 2.0
+```
+* When a module uses specific cmdlets or syntax that is only present on a specific minimun version of PowerShell in the module manifest ps1d file.
+
+```PowerShell
+PowerShellVersion = '3.0'
+```
+* If the script or module being created will support as the least 
 
 ### Formatting
 
