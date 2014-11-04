@@ -2,19 +2,19 @@
 
 ## Introduction
 
-In the Python world developers have a great programming style reference (PEP-8), 
-on the PowerShell world there is no document to follow officaly from Microsoft, 
-but the community it self has come up with several rules they follow.
+In the Python world developers have a great programming style reference (PEP-8)
+but there is no equivalent guidance from Microsoft in the PowerShell world. In
+its absence, the community has come up with their own best practices.
 
 The guide is written following the power of the "Default" which is to cover
 mainly those versions of PowerShell that come pre-installed by default with
-Windows (PS v.2.0, PS v3.0 and PSv4.0).
+Windows (PS v2.0, PS v3.0 and PS v4.0).
 
-The practices in the guide are just recommendations so as to allow a scriptiers
-and programers to write PowerShell code that can easyly be maintained in the 
+The practices in the guide are just recommendations so as to allow scripters
+and programers to write PowerShell code that can easily be maintained in the 
 real world and at the same time help enforce the best practices that the 
 community has developed.
-## Table of Content
+## Table of Contents
 
 * [Code Layout](#code-layout)
 * [Security](#security)
@@ -87,8 +87,7 @@ community has developed.
   
   # This is more readable
   ```
-* If for ever reason the comment needs to span more than 2 lines use a comment 
-  block.
+* If a comment needs to span more than two lines use a comment block.
 
   ```PowerShell
     <#  
@@ -99,11 +98,11 @@ community has developed.
     #>
   ```
 
-
-* Don't use `;`  at the end of each line. Even do PowerShell will not complain 
+* Don't use `;`  at the end of each line. Even though PowerShell will not complain, 
 it is not C# so there is no need to add it to the line endings.
 
   This is common when declaring hashes where each element is one per line also:
+  
   ```PowerShell
   # Not necessary the ;
   $MyHash = @{one = 1;
@@ -132,10 +131,11 @@ it is not C# so there is no need to add it to the line endings.
     	$Person = "Adult"
     }
     ```
+
 * Do not use Unix-style line endings.
 
     * If you're using Git you might want to add the following
-    configuration setting to protect your project from Unix-Style line
+    configuration setting to protect your project from Unix-style line
     endings creeping in:
 
     ```bash
@@ -144,13 +144,13 @@ it is not C# so there is no need to add it to the line endings.
 *  Use spaces around the `=` operator.
 
 * Use spaces around operators, after commas, colons and semicolons, around `{`
-  and before `}`. White-space might be (mostly) irrelevant to  PowerShell, 
-  but its proper use is the key to writing easily
-  readable code.
+  and before `}`. White-space might be (mostly) irrelevant to PowerShell, 
+  but its proper use is the key to writing readable code.
   
   ```PowerShell
   $Animal = @('dog', 'cat')
   ```
+  
   In the case of `{` and `}` when declaring a hash there should be no space after of before
   but for script blocks it is acceptable since it makes it more readable. 
   
@@ -173,10 +173,11 @@ it is not C# so there is no need to add it to the line endings.
   $FirstName = 'Carlos'
   'Message' = "Hello $( $FirstName )"
   ```
+  
 * No spaces after `(`, `[` or before `]`, `)`.
 
 * Avoid line continuation back tick where not required. In practice, avoid using
-  line continuations. In the case of multiple parameters for a Cmdlet or 
+  line continuations. In the case of multiple parameters for a cmdlet or 
   function it is better to use a technique called splatting (more info can 
   be obtained by running  `help about_Splatting`
 
@@ -195,9 +196,10 @@ it is not C# so there is no need to add it to the line endings.
   
   Get-WmiObject @Params
   ```
+  
 * Align the parameters of a method call if they span more than one
   line. When aligning parameters is not appropriate due to line-length
-  constraints, single indent for the lines after the first is also
+  constraints, single indenting the lines after the first is also
   acceptable.
   
   ```PowerShell
@@ -225,18 +227,17 @@ it is not C# so there is no need to add it to the line endings.
 
 * Limit lines to 80 characters when possible.
 
-* Avoid trailing whitespace, this could cause in the use of source control software
+* Avoid trailing whitespace as this could cause in the use of source control software
   to have lines shown as modified where only a space was added or removed making the
   analysis of the changes more difficult in some cases.
 
 * End each file with a newline.
  
-
 #### Functions
-* Avoid using the `return` keyword in your functions, just place the object 
+* Avoid using the `return` keyword in your functions – just place the object 
   variable on its own.
 
-* When declaring simple functions leave a space between the function
+* When declaring simple functions, leave a space between the function
   name and the parameters.
   
   ```PowerShell
@@ -248,15 +249,15 @@ it is not C# so there is no need to add it to the line endings.
 
 #### Advanced Functions
 
-* For advanced functions and scripts use the format of **<verb-<noun>** for
-  naming. For a list of approved verbs the cmdlet `Get-Verb` will list
-  them. On the noun side it can be composed of more than one joined word
-  using Camel Case and only singular nouns.
+* Use the format of **<verb-<noun>** when naming Advanced Functions or scripts.
+  For a list of approved verbs, run `Get-Verb`. Nouns can be composed of multiple
+  singular nouns using Camel Case (NounNoun).
 
-*  In  Advanced Functions do not use the keyword `return` to return an object.
+*  Do not use `return` to return an object – just place the object variable on its
+   own.
 
-*  In Advanced Functions you return objects inside the `Process {}` block 
-   and not in `Begin {}` or `End {}` since it defeats the advantage of the pipeline.
+*  Return objects inside the `Process {}` block, not in `Begin {}` or `End {}` since
+   that defeats the advantage of the pipeline.
 
   ```PowerShell
   
@@ -294,7 +295,7 @@ it is not C# so there is no need to add it to the line endings.
   }
   
   # Good
-   function Get-USCitizenCapability
+  function Get-USCitizenCapability
   {
       [CmdletBinding()]
       [OutputType([psobject])]
@@ -310,7 +311,6 @@ it is not C# so there is no need to add it to the line endings.
       Begin {}
       Process
       {
-  
           $Capabilities = @{MilitaryService = $salse
                             DrinkAlcohol = $false
                             Vote = $false}
@@ -326,20 +326,20 @@ it is not C# so there is no need to add it to the line endings.
       End {}
   }
  ```
-* For Advanced Functions always use CmdletBinding attribute should always 
-  have at least a `Process {}` code block if any parameters takes values
-  from the Pipeline.
+ 
+* Always use CmdletBinding attribute that has at least a `Process {}` code block
+  if any parameters takes values from the Pipeline.
 
-* When possible use in advanced functions a OutputType attribute if it returns
-  an object or collection of objects. If the function returns different
-  object types depending on the parameter set provide one per parameter set
+* When possible, use the OutputType attribute if the function returns an object or
+  collection of objects. If the function returns different object types depending 
+  on the parameter set provide one per parameter set.
 
   ```PowerShell
   [OutputType([<TypeLiteral>], ParameterSetName="<Name>")]
   [OutputType("<TypeNameString>", ParameterSetName="<Name>")]
   ```
 
-* If ParameterSetName is used in any of the parameter provide always a
+* If ParameterSetName is used in any of the parameter always provide a
   DefaultParameterSetName in the CmdletBinding attribute.
   
   ```PowerShell
@@ -363,9 +363,9 @@ it is not C# so there is no need to add it to the line endings.
      <function body>
    }
   ```
-  * When using advanced functions or scripts with CmdletBinding attribute avoid
-    validating parameters in the body of the script when possible and use parameter
-    validation attributes instead
+  
+  * When using the CmdletBinding attribute, avoid validating parameters in the body
+    of the script when possible and use parameter validation attributes instead
 
       * **AllowNull** Validation Attribute
 
@@ -385,6 +385,7 @@ it is not C# so there is no need to add it to the line endings.
 
         The AllowEmptyString attribute allows the value of a mandatory parameter to be
         an empty string ("").
+        
         ```PowerShell
         Param
           (
@@ -398,7 +399,8 @@ it is not C# so there is no need to add it to the line endings.
       * **AllowEmptyCollection** Validation Attribute
 
         The AllowEmptyCollection attribute allows the value of a mandatory parameter
-        to be an empty collection (@()). 
+        to be an empty collection (@()).
+        
         ```PowerShell
         Param
           (
@@ -424,14 +426,15 @@ it is not C# so there is no need to add it to the line endings.
             [String[]]
             $ComputerName
           ) 
-
         ```
+
       * **ValidateLength** Validation Attribute
 
         The ValidateLength attribute specifies the minimum and maximum number 
         of characters in a parameter or variable value. Windows PowerShell generates an
         error if the length of a value specified for a parameter or a variable
         is outside of the range.
+        
         ```PowerShell
         Param
           (
@@ -447,7 +450,8 @@ it is not C# so there is no need to add it to the line endings.
         The ValidatePattern attribute specifies a regular expression that
         is compared to the parameter or variable value. Windows PowerShell generates
         an error if the value does not match the regular expression 
-        pattern. 
+        pattern.
+        
         ```PowerShell
         Param
           (
@@ -462,7 +466,8 @@ it is not C# so there is no need to add it to the line endings.
 
         The ValidateRange attribute specifies a numeric range for each
         parameter or variable value. Windows PowerShell generates an error
-        if any value is outside that range. 
+        if any value is outside that range.
+        
         ```PowerShell
         Param
           (
@@ -473,7 +478,6 @@ it is not C# so there is no need to add it to the line endings.
           ) 
         ```
  
-
       * **ValidateScript** Validation Attribute
 
         The ValidateScript attribute specifies a script that is used 
@@ -484,11 +488,12 @@ it is not C# so there is no need to add it to the line endings.
         When you use the ValidateScript attribute, the value
         that is being validated is mapped to the $_ variable. You can
         use the $_ variable to refer to the value in the script.
+        
         ```PowerShell
         Param
           (
             [parameter()]
-            [ValidateScript({$_ -ge (get-date)})]
+            [ValidateScript({$_ -ge (Get-Date)})]
             [DateTime]
             $EventDate
           ) 
@@ -523,7 +528,8 @@ it is not C# so there is no need to add it to the line endings.
         type will accept a value of Null. (If you specify a type that will
         not accept a null value, such as a string, the null value will be
         rejected without the ValidateNotNull attribute, because it does not
-        match the specified type.)  
+        match the specified type.)
+        
         ```PowerShell
         Param
           (
@@ -539,7 +545,8 @@ it is not C# so there is no need to add it to the line endings.
         value cannot be null ($null) and cannot be an empty string ("").
         Windows PowerShell generates an error if the parameter is used in 
         a function call, but its value is null, an empty string, or an empty
-        array.   
+        array.
+        
         ```PowerShell
         Param
           (
@@ -590,12 +597,13 @@ $cred.GetNetworkCredential().password
 
 ### PowerShell Supported Version
 
-* When working in an environment where there are multiple versions of PowerShell make sure to specify the lowest version your script will support by prividing a Requires statement at the top of the script.
+* When working in an environment where there are multiple versions of PowerShell, make sure to specify the lowest version your script will support by providing a Requires statement at the top of the script.
 
 ```PowerShell
 #Requires -Version 2.0
 ```
-* When a module uses specific cmdlets or syntax that is only present on a specific minimun version of PowerShell in the module manifest ps1d file.
+
+* When a module uses specific cmdlets or syntax that is only present on a specific minimun version of PowerShell in the module manifest ps1d file:
 
 ```PowerShell
 PowerShellVersion = '3.0'
@@ -608,19 +616,18 @@ TODO
 * When to use format file.
 * why avoid format cmdlets in functions and scripts
 
-
 ### Loading Third Party .Net Libraries
 
 TODO
 * Use of Add-Type in PS v2.0 and above instead of reflective loading.
 * When embedding C# code makes sense and when it is better to just compile it
- in to a DLL and load it as a Type.
+  in to a DLL and load it as a Type.
 * How to set assemblies in module manifest instead of hand loading
 
 ### Comment Based Help
 
 TODO
-* leave a newline between comment based help and function declaration
+* Leave a newline between comment based help and function declaration
 * What should be the least required information in a comment based help
 * When to use comment help vs MAML XML files
 * When to create about contextual help files
