@@ -1,4 +1,4 @@
 PSStyleGuide
 ============
 
-UnOfficilal PowerShell Style Guide
+Unofficial PowerShell Style Guide
