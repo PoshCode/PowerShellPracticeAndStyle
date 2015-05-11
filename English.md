@@ -3,18 +3,15 @@
 ## Introduction
 
 In the Python world developers have a great programming style reference (PEP-8), 
-on the PowerShell world there is no document to follow officaly from Microsoft, 
-but the community it self has come up with several rules they follow.
+but in the PowerShell world there is no official document from Microsoft that can be followed. Despite this, the community itself has come up with several rules they follow.
 
 The guide is written following the power of the "Default" which is to cover
 mainly those versions of PowerShell that come pre-installed by default with
 Windows (PS v.2.0, PS v3.0 and PSv4.0).
 
-The practices in the guide are just recommendations so as to allow a scriptiers
-and programers to write PowerShell code that can easyly be maintained in the 
-real world and at the same time help enforce the best practices that the 
-community has developed.
-## Table of Content
+The practices in the guide are just recommendations so as to allow a script writers and programmers to write PowerShell code that can easily be maintained in the real world, and at the same time help enforce the best practices that the community has developed.
+
+## Table of Contents
 
 * [Code Layout](#code-layout)
 * [Security](#security)
@@ -25,17 +22,16 @@ community has developed.
 * [Comment Based Help](#comment-based-help)
 * [Performance](#performance)
 * [Error Handling](#error-handling)
+
 ### Code Layout
 
-* Avoid using aliases for cmdlets and advanced functions since aliases can change
-  and make the code hard to read and understand for people not familiar with the
-  alias.
+* Avoid using aliases for cmdlets and advanced functions since aliases can change and make the code hard to read and understand for people not familiar with the alias.
 
   ```PowerShell
   # Bad
   gwmi -Class win32_service
 
-  #Good
+  # Good
   Get-WmiObject -Class Win32_Service
   ```
 
@@ -51,7 +47,7 @@ community has developed.
   Get-WmiObject -Class win32_service -Property name,state
   ```
 
-* Avoid in scripts the use of `~` to represent the home folder since it changes depending on the provider the user is located at the time of execution, also it can be changed representing a whole other path.
+* Avoid in scripts the use of `~` to represent the home folder since it changes depending on the provider the user is located at the time of execution. It can also be changed representing a completely different path.
 
   ```PowerShell
   PS C:\Windows\system32> cd ~
@@ -66,12 +62,11 @@ community has developed.
 
   ```
 
-* when working with scripts always use full paths instead of relative paths since depending if using cmdlets or .Net API calls may use different paths as their default path. 
+* When working with scripts always use full paths instead of relative paths since script calls may use different paths as their default path, depending if you are using cmdlets or the .Net API. 
 
-* Comment your code where it makes sense so as to make it more maintainable by
-  a third party. Try to avoid over commenting the code.
+* Comment your code where it makes sense to make it more maintainable by a third party. Try to avoid over commenting the code.
   
-  Over comment:
+  *Over comment:*
   ```PowerShell
   # We get the service BITS object to process
   # The service is also known as Background Intelligent Transfer Service
@@ -87,7 +82,7 @@ community has developed.
   
   # This is more readable
   ```
-* If for ever reason the comment needs to span more than 2 lines use a comment 
+* If the comment must span more than 2 lines use a comment 
   block.
 
   ```PowerShell
@@ -99,11 +94,10 @@ community has developed.
     #>
   ```
 
-
-* Don't use `;`  at the end of each line. Even do PowerShell will not complain 
+* Don't use `;`  at the end of each line. PowerShell will not complain;
 it is not C# so there is no need to add it to the line endings.
 
-  This is common when declaring hashes where each element is one per line also:
+  This is also common when declaring hashes, where each element is one per line:
   ```PowerShell
   # Not necessary the ;
   $MyHash = @{one = 1;
@@ -116,7 +110,7 @@ it is not C# so there is no need to add it to the line endings.
             three = 3}
   ```
 
-* Use four **spaces** per indentation level. No hard tabs.
+* Use four *spaces* per indentation level. No hard tabs.
 
     ```PowerShell
     # Good 4 spaces
@@ -134,25 +128,21 @@ it is not C# so there is no need to add it to the line endings.
     ```
 * Do not use Unix-style line endings.
 
-    * If you're using Git you might want to add the following
+    If you are using Git you might want to add the following
     configuration setting to protect your project from Unix-Style line
     endings creeping in:
 
     ```bash
     $ git config --global core.autocrlf false
     ```
-*  Use spaces around the `=` operator.
+* Use spaces around the `=` operator.
 
-* Use spaces around operators, after commas, colons and semicolons, around `{`
-  and before `}`. White-space might be (mostly) irrelevant to  PowerShell, 
-  but its proper use is the key to writing easily
-  readable code.
+* Use spaces around operators, after commas, colons and semicolons, around `{` and before `}`. White-space might be (mostly) irrelevant to PowerShell, but its proper use is the key to writing easily readable code.
   
   ```PowerShell
   $Animal = @('dog', 'cat')
   ```
-  In the case of `{` and `}` when declaring a hash there should be no space after of before
-  but for script blocks it is acceptable since it makes it more readable. 
+  In the case of `{` and `}` when declaring a hash there should be no space after or before but for script blocks it is acceptable since it makes it more readable. 
   
   ```PowerShell
   # Spacing in a Hash
@@ -176,7 +166,7 @@ it is not C# so there is no need to add it to the line endings.
 * No spaces after `(`, `[` or before `]`, `)`.
 
 * Avoid line continuation back tick where not required. In practice, avoid using
-  line continuations. In the case of multiple parameters for a Cmdlet or 
+  line continuations. In the case of multiple parameters for a cmdlet or 
   function it is better to use a technique called splatting (more info can 
   be obtained by running  `help about_Splatting`
 
@@ -197,13 +187,13 @@ it is not C# so there is no need to add it to the line endings.
   ```
 * Align the parameters of a method call if they span more than one
   line. When aligning parameters is not appropriate due to line-length
-  constraints, single indent for the lines after the first is also
+  constraints, a single indent for the lines after the first is also
   acceptable.
   
   ```PowerShell
   # Bad double indentation
   $MyObj.GetData(Param1,
-      param2,
+      Param2,
       Param3,
       Param4)
     
@@ -211,7 +201,7 @@ it is not C# so there is no need to add it to the line endings.
   # Good  
   $MyObj.GetData(
          Param1,
-         param2,
+         Param2,
          Param3,
          Param4
    )
@@ -225,15 +215,12 @@ it is not C# so there is no need to add it to the line endings.
 
 * Limit lines to 80 characters when possible.
 
-* Avoid trailing whitespace, this could cause in the use of source control software
-  to have lines shown as modified where only a space was added or removed making the
-  analysis of the changes more difficult in some cases.
+* Avoid trailing whitespace. In source control software this could result in lines shown as modified where only a space was added or removed, making the analysis of the changes more difficult in some cases.
 
 * End each file with a newline.
  
-
 #### Functions
-* Avoid using the `return` keyword in your functions, just place the object 
+* Avoid using the `return` keyword in your functions. Just place the object 
   variable on its own.
 
 * When declaring simple functions leave a space between the function
