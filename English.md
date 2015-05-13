@@ -152,7 +152,7 @@ it is not C# so there is no need to add it to the line endings.
   Invoke-Command -ScriptBlock { Get-Service -Name BITS }
   ```
   
-  In the case of `(` and `)` in string expesions a space is recommended since it makes it more readable.
+  In the case of `(` and `)` in string expressions a space is recommended since it makes it more readable.
   
   ```PowerShell
   # Bad Spacing
