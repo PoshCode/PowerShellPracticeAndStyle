@@ -579,7 +579,7 @@ Export-CliXml to protect the password value. The password will be protected as a
 string and will only be accessible to the user who generated the file on the same 
 computer where it was generated.
 
-```
+```PowerShell
 # Save a credential to disk
 Get-Credential | Export-CliXml -Path c:\creds\credential.xml
 
