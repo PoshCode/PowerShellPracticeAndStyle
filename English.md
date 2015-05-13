@@ -275,9 +275,8 @@ it is not C# so there is no need to add it to the line endings.
           }
   
           $Obj = New-Object -Property $Capabilities -TypeName psobject
-          Return $Obj
       }
-      End {}
+      End { Return $Obj }
   }
   
   # Good
