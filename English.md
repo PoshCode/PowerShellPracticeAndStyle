@@ -8,11 +8,24 @@ This document is an attempt to come to an agreement on a style-guide because we 
 
 ## Table of Contents
 
-<!-- MarkdownTOC depth=3 autolink=true bracket=round -->
+<!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
-- [Naming Conventions](#naming-conventions)
-- [Commenting](#commenting)
 - [Code Layout](#code-layout)
+    - [Indentation](#indentation)
+    - [Maximum Line Length](#maximum-line-length)
+    - [Blank lines](#blank-lines)
+    - [Trailing spaces](#trailing-spaces)
+    - [Spaces around parameters and operators](#spaces-around-parameters-and-operators)
+    - [Spaces around special characters](#spaces-around-special-characters)
+    - [Avoid using semicolons (`;`) at the end of each line.](#avoid-using-semicolons--at-the-end-of-each-line)
+- [Commenting](#commenting)
+    - [Block comments](#block-comments)
+    - [Inline comments](#inline-comments)
+    - [Documentation comments](#documentation-comments)
+- [Naming Conventions](#naming-conventions)
+    - [Use the full name of each command.](#use-the-full-name-of-each-command)
+    - [Use full parameter names.](#use-full-parameter-names)
+    - [Use full, explicit paths when possible.](#use-full-explicit-paths-when-possible)
 - [Functions](#functions)
 - [Advanced Functions](#advanced-functions)
 - [Security](#security)
@@ -25,70 +38,101 @@ This document is an attempt to come to an agreement on a style-guide because we 
 
 <!-- /MarkdownTOC -->
 
-### Naming Conventions
+### Code Layout
 
-In general, prefer the use of full explicit names for commands and parameters rather than aliases or short forms. There are tools [Expand-Alias](https://github.com/PoshCode/ModuleBuilder/blob/master/ResolveAlias.psm1) for fixing many, but not all of these issues.
+Please note that many of these guidelines, in particular, are purely about readability. When we ask you to leave an empty line after a closing function brace, or two lines before functions, we're not being capricious, we're doing so because it makes it easier for experienced developers to scan your code.
 
-###### Use the full name of each command.
+#### Indentation
 
-Every PowerShell scripter learns the actual command names, but different people learn and use different aliases (e.g.: ls for Linux users, dir for DOS users, gci ...).  In your shared scripts you should use the more universally known full command name. As a bonus, sites like GitHub will highlight commands properly when you use the full Verb-Noun name:
+Use four *spaces* per indentation level. This is what PowerShell ISE does and understands, and there's really no excuse good enough to do anything different. 
+
+Do not use tabs except to remain consistent -- when editing code that already uses tabs, you should not change the indentation character for just part of the code, and particularly when contributing to other people's projects, you should never reformat the whitespace on an entire file as _part_ of an edit.
+
+The 4-space rule is optional for continuation lines. Hanging indents (when indenting a wrapped command which was too long) may be indented more than one indentation level, and may be indented an odd number of spaces to line up with a method call or parameter block.
+
+  
+```PowerShell
+
+# This is ok
+$MyObj.GetData(
+       $Param1,
+       $Param2,
+       $Param3,
+       $Param4
+    )
+   
+# This is better
+$MyObj.GetData($Param1,
+               $Param2,
+               $Param3,
+               $Param4)
+```
+
+#### Maximum Line Length
+
+Limit lines to 110 characters when possible. Although most of us work on large monitors, the PowerShell console is only 120 characters wide, and even when pasting, reserves part of the line for the continuation prompt. 
+
+Keeping files narrower allows for side-by-side editing, so even narrower guidelines (down to the ancient 72 column limit) may be established by various projects, so be sure to check when you're working on someone else's project.
+
+The preferred way to wrap long lines is to use splatting (see [About_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should always be used in preference to the backtick for line continuation when applicable.
+
+#### Blank lines
+
+Surround function and class definitions with two blank lines.
+
+Method definitions within a class are surrounded by a single blank line.
+
+Blank lines may be ommitted between a bunch of related one-liners (e.g. empty functions)
+
+Additional blank lines may be used sparingly to separate groups of related functions, or within functions to indicate logical sections (e.g. before a block comment).
+
+End each file with a single blank line.
+
+#### Trailing spaces
+
+Lines should not have trailing whitespace. Extra spaces result in future edits where the only change is a space being added or removed, making the analysis of the changes more difficult for no reason.
+
+#### Spaces around parameters and operators
+
+You should us a single space around parameter names and operators, including comparison operators and math and assignment operators, even when the spaces are not necessary for PowerShell to correctly parse the code.
+
+One notable exception is when using semi-colons to pass values to switch parameters:
 
 ```PowerShell
 # Do not write:
-gwmi -Class win32_service
+$variable=Get-Content $FilePath -Wai:($ReadCount-gt0) -First($ReadCount*5)
 
 # Instead write:
-Get-WmiObject -Class Win32_Service
+$variable = Get-Content -Path $FilePath -Wait:($ReadCount -gt 0) -TotalCount ($ReadCount * 5)
 ```
 
-###### Use full parameter names. 
+#### Spaces around special characters
 
-Because there are so many commands in PowerShell, it's impossible for every scripter to know every command. Therefore it's useful to be explicit about your parameter names for the sake of readers who may be unfamiliar with the command you're using. This will also help you avoid bugs if a future change to the command alters the parameter sets.
+White-space is (mostly) irrelevant to PowerShell, but its proper use is the key to writing easily readable code.
+
+Use a single space after commas and semicolons, and around pairs of curly braces. 
+
+Avoid extra spaces inside parenthesis or square braces.  
+
+Nested expressions `$( ... )` and script blocks `{ ... }` should have a single space _inside_ them to make code stand out and be more readable.
+
+Nested expressions `$( ... )` and variable delimiters `${...}` inside strings do not need spaces _outside_, since that would become a part of the string.
+  
+
+#### Avoid using semicolons (`;`) at the end of each line.
+
+PowerShell will not complain about extra semicolons, but they are unecessary, and get in the way when code is being edited or copy-pasted. They also result in extra do-nothing edits in source control when someone finally decides to delete them.
+
+They are also unecessary when declaring hashtables if you are already putting each element on it's own line:
 
 ```PowerShell
-# Do not write:
-Get-WmiObject win32_service name,state
-
-# Instead write:
-Get-WmiObject -Class win32_service -Property name,state
+# This is the preferred way to declare a hashtable if it must go past one line:
+$Options = @{
+    Margin = 2
+    Padding = 2
+    FontSize = 24
+}  
 ```
-
-###### Use full, explicit paths when possible.
-
-When writing scripts, it's really only safe to use `..` or `.` in a path if you have previously explicitly set the location (within the script), and even then you should beware of using relative paths when calling .Net methods or legacy/native applications, because they will use the `[Environment]::CurrentDirectory` rather than PowerShell's present working directory (`$PWD`). Because checking for these types of errors is tedious (and because they are easy to over-look) it's best to avoid using relative paths altogether, and instead, base your paths off of $PSScriptRoot (the folder your script is in) when necessary.
-
-```PowerShell
-# Do not write:
-Get-Content .\README.md
-
-# Especially do not write:
-[System.IO.File]::ReadAllText(".\README.md")
-
-# Instead write:
-Get-Content (Join-Path $PSScriptRoot README.md)
-
-# Or even use string concatenation:
-[System.IO.File]::ReadAllText("$PSScriptRoot\README.md")
-```
-
-###### Avoid the use of `~` to represent the home folder. 
-
-The meaning of ~ is unfortunately dependent on the "current" provider at the time of execution. This isn't really a style issue, but it's an important rule for code you intend to share anyway. Instead, use `${Env:UserProfile}` or `(Get-PSProvider FileSystem).Home` ...
-
-```PowerShell
-PS C:\Windows\system32> cd ~
-PS C:\Users\Name> cd HKCU:\Software
-PS HKCU:\Software> cd ~
-cd : Home location for this provider is not set. To set the home location, call "(get-psprovider 'Registry').Home = 'path'".
-At line:1 char:1
-+ cd ~
-+ ~~~~
-    + CategoryInfo          : InvalidOperation: (:) [Set-Location], PSInvalidOperationException
-    + FullyQualifiedErrorId : InvalidOperation,Microsoft.PowerShell.Commands.SetLocationCommand
-
-```
-
-
 ### Commenting
 
 Comments that contradict the code are worse than no comments. Always make a priority of keeping the comments up-to-date when the code changes! 
@@ -108,7 +152,7 @@ $Margin = $Margin + 2
 
 ```
 
-###### Block comments
+#### Block comments
 
 Block comments generally apply to some or all of the code which follows them, and are indented to the same level as that code. Each line should start with a # and a single space. 
 
@@ -127,7 +171,7 @@ If the block is particularly long (as in the case of documentation text) it is r
   #>
 ```
 
-###### Inline comments
+#### Inline comments
 
 Comments on the same line as a statement can be distracting, but when they don't state the obvious, and particularly when you have several short lines of code which need explaining, they can be useful.
 
@@ -141,7 +185,7 @@ $Options = @{
 }
 ```
 
-###### Documentation comments
+#### Documentation comments
 
 In order to ensure that the documentation stays with the function, documentation comments should be placed INSIDE the function, rather than above. To ensure they stay current with changes to the parameters, they should be placed at the top of the function, above and within the `param` block. Parameter documentation should be within the param block, directly above each parameter:
 
@@ -168,100 +212,67 @@ function Test-Help {
 }
 ```
 
-### Code Layout
+### Naming Conventions
 
-Please note that many of these guidelines, in particular, are purely about readability. When we ask you to leave an empty line after a closing function brace, or two lines before functions, we're not being capricious, we're doing so because it makes it easier for experienced developers to scan your code.
+In general, prefer the use of full explicit names for commands and parameters rather than aliases or short forms. There are tools [Expand-Alias](https://github.com/PoshCode/ModuleBuilder/blob/master/ResolveAlias.psm1) for fixing many, but not all of these issues.
 
-###### Indentation
+#### Use the full name of each command.
 
-Use four *spaces* per indentation level. This is what PowerShell ISE does and understands, and there's really no excuse good enough to do anything different. 
-
-Do not use tabs except to remain consistent -- when editing code that already uses tabs, you should not change the indentation character for just part of the code, and particularly when contributing to other people's projects, you should never reformat the whitespace on an entire file as _part_ of an edit.
-
-The 4-space rule is optional for continuation lines. Hanging indents (when indenting a wrapped command which was too long) may be indented more than one indentation level, and may be indented an odd number of spaces to line up with a method call or parameter block.
-
-  
-```PowerShell
-
-# This is ok
-$MyObj.GetData(
-       $Param1,
-       $Param2,
-       $Param3,
-       $Param4
-    )
-   
-# This is better
-$MyObj.GetData($Param1,
-               $Param2,
-               $Param3,
-               $Param4)
-```
-
-###### Maximum Line Length
-
-Limit lines to 110 characters when possible. Although most of us work on large monitors, the PowerShell console is only 120 characters wide, and even when pasting, reserves part of the line for the continuation prompt. 
-
-Keeping files narrower allows for side-by-side editing, so even narrower guidelines (down to the ancient 72 column limit) may be established by various projects, so be sure to check when you're working on someone else's project.
-
-The preferred way to wrap long lines is to use splatting (see [About_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should always be used in preference to the backtick for line continuation when applicable.
-
-###### Blank lines
-
-Surround function and class definitions with two blank lines.
-
-Method definitions within a class are surrounded by a single blank line.
-
-Blank lines may be ommitted between a bunch of related one-liners (e.g. empty functions)
-
-Additional blank lines may be used sparingly to separate groups of related functions, or within functions to indicate logical sections (e.g. before a block comment).
-
-End each file with a single blank line.
-
-###### Trailing spaces
-
-Lines should not have trailing whitespace. Extra spaces result in future edits where the only change is a space being added or removed, making the analysis of the changes more difficult for no reason.
-
-###### Use spaces around parameters and operators
-
-This includes comparison operators as well as math and assignment operators, and parameter names, even when the spaces are not necessary for PowerShell to correctly parse the code.
-
-One notable exception is when using semi-colons to pass values to switch parameters:
+Every PowerShell scripter learns the actual command names, but different people learn and use different aliases (e.g.: ls for Linux users, dir for DOS users, gci ...).  In your shared scripts you should use the more universally known full command name. As a bonus, sites like GitHub will highlight commands properly when you use the full Verb-Noun name:
 
 ```PowerShell
 # Do not write:
-$variable=Get-Content $FilePath -Wai:($ReadCount-gt0) -First($ReadCount*5)
+gwmi -Class win32_service
 
 # Instead write:
-$variable = Get-Content -Path $FilePath -Wait:($ReadCount -gt 0) -TotalCount ($ReadCount * 5)
+Get-WmiObject -Class Win32_Service
 ```
 
-###### Use spaces after special characters
+#### Use full parameter names. 
 
-White-space is (mostly) irrelevant to PowerShell, but its proper use is the key to writing easily readable code.
-
-Use a single space after commas and semicolons, and around pairs of curly braces. 
-
-Avoid extra spaces inside parenthesis or square braces.  
-
-Nested expressions `$( ... )` and script blocks `{ ... }` should have a single space _inside_ them to make code stand out and be more readable.
-
-Nested expressions `$( ... )` and variable delimiters `${...}` inside strings do not need spaces _outside_, since that would become a part of the string.
-  
-
-###### Avoid using semicolons (`;`) at the end of each line.
-
-PowerShell will not complain about extra semicolons, but they are unecessary, and get in the way when code is being edited or copy-pasted. They also result in extra do-nothing edits in source control when someone finally decides to delete them.
-
-They are also unecessary when declaring hashtables if you are already putting each element on it's own line:
+Because there are so many commands in PowerShell, it's impossible for every scripter to know every command. Therefore it's useful to be explicit about your parameter names for the sake of readers who may be unfamiliar with the command you're using. This will also help you avoid bugs if a future change to the command alters the parameter sets.
 
 ```PowerShell
-# This is the preferred way to declare a hashtable if it must go past one line:
-$Options = @{
-    Margin = 2
-    Padding = 2
-    FontSize = 24
-}  
+# Do not write:
+Get-WmiObject win32_service name,state
+
+# Instead write:
+Get-WmiObject -Class win32_service -Property name,state
+```
+
+#### Use full, explicit paths when possible.
+
+When writing scripts, it's really only safe to use `..` or `.` in a path if you have previously explicitly set the location (within the script), and even then you should beware of using relative paths when calling .Net methods or legacy/native applications, because they will use the `[Environment]::CurrentDirectory` rather than PowerShell's present working directory (`$PWD`). Because checking for these types of errors is tedious (and because they are easy to over-look) it's best to avoid using relative paths altogether, and instead, base your paths off of $PSScriptRoot (the folder your script is in) when necessary.
+
+```PowerShell
+# Do not write:
+Get-Content .\README.md
+
+# Especially do not write:
+[System.IO.File]::ReadAllText(".\README.md")
+
+# Instead write:
+Get-Content (Join-Path $PSScriptRoot README.md)
+
+# Or even use string concatenation:
+[System.IO.File]::ReadAllText("$PSScriptRoot\README.md")
+```
+
+##### Avoid the use of `~` to represent the home folder. 
+
+The meaning of ~ is unfortunately dependent on the "current" provider at the time of execution. This isn't really a style issue, but it's an important rule for code you intend to share anyway. Instead, use `${Env:UserProfile}` or `(Get-PSProvider FileSystem).Home` ...
+
+```PowerShell
+PS C:\Windows\system32> cd ~
+PS C:\Users\Name> cd HKCU:\Software
+PS HKCU:\Software> cd ~
+cd : Home location for this provider is not set. To set the home location, call "(get-psprovider 'Registry').Home = 'path'".
+At line:1 char:1
++ cd ~
++ ~~~~
+    + CategoryInfo          : InvalidOperation: (:) [Set-Location], PSInvalidOperationException
+    + FullyQualifiedErrorId : InvalidOperation,Microsoft.PowerShell.Commands.SetLocationCommand
+
 ```
 
 <!-- JOEL STOPPED EDITING HERE -->
