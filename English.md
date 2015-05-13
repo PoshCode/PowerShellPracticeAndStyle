@@ -275,9 +275,8 @@ it is not C# so there is no need to add it to the line endings.
           }
   
           $Obj = New-Object -Property $Capabilities -TypeName psobject
-          Return $Obj
       }
-      End {}
+      End { Return $Obj }
   }
   
   # Good
@@ -573,6 +572,19 @@ $cred.GetNetworkCredential().password
  # Decrypt the secure string.
  $SecureStringToBSTR = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecString)
  $PlainText = [Runtime.InteropServices.Marshal]::PtrToStringAuto($SecureStringToBSTR)
+```
+
+* For credentials that need to be saved to disk, serialize the credential object using
+Export-CliXml to protect the password value. The password will be protected as a secure
+string and will only be accessible to the user who generated the file on the same 
+computer where it was generated.
+
+```PowerShell
+# Save a credential to disk
+Get-Credential | Export-CliXml -Path c:\creds\credential.xml
+
+# Import the previously saved credential
+$Credential = Import-CliXml -Path c:\creds\credential.xml
 ```
 
 ### PowerShell Supported Version
