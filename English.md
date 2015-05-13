@@ -298,7 +298,7 @@ it is not C# so there is no need to add it to the line endings.
       Process
       {
   
-          $Capabilities = @{MilitaryService = $salse
+          $Capabilities = @{MilitaryService = $false
                             DrinkAlcohol = $false
                             Vote = $false}
           if ($Age -ge 18)
