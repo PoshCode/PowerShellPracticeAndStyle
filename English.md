@@ -574,6 +574,19 @@ $cred.GetNetworkCredential().password
  $PlainText = [Runtime.InteropServices.Marshal]::PtrToStringAuto($SecureStringToBSTR)
 ```
 
+* For credentials that need to be saved to disk, serialize the credential object using
+Export-CliXml to protect the password value. The password will be protected as a secure
+string and will only be accessible to the user who generated the file on the same 
+computer where it was generated.
+
+```
+# Save a credential to disk
+Get-Credential | Export-CliXml -Path c:\creds\credential.xml
+
+# Import the previously saved credential
+$Credential = Import-CliXml -Path c:\creds\credential.xml
+```
+
 ### PowerShell Supported Version
 
 * When working in an environment where there are multiple versions of PowerShell make sure to specify the lowest version your script will support by prividing a Requires statement at the top of the script.
