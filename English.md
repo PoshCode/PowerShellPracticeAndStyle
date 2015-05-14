@@ -312,13 +312,14 @@ it is not C# so there is no need to add it to the line endings.
       End {}
   }
  ```
-* For Advanced Functions always use CmdletBinding attribute should always 
-  have at least a `Process {}` code block if any parameters takes values
+* Always use CmdletBinding attribute.
+
+* Always have at least a `Process {}` code block if any parameters takes values
   from the Pipeline.
 
-* When possible use in advanced functions a OutputType attribute if it returns
+* Specify an OutputType attribute if the advanced function returns
   an object or collection of objects. If the function returns different
-  object types depending on the parameter set provide one per parameter set
+  object types depending on the parameter set provide one per parameter set.
 
   ```PowerShell
   [OutputType([<TypeLiteral>], ParameterSetName="<Name>")]
@@ -336,7 +337,8 @@ it is not C# so there is no need to add it to the line endings.
        [OutputType("System.Int32", ParameterSetName="ID")]
        [OutputType([String], ParameterSetName="Name")]
   
-       Param (      
+       Param
+       (      
            [parameter(Mandatory=$true, ParameterSetName="ID")]
            [Int[]]
            $UserID,
@@ -348,10 +350,10 @@ it is not C# so there is no need to add it to the line endings.
               
      <function body>
    }
-  ```
+```
   * When using advanced functions or scripts with CmdletBinding attribute avoid
     validating parameters in the body of the script when possible and use parameter
-    validation attributes instead
+    validation attributes instead.
 
       * **AllowNull** Validation Attribute
 
@@ -359,12 +361,12 @@ it is not C# so there is no need to add it to the line endings.
         to be null ($null).
         ```PowerShell
         Param
-          (
+        (
             [parameter(Mandatory=$true)]
             [AllowNull()]
             [String]
             $ComputerName
-          ) 
+        ) 
 
         ```
       * **AllowEmptyString** Validation Attribute
@@ -373,12 +375,12 @@ it is not C# so there is no need to add it to the line endings.
         an empty string ("").
         ```PowerShell
         Param
-          (
+        (
             [parameter(Mandatory=$true)]
             [AllowEmptyString()]
             [String]
             $ComputerName
-          ) 
+        ) 
         ```
 
       * **AllowEmptyCollection** Validation Attribute
@@ -387,12 +389,12 @@ it is not C# so there is no need to add it to the line endings.
         to be an empty collection (@()). 
         ```PowerShell
         Param
-          (
+        (
             [parameter(Mandatory=$true)]
             [AllowEmptyCollection()]
             [String[]]
             $ComputerName
-          ) 
+        ) 
         ```
 
       * **ValidateCount** Validation Attribute
@@ -404,12 +406,12 @@ it is not C# so there is no need to add it to the line endings.
         
         ```PowerShell
         Param
-          (
+        (
             [parameter(Mandatory=$true)]
             [ValidateCount(1,5)]
             [String[]]
             $ComputerName
-          ) 
+        ) 
 
         ```
       * **ValidateLength** Validation Attribute
@@ -420,12 +422,12 @@ it is not C# so there is no need to add it to the line endings.
         is outside of the range.
         ```PowerShell
         Param
-          (
+        (
             [parameter(Mandatory=$true)]
             [ValidateLength(1,10)]
             [String[]]
             $ComputerName
-          ) 
+        ) 
         ```
         
       * **ValidatePattern** Validation Attribute
@@ -436,12 +438,12 @@ it is not C# so there is no need to add it to the line endings.
         pattern. 
         ```PowerShell
         Param
-          (
+        (
             [parameter(Mandatory=$true)]
             [ValidatePattern("[0-9][0-9][0-9][0-9]")]
             [String[]]
             $ComputerName
-          ) 
+        ) 
         ```
 
       * **ValidateRange** Validation Attribute
@@ -451,12 +453,12 @@ it is not C# so there is no need to add it to the line endings.
         if any value is outside that range. 
         ```PowerShell
         Param
-          (
+        (
             [parameter(Mandatory=$true)]
             [ValidateRange(0,10)]
             [Int]
             $Attempts
-          ) 
+        ) 
         ```
  
 
@@ -472,12 +474,12 @@ it is not C# so there is no need to add it to the line endings.
         use the $_ variable to refer to the value in the script.
         ```PowerShell
         Param
-          (
+        (
             [parameter()]
             [ValidateScript({$_ -ge (get-date)})]
             [DateTime]
             $EventDate
-          ) 
+        ) 
         ```
 
       * **ValidateSet** Attribute
@@ -490,12 +492,12 @@ it is not C# so there is no need to add it to the line endings.
         
         ```PowerShell
         Param
-          (
+        (
             [parameter(Mandatory=$true)]
             [ValidateSet("Low", "Average", "High")]
             [String[]]
             $Detail
-          ) 
+        ) 
         ```
 
       * **ValidateNotNull** Validation Attribute
@@ -512,11 +514,11 @@ it is not C# so there is no need to add it to the line endings.
         match the specified type.)  
         ```PowerShell
         Param
-          (
+        (
             [parameter(Mandatory=$true)]
             [ValidateNotNull()]
             $ID
-          ) 
+        ) 
         ```
 
       * **ValidateNotNullOrEmpty** Validation Attribute
@@ -528,12 +530,12 @@ it is not C# so there is no need to add it to the line endings.
         array.   
         ```PowerShell
         Param
-          (
+        (
             [parameter(Mandatory=$true)]
             [ValidateNotNullOrEmpty()]
             [String[]]
             $UserName
-          ) 
+        ) 
         ```
 
 TODO
