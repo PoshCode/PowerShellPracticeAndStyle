@@ -44,12 +44,10 @@ Please note that many of these guidelines, in particular, are purely about reada
 
 #### Indentation
 
-Use four *spaces* per indentation level. This is what PowerShell ISE does and understands, and there's really no excuse good enough to do anything different. 
+##### Use four *spaces* per indentation level.
+This is what PowerShell ISE does and understands, and it's the default for most code editors. If you are sure noone outside your team will need to read and understand your code, feel free to agree on 2 spaces or 3, or even tabs, but for public code, please stick to 4 spaces.
 
-Do not use tabs except to remain consistent -- when editing code that already uses tabs, you should not change the indentation character for just part of the code, and particularly when contributing to other people's projects, you should never reformat the whitespace on an entire file as _part_ of an edit.
-
-The 4-space rule is optional for continuation lines. Hanging indents (when indenting a wrapped command which was too long) may be indented more than one indentation level, and may be indented an odd number of spaces to line up with a method call or parameter block.
-
+That said, the 4-space rule is optional for continuation lines. Hanging indents (when indenting a wrapped command which was too long) may be indented more than one indentation level, or may even be indented an odd number of spaces to line up with a method call or parameter block.
   
 ```PowerShell
 
@@ -68,13 +66,24 @@ $MyObj.GetData($Param1,
                $Param4)
 ```
 
+##### Maintain consistent spacing.
+The big exception to the indentation rule is when you're editing someone's legacy code base -- use the indentation rules they've established, because conformity within the same project is far more important than conformity with other projects.
+
+Also, if you must change whitespacing in a file that's in source control, please make a commit that does nothing but edit the whitespace. You should never reformat the whitespace on an entire file as _part_ of an edit.
+
 #### Maximum Line Length
 
-Limit lines to 110 characters when possible. Although most of us work on large monitors, the PowerShell console is only 120 characters wide, and even when pasting, reserves part of the line for the continuation prompt. 
+Limit lines to 120 characters when possible. Although most of us work on large monitors, the PowerShell console is only 120 characters wide, and there will be times when you want to see the source of a script in your console.
 
-Keeping files narrower allows for side-by-side editing, so even narrower guidelines (down to the ancient 72 column limit) may be established by various projects, so be sure to check when you're working on someone else's project.
+Keeping files narrower allows for side-by-side editing, so even narrower guidelines (down to the ancient 72 column limit) may be established by various projects. Be sure to check when you're working on someone else's project.
 
-The preferred way to wrap long lines is to use splatting (see [About_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should always be used in preference to the backtick for line continuation when applicable.
+The preferred way to avoid long lines is to use splatting (see [About_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should always be used in preference to the backtick for line continuation when applicable, even for strings:
+
+```
+Write-Host ("This is an incredibly important, and extremely long message. " + 
+            "We cannot afford to leave any part of it out, nor do we want line-breaks in the output. " +
+            "Using string concatenation let's us use short lines here, and still get a long line in the output")
+```
 
 #### Blank lines
 
