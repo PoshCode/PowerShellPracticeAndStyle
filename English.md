@@ -11,6 +11,7 @@ This document is an attempt to come to an agreement on a style-guide because we 
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
 - [Code Layout](#code-layout)
+    - [Maintain consistency in layout](#maintain-consistency-in-layout)
     - [Indentation](#indentation)
     - [Maximum Line Length](#maximum-line-length)
     - [Blank lines](#blank-lines)
@@ -42,12 +43,20 @@ This document is an attempt to come to an agreement on a style-guide because we 
 
 Please note that many of these guidelines, in particular, are purely about readability. When we ask you to leave an empty line after a closing function brace, or two lines before functions, we're not being capricious, we're doing so because it makes it easier for experienced developers to scan your code.
 
+#### Maintain consistency in layout
+
+Rules about indentation and line length are about consistency across code bases. Long practice has shown that it's easier to read and understand code when it looks familiar and you're not being distracted by details, which means that (as with the python community), it's better for everyone to follow a single set of rules.
+
+We aren't trying to force the whole world to change overnight, and the code layout rules for individual projects trump these rules. Whether for legacy reasons, or to match guidelines for multiple languages in a single project, different projects may have different style guides, and since the goal is consistency, you should always abide by the rules in place on your project.
+
+If you do have a legacy project that is in source control and you decide to reformat code to adopt these rules, try to make all of your whitespace changes in a single a commit that does _nothing_ but edit the whitespace. You should never reformat the whitespace on a file as _part_ of a content change.
+
 #### Indentation
 
 ##### Use four *spaces* per indentation level.
-This is what PowerShell ISE does and understands, and it's the default for most code editors. If you are sure noone outside your team will need to read and understand your code, feel free to agree on 2 spaces or 3, or even tabs, but for public code, please stick to 4 spaces.
+This is what PowerShell ISE does and understands, and it's the default for most code editors. As always, existing projects may have different standards, but for public code, please stick to 4 spaces, and the rest of us will try to do the same.
 
-That said, the 4-space rule is optional for continuation lines. Hanging indents (when indenting a wrapped command which was too long) may be indented more than one indentation level, or may even be indented an odd number of spaces to line up with a method call or parameter block.
+The 4-space rule is optional for continuation lines. Hanging indents (when indenting a wrapped command which was too long) may be indented more than one indentation level, or may even be indented an odd number of spaces to line up with a method call or parameter block.
   
 ```PowerShell
 
@@ -66,16 +75,14 @@ $MyObj.GetData($Param1,
                $Param4)
 ```
 
-##### Maintain consistent spacing.
-The big exception to the indentation rule is when you're editing someone's legacy code base -- use the indentation rules they've established, because conformity within the same project is far more important than conformity with other projects.
-
-Also, if you must change whitespacing in a file that's in source control, please make a commit that does nothing but edit the whitespace. You should never reformat the whitespace on an entire file as _part_ of an edit.
 
 #### Maximum Line Length
 
-Limit lines to 120 characters when possible. Although most of us work on large monitors, the PowerShell console is only 120 characters wide, and there will be times when you want to see the source of a script in your console.
+Limit lines to 115 characters when possible. 
 
-Keeping files narrower allows for side-by-side editing, so even narrower guidelines (down to the ancient 72 column limit) may be established by various projects. Be sure to check when you're working on someone else's project.
+The PowerShell console is, by default, 120 characters wide, but it allows only 119 characters on output lines, and when entering multi-line text, PowerShell uses a line continuation prompt: `>>> ` and thus limits your line length to 116 anyway.
+
+Most of us work on widescreen monitors these days, and there is little reason to keep a narrow line width, however, keeping files relatively narrow allows for side-by-side editing, so even narrower guidelines may be established by a given project. Be sure to check when you're working on someone else's project.
 
 The preferred way to avoid long lines is to use splatting (see [About_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should always be used in preference to the backtick for line continuation when applicable, even for strings:
 
