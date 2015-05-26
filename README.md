@@ -3,6 +3,12 @@ PSStyleGuide
 
 The Community PowerShell Style Guide
 
+# Status of This Guide
+
+The PowerShell Style Guide is in PREVIEW.
+
+We are still actively working out our disagreements about the rules in this guide, so please don't be suprised if, over then next few weeks we change rules to contradict what they say at this current moment.
+
 ## Contributing
 
 Markdown documents on GitHub support linking to any header, so when editing, please observe the following conventions:
