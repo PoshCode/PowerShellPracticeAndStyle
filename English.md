@@ -663,6 +663,22 @@ Get-Credential | Export-CliXml -Path c:\creds\credential.xml
 $Credential = Import-CliXml -Path c:\creds\credential.xml
 ```
 
+* For strings that may be sensitive and need to be saved to disk, use ConvertFrom-SecureString to encrypt into a standard string that can be saved to disk. You can then use ConvertTo-SecureString to convert the encrypted standard string back into a SecureString.
+  * This command uses the Windows Data Protection API (DPAPI) to encrypt the data. Optionally, you can use the -Key or -SecureKey switches with ConvertFrom-SecureString to specify an encryption key for use with AES encryption.
+
+```PowerShell
+# Prompt for a Secure String
+$Secure = Read-Host -Prompt "Enter the Secure String" -AsSecureString
+
+# Encrypt to Standard String and store on disk
+ConvertFrom-SecureString -SecureString $Secure | Out-File -Path "C:\Users\$Env:USERNAME\AppData\Local\Sec.bin"
+
+# Read the Standard String from disk and convert to a SecureString
+$Secure = Get-Content -Path "C:\Users\$Env:USERNAME\AppData\Local\Sec.bin" | ConvertTo-SecureString
+
+
+```
+
 ### PowerShell Supported Version
 
 * When working in an environment where there are multiple versions of PowerShell make sure to specify the lowest version your script will support by prividing a Requires statement at the top of the script.
