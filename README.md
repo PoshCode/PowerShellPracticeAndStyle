@@ -1,6 +1,16 @@
-# The PowerShell Best Practices and Style Guide
+## The PowerShell Best Practices and Style Guide
 
-These documents are released under the [Creative Commons ShareAlike License](http://creativecommons.org/licenses/by-sa/4.0/). The authors encourage you to redistribute this file as widely as possible, but ask that you send us pull requests with any changes!
+<p align="center"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; float: left; vertical-align: middle; margin: 10px;"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a></p>
+
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>, please attribute to Don Jones, Matt Penny, Carlos Perez, Joel Bennett and the PowerShell Community.
+
+###### You are free to:
+
+**Share** — copy and redistribute the material in any medium or format
+
+**Adapt** — remix, transform, and build upon the material 
+
+The authors encourage you to redistribute this content as widely as possible, but require that you give credit to the primary authors below, and that you notify us on github of any improvements you make.
 
 The *PowerShell Best Practices* are always evolving, and continue to be edited and updated as the language and tools (and our community understanding of them) evolve. We encourage you to check back for new editions at least twice a year, by visiting https://github.com/PoshCode/PowerShellPracticeAndStyle
 
@@ -16,15 +26,17 @@ For more information, see [CONTRIBUTING](contributing.md)
 
 _The Community Book of PowerShell Practices_ was originally compiled and edited by Don Jones and Matt Penny with input from the Windows PowerShell community on PowerShell.org
 
-Copyright (c) Don Jones, Matt Penny 2015
+Portions copyright (c) Don Jones, Matt Penny, 2014-2015
 
 _The PowerShell Style Guide_ was originally created by Carlos Perez, for his students, and all the good parts were written by him. 
 
-Copyright (c) Carlos Perez 2015
+Portions copyright (c) Carlos Perez, 2015
 
 Any mistakes in either of these documents are there because Joel Bennett got involved. Please submit [issues](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues) and help us correct them.
 
-## Foreword
+Portions copyright (c) Joel Bennett, 2015
+
+### Foreword
 
 During the 2013 Scripting Games, it became apparent that a great many folks in the PowerShell community have vastly different ideas about what's "right and wrong" in the world of PowerShell scripting. Some folks down-scored techniques that others praised, and vice-versa.
 
