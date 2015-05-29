@@ -1,83 +1,58 @@
 These documents are in an extremely rough state, not suitable for inclusion in the main guide yet.
 
+### Using The .Net Framework
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
-- [More Formatting Rules?](#more-formatting-rules)
-  - [Open braces on the same line](#open-braces-on-the-same-line)
-  - [Closing braces always on their own line](#closing-braces-always-on-their-own-line)
-  - [Prefer: param() begin, process, end](#prefer-param-begin-process-end)
-- [Formatting](#formatting)
-  - [Never use format cmdlets in functions and scripts](#never-use-format-cmdlets-in-functions-and-scripts)
-  - [Ship Format Files When Outputting Custom Objects](#ship-format-files-when-outputting-custom-objects)
-- [Using The .Net Framework](#using-the-net-framework)
-  - [Use RequiredAssemblies rather than Add-Type](#use-requiredassemblies-rather-than-add-type)
-  - [Use Add-Type rather than Reflection](#use-add-type-rather-than-reflection)
-  - [Use Add-Type for small classes or PInvoke calls](#use-add-type-for-small-classes-or-pinvoke-calls)
-  - [Prefer shipping binaries over large compilations](#prefer-shipping-binaries-over-large-compilations)
-- [Comment Based Help](#comment-based-help)
-  - [Always ship a about_ModuleName with modules](#always-ship-a-about_modulename-with-modules)
+- [Use RequiredAssemblies rather than Add-Type](#use-requiredassemblies-rather-than-add-type)
+    - [Use Add-Type rather than Reflection](#use-add-type-rather-than-reflection)
+    - [Use Add-Type for small classes or PInvoke calls](#use-add-type-for-small-classes-or-pinvoke-calls)
+    - [Prefer shipping binaries over large compilations](#prefer-shipping-binaries-over-large-compilations)
 - [Performance](#performance)
-  - [Prefer language features over cmdlets](#prefer-language-features-over-cmdlets)
-  - [Know when to use .Net](#know-when-to-use-net)
+    - [Prefer language features over cmdlets](#prefer-language-features-over-cmdlets)
+    - [Know when to use .Net](#know-when-to-use-net)
 - [Error Handling](#error-handling)
 - [General Design Principles](#general-design-principles)
-  - [Use custom objects](#use-custom-objects)
-  - [Scripts vs Functions](#scripts-vs-functions)
-  - [Always write CmdletBinding](#always-write-cmdletbinding)
-  - [Prefer PipelineByPropertyName parameters.](#prefer-pipelinebypropertyname-parameters)
-  - [Specify aliases for pipeline binding](#specify-aliases-for-pipeline-binding)
-  - [Never forget the Common Parameters](#never-forget-the-common-parameters)
-  - [Specify positional parameters, but don't use them](#specify-positional-parameters-but-dont-use-them)
-  - [Specify short aliases, but don't use them](#specify-short-aliases-but-dont-use-them)
-  - [Never specify Default values for mandatory parameters](#never-specify-default-values-for-mandatory-parameters)
-  - [Always specify HelpText for mandatory parameters](#always-specify-helptext-for-mandatory-parameters)
-  - [Use PsCmdlet.ThrowTerminatingError rather than throw](#use-pscmdletthrowterminatingerror-rather-than-throw)
-  - [Use PsCmdlet.WriteError rather than Write-Error](#use-pscmdletwriteerror-rather-than-write-error)
-  - [Use SupportsShouldProcess when appropriate](#use-supportsshouldprocess-when-appropriate)
-  - [Modules ARE the Best Practice](#modules-are-the-best-practice)
-  - [Use RequiredModules](#use-requiredmodules)
-  - [Persisting Configuration](#persisting-configuration)
-  - [Provide aliases in your modules](#provide-aliases-in-your-modules)
+    - [Use custom objects](#use-custom-objects)
+    - [Scripts vs Functions](#scripts-vs-functions)
+    - [Always write CmdletBinding](#always-write-cmdletbinding)
+- [Include Help](#include-help)
+    - [Always ship a about_ModuleName with modules](#always-ship-a-about_modulename-with-modules)
+    - [Prefer PipelineByPropertyName parameters.](#prefer-pipelinebypropertyname-parameters)
+    - [Specify aliases for pipeline binding](#specify-aliases-for-pipeline-binding)
+    - [Never forget the Common Parameters](#never-forget-the-common-parameters)
+    - [Specify positional parameters, but don't use them](#specify-positional-parameters-but-dont-use-them)
+    - [Specify short aliases, but don't use them](#specify-short-aliases-but-dont-use-them)
+    - [Never specify Default values for mandatory parameters](#never-specify-default-values-for-mandatory-parameters)
+    - [Always specify HelpText for mandatory parameters](#always-specify-helptext-for-mandatory-parameters)
+    - [Use PsCmdlet.ThrowTerminatingError rather than throw](#use-pscmdletthrowterminatingerror-rather-than-throw)
+    - [Use PsCmdlet.WriteError rather than Write-Error](#use-pscmdletwriteerror-rather-than-write-error)
+    - [Use SupportsShouldProcess when appropriate](#use-supportsshouldprocess-when-appropriate)
+    - [Modules ARE the Best Practice](#modules-are-the-best-practice)
+    - [Use RequiredModules](#use-requiredmodules)
+    - [Persisting Configuration](#persisting-configuration)
+    - [Provide aliases in your modules](#provide-aliases-in-your-modules)
 - [GOTCHAS](#gotchas)
-  - [Beware string concatenation with +](#beware-string-concatenation-with-)
-  - [Beware -match and -like](#beware--match-and--like)
-  - [Beware -contains and -in](#beware--contains-and--in)
+    - [Beware string concatenation with +](#beware-string-concatenation-with-)
+    - [Beware -match and -like](#beware--match-and--like)
+    - [Beware -contains and -in](#beware--contains-and--in)
 - [Use Language Features](#use-language-features)
 - [You should understand the .Net underpinnings](#you-should-understand-the-net-underpinnings)
-  - [AVOID appending to arrays in a loop](#avoid-appending-to-arrays-in-a-loop)
-  - [EXCEPTIONS:](#exceptions)
-  - [RATIONALE:](#rationale)
-  - [AVOID appending to string in a loop](#avoid-appending-to-string-in-a-loop)
-  - [EXCEPTIONS:](#exceptions-1)
-  - [RATIONALE:](#rationale-1)
-- [Have a single output type from a cmdlet](#have-a-single-output-type-from-a-cmdlet)
+    - [AVOID appending to arrays in a loop](#avoid-appending-to-arrays-in-a-loop)
+    - [EXCEPTIONS:](#exceptions)
+    - [RATIONALE:](#rationale)
+    - [AVOID appending to string in a loop](#avoid-appending-to-string-in-a-loop)
+    - [EXCEPTIONS:](#exceptions-1)
+    - [RATIONALE:](#rationale-1)
 - [Strongly type parameters](#strongly-type-parameters)
-- [Formatting Output](#formatting-output)
-  - [Don't use format commands in functions](#dont-use-format-commands-in-functions)
-  - [Only output one "kind" of thing at a time](#only-output-one-kind-of-thing-at-a-time)
 - [Don't reinvent the wheel](#dont-reinvent-the-wheel)
 - [Let's talk about Logging](#lets-talk-about-logging)
 - [Let's talk about code signing](#lets-talk-about-code-signing)
+- [Don't reinvent the wheel](#dont-reinvent-the-wheel-1)
+- [Let's talk about Logging](#lets-talk-about-logging-1)
+- [Let's talk about code signing](#lets-talk-about-code-signing-1)
 
 <!-- /MarkdownTOC -->
 
-### More Formatting Rules?
-
-#### Open braces on the same line
-Code folding is nicer in many editors.
-
-#### Closing braces always on their own line
-Because that's how they're supposed to be!
-
-#### Prefer: param() begin, process, end
-That's the order PowerShell will execute it in
-
-### Formatting
-
-#### Never use format cmdlets in functions and scripts
-#### Ship Format Files When Outputting Custom Objects
-
-### Using The .Net Framework
 
 #### Use RequiredAssemblies rather than Add-Type
 #### Use Add-Type rather than Reflection
@@ -91,15 +66,6 @@ With PowerShell 5, security is tighter, and compiling code in memory will be fro
 
 TODO: Discuss: when does embedding C# code makes sense more sense than just compiling it every time?
 
-### Comment Based Help
-
-#### Always ship a about_ModuleName with modules
-
-TODO
-Discuss: Add a blank line between comment based help and function declaration?
-Discuss: Minimum acceptable comment based help: Synopsis, Parameters, and an example for each parameter set (plus pipeline examples if you can contrive one)
-Discuss: Benefits of MAML help files
-Discuss: Other reasons to write about_topics
 
 ### Performance
 
@@ -136,7 +102,7 @@ Discuss: During development, always write scripts, which are automatically re-pa
 
 #### Always write CmdletBinding
 
-Let's just get this out of the way: all of your scripts should start life as this snippet:
+This is in the Style Guide too, but we should discuss it in more depth here, and link to it from the Style Guide.  Scripts should start life as something like this:
 
 ```
 [CmdletBinding()]param()
@@ -145,6 +111,19 @@ end{}
 ```
 
 You can always ignore one of the blocks, and add parameters and such, but you should never write a script without CmdletBinding, and you should never write one without at least considering making it take pipeline input
+
+
+### Include Help
+
+TODO: Link to StyleGuide about formatting help
+Discuss: Minimum acceptable comment based help: Synopsis, Parameters, and an example for each parameter set (plus pipeline examples if you can contrive one)
+Discuss: Benefits of MAML help files
+
+#### Always ship a about_ModuleName with modules
+
+Discuss: Other reasons to write about_topics
+
+
 
 #### Prefer PipelineByPropertyName parameters.
 Discuss: This allows the most flexibility: piping objects and using scriptblocks to shape it for parameters. Unless you absolutely need to write a `begin` block and use this parameter in it, you probably should accept it on the pipeline.
@@ -157,7 +136,7 @@ Discuss: You MUST do all your work in the process block if you do this.
 You can use aliases to map parameters to property names of objects which might be piped to you while still keeping your parameter names clear and meaningful.
 
 #### Never forget the Common Parameters
-Particularly when splatting PSBoundParameters to the next function, if that function isn't `[CmdletBinding()]` you must remember to strip the common parameters if they're present.
+Particularly when splatting PSBoundParameters to the next function, if that function isn't `[CmdletBinding()]` (it should be!) you must remember to strip the common parameters if they're present.
 
 #### Specify positional parameters, but don't use them
 When writing at the command line, positional parameters are a blessing, but they can be confusing for future readers. You should always expose your parameters positionally when it makes sense, but you should rarely share a script that pases parameters positionally.
@@ -319,12 +298,6 @@ The language features are always faster, and almost always more readable. Of cou
 * Easier to read and understand
 
 
-### Have a single output type from a cmdlet
-
-When possible, you should avoid mixin output types, and you should indicate with an attribute the output type of a script cmdlet.
-
-Particularly, avoid outputting strings interspersed with your output just to avoid Write-Host.
-
 ### Strongly type parameters
 Although PowerShell is a dynamic language, we have can specify types, and in Parameters, it's particularly useful because it hints to users what they can pass to your command.
 
@@ -337,35 +310,9 @@ When passing on parameters to another command, you should be _at least_ as stron
 One notable exception is when you could accept more than one type. In PowerShell you can speficy parameter set overloads, but you can't change the type of a parameter.
 
 
-### Formatting Output
-
-#### Don't use format commands in functions
-
-Instead you should include a modulename.format.ps1xml, and define a PSTypeName on your objects, so that PowerShell will format your output automatically.
-
-In a few rare conditions, it might be ok to output custom text to the host (e.g. via Write-Host), or a graphical UI:
-
-* If you have a -Formatted switch parameter
-* If you have a command which uses the verb `Show`
-
-#### Only output one "kind" of thing at a time
-
-When you combine multiple objects, they should be derived from a common basetype (like FileInfo and DirectoryInfo come from System.IO.FileSystemInfo), or should have format files or type files which cause them to output the same columns.
-
-Otherwise, you may get empty rows of output, etc.
-
-**Exception:** For internal functions, it's ok to return arrays where each item is a different type, meant for assignment like so:
-
-```PowerShell
-$user, $group, $account = Get-UserGroupAccoutStatus
-```
-
-These get an exemption because they're not intended to ever be "output" to the host, and can offer significant savings (e.g. one database call with three table joins, instead of three database calls with two or three joins each).
-
-When you do output multiple object types, you should name your function in such a way that it's obvious to users that you're returning multiple things.
-
-Remember that PowerShell buffers output, so if you must output different types, you should call Out-Default once for each type to make sure they come out separately.
-   
+### Don't reinvent the wheel
+### Let's talk about Logging
+### Let's talk about code signing
 ### Don't reinvent the wheel
 ### Let's talk about Logging
 ### Let's talk about code signing
