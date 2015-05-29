@@ -1,10 +1,13 @@
 # The PowerShell Best Practices and Style Guide
 
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; float: left; vertical-align: middle; margin: 10px;"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>, please attribute to Don Jones, Matt Penny, Carlos Perez, Joel Bennett and the PowerShell Community.
+<p align="center"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; float: left; vertical-align: middle; margin: 10px;"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a></p>
 
-You are free to:
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>, please attribute to Don Jones, Matt Penny, Carlos Perez, Joel Bennett and the PowerShell Community.
+
+###### You are free to:
 
 **Share** — copy and redistribute the material in any medium or format
+
 **Adapt** — remix, transform, and build upon the material 
 
 The authors encourage you to redistribute this content as widely as possible, but require that you give credit to the primary authors below, and that you notify us on github of any improvements you make.
