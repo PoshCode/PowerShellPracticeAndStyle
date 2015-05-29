@@ -30,6 +30,8 @@ This document is an attempt to come to an agreement on a style-guide because we 
 - [Functions](#functions)
 - [Advanced Functions](#advanced-functions)
 - [Security](#security)
+    - [Always use PSCredential for credentials/passwords](#always-use-pscredential-for-credentialspasswords)
+    - [Other Secure Strings](#other-secure-strings)
 - [PowerShell Supported Version](#powershell-supported-version)
 - [Formatting](#formatting)
 - [Loading Third Party .Net Libraries](#loading-third-party-net-libraries)
@@ -619,35 +621,42 @@ TODO
 
 ### Security
 
-* Try to use PSCredential object for credentials since by requiring it as a
-  parameter it allows for not showing passwords on screen, history or
-  exposing password to generic memory scrapper malware.
+#### Always use PSCredential for credentials/passwords
 
-* If you need to use a credential in clear text like passing it to .Net API call or a third party library it is better to decrypt the credential as it is being passed instead of saving it in a variable.
+You must avoid storing the password in a plain string object, or allowing the user to type them in as a parameter (where it might end up in the history or exposed to screen-scraper malware). The best method for this is to always deal with PSCredential objects (which store the Password in a SecureString).
 
-```PowerShell
-# create a credential object.
-$cred = (Get-Credential "acmelabs\carlos")
+More specifically, you should always take PSCredentials as a parameter (and never call Get-Credential within your function) to allow the user the opportunity to reuse credentials stored in a variable.
 
-# Get the cleartext username.
-$cred.GetNetworkCredential().username
+Furthermore, you should use the Credential attribute as the built-in commands do, so if the user passes their user name (instead of a PSCredential object), they will be prompted for their password in a Windows secure dialog.
 
-# Get the domain for the account.
-$cred.GetNetworkCredential().domain
-
-# Get the cleartext password. 
-$cred.GetNetworkCredential().password
+```
+param(
+[System.Management.Automation.PSCredential]
+[System.Management.Automation.Credential()]
+$Credentials
+)
 ```
 
-* For strings that may be sensitive in a parameter use the SecureString type so 
-  as to protect the value of the string. When using parameters the string can be
-  provided by a user using `Read-Host -AsSecureString` it can be turned to a 
-  plain text string back if needed.
+If you absolutely must pass a password in a plain string to a .Net API call or a third party library it is better to decrypt the credential as it is being passed instead of saving it in a variable.
 
 ```PowerShell
- # Decrypt the secure string.
- $SecureStringToBSTR = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecString)
- $PlainText = [Runtime.InteropServices.Marshal]::PtrToStringAuto($SecureStringToBSTR)
+# Get the cleartext password for a method call:
+$Insecure.SetPassword( $Credentials.GetNetworkCredential().Password )
+```
+
+#### Other Secure Strings
+
+
+For other strings that may be sensitive, use the SecureString type to protect the value of the string. Be sure to always provide an example for the user of passing the value using `Read-Host -AsSecureString`.
+
+Note, if you ever need to turn a SecureString into a string, you can use this method, but make sure to call ZeroFreeBSTR to avoid a memory leak:
+
+```PowerShell
+# Decrypt a secure string.
+$BSTR = [System.Runtime.InteropServices.marshal]::SecureStringToBSTR($this);
+$plaintext = [System.Runtime.InteropServices.marshal]::PtrToStringAuto($BSTR);
+[System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR);
+return $plaintext
 ```
 
 * For credentials that need to be saved to disk, serialize the credential object using
