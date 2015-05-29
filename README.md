@@ -1,4 +1,4 @@
-# The PowerShell Best Practices and Style Guide
+## The PowerShell Best Practices and Style Guide
 
 <p align="center"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; float: left; vertical-align: middle; margin: 10px;"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a></p>
 
@@ -36,7 +36,7 @@ Any mistakes in either of these documents are there because Joel Bennett got inv
 
 Portions copyright (c) Joel Bennett, 2015
 
-## Foreword
+### Foreword
 
 During the 2013 Scripting Games, it became apparent that a great many folks in the PowerShell community have vastly different ideas about what's "right and wrong" in the world of PowerShell scripting. Some folks down-scored techniques that others praised, and vice-versa.
 
