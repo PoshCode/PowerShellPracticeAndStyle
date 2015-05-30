@@ -4,8 +4,8 @@ You should always write comment-based help in your scripts and functions.
 
 Comment-based help is formatted as follows:
 
-````
-function your-function {
+```PowerShell
+function get-example {
 <#
 .SYNOPSIS
 A brief description of the function or script.
@@ -35,11 +35,10 @@ Links to further documentation
 Detail on what the script does, if this is needed
 
 #>
-````
-`
-Comment-based help is displayed when the user types 'help <your-function>'
+```
 
-Your help should be helpful. That is, if you've written a tool called "Get-LOBAppUser", don't write help that merely says, "Gets LOB App Users." Duh.
+Comment-based help is displayed when the user types `help get-example` or `get-example -?`, etc.
 
-**Further information:** You can get more on the use of comment-based help by typing 'help about\_Comment\_Based\_Help' within Powershell.
+Your help should be helpful. That is, if you've written a tool called `Get-LOBAppUser`, don't write help that merely says, "Gets LOB App Users." Duh.
 
+**Further information:** You can get more on the use of comment-based help by typing `help about_Comment_Based_Help` within Powershell.
