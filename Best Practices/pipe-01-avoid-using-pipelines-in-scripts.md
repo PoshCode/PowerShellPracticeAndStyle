@@ -3,9 +3,8 @@
 Consider this:
 
 ```PowerShell
-Get-Content computer-names.txt |
-ForEach-Object -Process {
- Get-WmiObject -Class Win32\_BIOS -ComputerName $\_
+Get-Content computer-names.txt | ForEach-Object -Process {
+    Get-WmiObject -Class Win32_BIOS -ComputerName $_
 }
 ```
 
@@ -15,7 +14,7 @@ And now this alternative:
 $computers = Get-Content computer-names.txt
 
 foreach ($computer in $computers) {
- Get-WmiObject -Class Win32\_BIOS -ComputerName $computer
+    Get-WmiObject -Class Win32_BIOS -ComputerName $computer
 }
 ```
 
