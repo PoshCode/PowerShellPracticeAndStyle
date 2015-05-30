@@ -3,9 +3,9 @@
 Consider this:
 
 ```PowerShell
-Get-WmiObject -Class Win32\_LogicalDisk `
-       -Filter "DriveType=3" `
-       -ComputerName SERVER2
+Get-WmiObject -Class Win32_LogicalDisk `
+              -Filter "DriveType=3" `
+              -ComputerName SERVER2
 ```
 
 In general, the community feels you should avoid using those backticks as "line continuation characters" when possible. They're hard to read, easy to miss, and easy to mis-type. Also, if you add an extra whitespace after the backtick in the above example, then the command won't work. The resulting error is hard to correlate to the actual problem, making debugging the issue harder.
