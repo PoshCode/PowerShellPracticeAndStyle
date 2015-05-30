@@ -1,4 +1,5 @@
 # DOC-07 Don't over-comment
+
 Don't precede each line of code with a comment - doing so breaks up the code and makes it harder to follow. Don't restate the obvious:
 
 ```PowerShell

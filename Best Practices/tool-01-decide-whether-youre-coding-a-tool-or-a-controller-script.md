@@ -1,4 +1,5 @@
 # TOOL-01 Decide whether you're coding a 'tool' or a 'controller' script
+
 For this discussion, it's important to have some agreed-upon terminology. While the terminology here isn't used universally, the community generally agrees that several types of "script" exist:
 
 1. Some scripts contain tools, when are meant to be reusable. These are typically functions or advanced functions, and they are typically contained in a script module or in a function library of some kind. These tools are designed for a high level of re-use.
