@@ -3,7 +3,9 @@ These documents are in an extremely rough state, not suitable for inclusion in t
 ### Using The .Net Framework
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
-- [Use RequiredAssemblies rather than Add-Type](#use-requiredassemblies-rather-than-add-type)
+- [Control what gets exported in a module](#control-what-gets-exported-in-a-module)
+    - [Specify when to use a Manifest for a module](#specify-when-to-use-a-manifest-for-a-module)
+    - [Use RequiredAssemblies rather than Add-Type](#use-requiredassemblies-rather-than-add-type)
     - [Use Add-Type rather than Reflection](#use-add-type-rather-than-reflection)
     - [Use Add-Type for small classes or PInvoke calls](#use-add-type-for-small-classes-or-pinvoke-calls)
     - [Prefer shipping binaries over large compilations](#prefer-shipping-binaries-over-large-compilations)
@@ -52,6 +54,11 @@ These documents are in an extremely rough state, not suitable for inclusion in t
 - [Let's talk about code signing](#lets-talk-about-code-signing-1)
 
 <!-- /MarkdownTOC -->
+
+TODO
+
+#### Control what gets exported in a module
+#### Specify when to use a Manifest for a module
 
 
 #### Use RequiredAssemblies rather than Add-Type

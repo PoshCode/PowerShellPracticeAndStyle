@@ -11,27 +11,27 @@ This document is an attempt to come to an agreement on a style-guide because we 
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
 - [Code Layout](#code-layout)
-    - [Maintain consistency in layout](#maintain-consistency-in-layout)
-    - [Indentation](#indentation)
-    - [Maximum Line Length](#maximum-line-length)
-    - [Blank lines](#blank-lines)
-    - [Trailing spaces](#trailing-spaces)
-    - [Spaces around parameters and operators](#spaces-around-parameters-and-operators)
-    - [Spaces around special characters](#spaces-around-special-characters)
-    - [Avoid using semicolons (`;`) at the end of each line.](#avoid-using-semicolons--at-the-end-of-each-line)
+  - [Maintain consistency in layout](#maintain-consistency-in-layout)
+  - [Indentation](#indentation)
+  - [Maximum Line Length](#maximum-line-length)
+  - [Blank lines](#blank-lines)
+  - [Trailing spaces](#trailing-spaces)
+  - [Spaces around parameters and operators](#spaces-around-parameters-and-operators)
+  - [Spaces around special characters](#spaces-around-special-characters)
+  - [Avoid using semicolons (`;`) at the end of each line.](#avoid-using-semicolons--at-the-end-of-each-line)
 - [Commenting](#commenting)
-    - [Block comments](#block-comments)
-    - [Inline comments](#inline-comments)
-    - [Documentation comments](#documentation-comments)
+  - [Block comments](#block-comments)
+  - [Inline comments](#inline-comments)
+  - [Documentation comments](#documentation-comments)
 - [Naming Conventions](#naming-conventions)
-    - [Use the full name of each command.](#use-the-full-name-of-each-command)
-    - [Use full parameter names.](#use-full-parameter-names)
-    - [Use full, explicit paths when possible.](#use-full-explicit-paths-when-possible)
+  - [Use the full name of each command.](#use-the-full-name-of-each-command)
+  - [Use full parameter names.](#use-full-parameter-names)
+  - [Use full, explicit paths when possible.](#use-full-explicit-paths-when-possible)
 - [Functions](#functions)
 - [Advanced Functions](#advanced-functions)
 - [Security](#security)
-    - [Always use PSCredential for credentials/passwords](#always-use-pscredential-for-credentialspasswords)
-    - [Other Secure Strings](#other-secure-strings)
+  - [Always use PSCredential for credentials/passwords](#always-use-pscredential-for-credentialspasswords)
+  - [Other Secure Strings](#other-secure-strings)
 - [PowerShell Supported Version](#powershell-supported-version)
 
 <!-- /MarkdownTOC -->
@@ -287,102 +287,90 @@ At line:1 char:1
     + FullyQualifiedErrorId : InvalidOperation,Microsoft.PowerShell.Commands.SetLocationCommand
 
 ```
-
-<!-- JOEL STOPPED EDITING HERE -->
  
 ### Functions
-* Avoid using the `return` keyword in your functions. Just place the object 
-  variable on its own.
 
-* When declaring simple functions leave a space between the function
-  name and the parameters.
+Avoid using the `return` keyword in your functions. Just place the object variable on its own.
+
+When declaring simple functions leave a space between the function name and the parameters.
   
-  ```PowerShell
-  function MyFunction ($param1, $param2)
-  {
-    
-  }
-  ```
+```PowerShell
+function MyFunction ($param1, $param2)
+{
+  
+}
+```
 
 ### Advanced Functions
 
-* For advanced functions and scripts use the format of **<verb-<noun>** for
+For Advanced Functions and scripts use the format of **<verb-<noun>** for
   naming. For a list of approved verbs the cmdlet `Get-Verb` will list
   them. On the noun side it can be composed of more than one joined word
   using Camel Case and only singular nouns.
 
-*  In  Advanced Functions do not use the keyword `return` to return an object.
+In Advanced Functions do not use the keyword `return` to return an object.
 
-*  In Advanced Functions you return objects inside the `Process {}` block 
+In Advanced Functions you return objects inside the `Process {}` block 
    and not in `Begin {}` or `End {}` since it defeats the advantage of the pipeline.
 
-  ```PowerShell
+```PowerShell
+# Bad
+function Get-USCitizenCapability {
+    [CmdletBinding()]
+    [OutputType([psobject])]
+    param (
+        [Parameter(Mandatory=$true,
+                   ValueFromPipelineByPropertyName=$true,
+                   Position=0)]
+        [int16]
+        $Age
+    )
+    process {
+        $Capabilities = @{
+            MilitaryService = $salse
+            DrinkAlcohol = $false
+            Vote = $false
+        }
+        if ($Age -ge 18)
+        {
+            $Capabilities['MilitaryService'] = $true
+            $Capabilities['Vote'] = $true
+        }
+
+        $Obj = New-Object -Property $Capabilities -TypeName psobject
+    }
+    end { return $Obj }
+}
   
-  # Bad
-  function Get-USCitizenCapability
-  {
-      [CmdletBinding()]
-      [OutputType([psobject])]
-      Param
-      (
-          [Parameter(Mandatory=$true,
-                     ValueFromPipelineByPropertyName=$true,
-                     Position=0)]
-          [int16]
-          $Age
-      )
-  
-      Begin {}
-      Process
-      {
-  
-          $Capabilities = @{MilitaryService = $salse
-                            DrinkAlcohol = $false
-                            Vote = $false}
-          if ($Age -ge 18)
-          {
-              $Capabilities['MilitaryService'] = $true
-              $Capabilities['Vote'] = $true
-          }
-  
-          $Obj = New-Object -Property $Capabilities -TypeName psobject
-      }
-      End { Return $Obj }
-  }
-  
-  # Good
-   function Get-USCitizenCapability
-  {
-      [CmdletBinding()]
-      [OutputType([psobject])]
-      Param
-      (
-          [Parameter(Mandatory=$true,
-                     ValueFromPipelineByPropertyName=$true,
-                     Position=0)]
-          [int16]
-          $Age
-      )
-  
-      Begin {}
-      Process
-      {
-  
-          $Capabilities = @{MilitaryService = $false
-                            DrinkAlcohol = $false
-                            Vote = $false}
-          if ($Age -ge 18)
-          {
-              $Capabilities['MilitaryService'] = $true
-              $Capabilities['Vote'] = $true
-          }
-  
-          $Obj = New-Object -Property $Capabilities -TypeName psobject
-          $Obj
-      }
-      End {}
-  }
- ```
+# Good
+function Get-USCitizenCapability {
+    [CmdletBinding()]
+    [OutputType([psobject])]
+    param(
+        [Parameter(Mandatory=$true,
+                   ValueFromPipelineByPropertyName=$true,
+                   Position=0)]
+        [int16]
+        $Age
+    )
+    process {
+        $Capabilities = @{
+            MilitaryService = $salse
+            DrinkAlcohol = $false
+            Vote = $false
+        }
+
+        if ($Age -ge 18)
+        {
+            $Capabilities['MilitaryService'] = $true
+            $Capabilities['Vote'] = $true
+        }
+
+        New-Object -Property $Capabilities -TypeName psobject
+    }
+}
+```
+
 * Always use CmdletBinding attribute.
 
 * Always have at least a `Process {}` code block if any parameters takes values
@@ -392,227 +380,207 @@ At line:1 char:1
   an object or collection of objects. If the function returns different
   object types depending on the parameter set provide one per parameter set.
 
-  ```PowerShell
-  [OutputType([<TypeLiteral>], ParameterSetName="<Name>")]
-  [OutputType("<TypeNameString>", ParameterSetName="<Name>")]
-  ```
+```PowerShell
+[OutputType([<TypeLiteral>], ParameterSetName="<Name>")]
+[OutputType("<TypeNameString>", ParameterSetName="<Name>")]
+```
 
 * If ParameterSetName is used in any of the parameter provide always a
   DefaultParameterSetName in the CmdletBinding attribute.
-  
-  ```PowerShell
-   function Get-User
-   {
-       [CmdletBinding(DefaultParameterSetName="ID")]
-  
-       [OutputType("System.Int32", ParameterSetName="ID")]
-       [OutputType([String], ParameterSetName="Name")]
-  
-       Param
-       (      
-           [parameter(Mandatory=$true, ParameterSetName="ID")]
-           [Int[]]
-           $UserID,
-  
-           [parameter(Mandatory=$true, ParameterSetName="Name")]
-           [String[]]
-           $UserName
-       )     
-              
-     <function body>
-   }
+
+```PowerShell
+function Get-User {
+    [CmdletBinding(DefaultParameterSetName="ID")]
+    [OutputType("System.Int32", ParameterSetName="ID")]
+    [OutputType([String], ParameterSetName="Name")]
+    param (      
+        [parameter(Mandatory=$true, ParameterSetName="ID")]
+        [Int[]]
+        $UserID,
+
+        [parameter(Mandatory=$true, ParameterSetName="Name")]
+        [String[]]
+        $UserName
+    )     
+    <# function body #>
+}
 ```
-  * When using advanced functions or scripts with CmdletBinding attribute avoid
-    validating parameters in the body of the script when possible and use parameter
-    validation attributes instead.
 
-      * **AllowNull** Validation Attribute
+* When using advanced functions or scripts with CmdletBinding attribute avoid
+  validating parameters in the body of the script when possible and use   parameter validation attributes instead.
 
-        The AllowNull attribute allows the value of a mandatory parameter
-        to be null ($null).
-        ```PowerShell
-        Param
-        (
-            [parameter(Mandatory=$true)]
-            [AllowNull()]
-            [String]
-            $ComputerName
-        ) 
+  * **AllowNull** Validation Attribute
 
-        ```
-      * **AllowEmptyString** Validation Attribute
+  The AllowNull attribute allows the value of a mandatory parameter to be null ($null).
 
-        The AllowEmptyString attribute allows the value of a mandatory parameter to be
-        an empty string ("").
-        ```PowerShell
-        Param
-        (
-            [parameter(Mandatory=$true)]
-            [AllowEmptyString()]
-            [String]
-            $ComputerName
-        ) 
-        ```
+  ```PowerShell
+  param (
+      [Parameter(Mandatory=$true)]
+      [AllowNull()]
+      [String]
+      $ComputerName
+  ) 
+  ```
 
-      * **AllowEmptyCollection** Validation Attribute
+  * **AllowEmptyString** Validation Attribute
 
-        The AllowEmptyCollection attribute allows the value of a mandatory parameter
-        to be an empty collection (@()). 
-        ```PowerShell
-        Param
-        (
-            [parameter(Mandatory=$true)]
-            [AllowEmptyCollection()]
-            [String[]]
-            $ComputerName
-        ) 
-        ```
+  The AllowEmptyString attribute allows the value of a mandatory parameter to be an empty string ("").
 
-      * **ValidateCount** Validation Attribute
+  ```PowerShell
+  param (
+      [Parameter(Mandatory=$true)]
+      [AllowEmptyString()]
+      [String]
+      $ComputerName
+  ) 
+  ```
 
-        The ValidateCount attribute specifies the minimum and maximum number
-        of parameter values that a parameter accepts. Windows PowerShell
-        generates an error if the number of parameter values in the command that
-        calls the function is outside that range. 
-        
-        ```PowerShell
-        Param
-        (
-            [parameter(Mandatory=$true)]
-            [ValidateCount(1,5)]
-            [String[]]
-            $ComputerName
-        ) 
+  * **AllowEmptyCollection** Validation Attribute
 
-        ```
-      * **ValidateLength** Validation Attribute
+  The AllowEmptyCollection attribute allows the value of a mandatory parameter to be an empty collection (@()).
 
-        The ValidateLength attribute specifies the minimum and maximum number 
-        of characters in a parameter or variable value. Windows PowerShell generates an
-        error if the length of a value specified for a parameter or a variable
-        is outside of the range.
-        ```PowerShell
-        Param
-        (
-            [parameter(Mandatory=$true)]
-            [ValidateLength(1,10)]
-            [String[]]
-            $ComputerName
-        ) 
-        ```
-        
-      * **ValidatePattern** Validation Attribute
+  ```PowerShell
+  param (
+      [Parameter(Mandatory=$true)]
+      [AllowEmptyCollection()]
+      [String[]]
+      $ComputerName
+  ) 
+  ```
 
-        The ValidatePattern attribute specifies a regular expression that
-        is compared to the parameter or variable value. Windows PowerShell generates
-        an error if the value does not match the regular expression 
-        pattern. 
-        ```PowerShell
-        Param
-        (
-            [parameter(Mandatory=$true)]
-            [ValidatePattern("[0-9][0-9][0-9][0-9]")]
-            [String[]]
-            $ComputerName
-        ) 
-        ```
+  * **ValidateCount** Validation Attribute
 
-      * **ValidateRange** Validation Attribute
+  The ValidateCount attribute specifies the minimum and maximum number
+  of parameter values that a parameter accepts. Windows PowerShell
+  generates an error if the number of parameter values in the command that
+  calls the function is outside that range. 
 
-        The ValidateRange attribute specifies a numeric range for each
-        parameter or variable value. Windows PowerShell generates an error
-        if any value is outside that range. 
-        ```PowerShell
-        Param
-        (
-            [parameter(Mandatory=$true)]
-            [ValidateRange(0,10)]
-            [Int]
-            $Attempts
-        ) 
-        ```
- 
+  ```PowerShell
+  param (
+      [Parameter(Mandatory=$true)]
+      [ValidateCount(1,5)]
+      [String[]]
+      $ComputerName
+  ) 
+  ```
 
-      * **ValidateScript** Validation Attribute
+  * **ValidateLength** Validation Attribute
 
-        The ValidateScript attribute specifies a script that is used 
-        to validate a parameter or variable value. Windows PowerShell
-        pipes the value to the script, and generates an error if the
-        script returns "false" or if the script throws an exception.
+  The ValidateLength attribute specifies the minimum and maximum number 
+  of characters in a parameter or variable value. Windows PowerShell generates an
+  error if the length of a value specified for a parameter or a variable
+  is outside of the range.
 
-        When you use the ValidateScript attribute, the value
-        that is being validated is mapped to the $_ variable. You can
-        use the $_ variable to refer to the value in the script.
-        ```PowerShell
-        Param
-        (
-            [parameter()]
-            [ValidateScript({$_ -ge (get-date)})]
-            [DateTime]
-            $EventDate
-        ) 
-        ```
+  ```PowerShell
+  param (
+      [Parameter(Mandatory=$true)]
+      [ValidateLength(1,10)]
+      [String[]]
+      $ComputerName
+  ) 
+  ```
 
-      * **ValidateSet** Attribute
+  * **ValidatePattern** Validation Attribute
 
-        The ValidateSet attribute specifies a set of valid values for a 
-        parameter or variable. Windows PowerShell generates an error if a
-        parameter or variable value does not match a value in the set. In
-        the following example, the value of the Detail parameter can only
-        be "Low," "Average," or "High."
-        
-        ```PowerShell
-        Param
-        (
-            [parameter(Mandatory=$true)]
-            [ValidateSet("Low", "Average", "High")]
-            [String[]]
-            $Detail
-        ) 
-        ```
+  The ValidatePattern attribute specifies a regular expression that
+  is compared to the parameter or variable value. Windows PowerShell generates
+  an error if the value does not match the regular expression 
+  pattern. 
+  ```PowerShell
+  param (
+      [Parameter(Mandatory=$true)]
+      [ValidatePattern("[0-9][0-9][0-9][0-9]")]
+      [String[]]
+      $ComputerName
+  ) 
+  ```
 
-      * **ValidateNotNull** Validation Attribute
+  * **ValidateRange** Validation Attribute
 
-        The ValidateNotNull attribute specifies that the parameter
-        value cannot be null ($null). Windows PowerShell generates an
-        error if the parameter value is null. 
+  The ValidateRange attribute specifies a numeric range for each
+  parameter or variable value. Windows PowerShell generates an error
+  if any value is outside that range. 
+  ```PowerShell
+  param (
+      [Parameter(Mandatory=$true)]
+      [ValidateRange(0,10)]
+      [Int]
+      $Attempts
+  ) 
+  ```
 
-        The ValidateNotNull attribute is designed to be used when the
-        type of the parameter value is not specified or when the specified
-        type will accept a value of Null. (If you specify a type that will
-        not accept a null value, such as a string, the null value will be
-        rejected without the ValidateNotNull attribute, because it does not
-        match the specified type.)  
-        ```PowerShell
-        Param
-        (
-            [parameter(Mandatory=$true)]
-            [ValidateNotNull()]
-            $ID
-        ) 
-        ```
+  * **ValidateScript** Validation Attribute
 
-      * **ValidateNotNullOrEmpty** Validation Attribute
+  The ValidateScript attribute specifies a script that is used 
+  to validate a parameter or variable value. Windows PowerShell
+  pipes the value to the script, and generates an error if the
+  script returns "false" or if the script throws an exception.
 
-        The ValidateNotNullOrEmpty attribute specifies that the parameter 
-        value cannot be null ($null) and cannot be an empty string ("").
-        Windows PowerShell generates an error if the parameter is used in 
-        a function call, but its value is null, an empty string, or an empty
-        array.   
-        ```PowerShell
-        Param
-        (
-            [parameter(Mandatory=$true)]
-            [ValidateNotNullOrEmpty()]
-            [String[]]
-            $UserName
-        ) 
-        ```
+  When you use the ValidateScript attribute, the value
+  that is being validated is mapped to the $_ variable. You can
+  use the $_ variable to refer to the value in the script.
 
-TODO
+  ```PowerShell
+  param (
+      [Parameter()]
+      [ValidateScript({$_ -ge (get-date)})]
+      [DateTime]
+      $EventDate
+  ) 
+  ```
 
-* Control what gets exported in a module
-* Specify when to use a Manifest for a module
+  * **ValidateSet** Attribute
+
+  The ValidateSet attribute specifies a set of valid values for a 
+  parameter or variable. Windows PowerShell generates an error if a
+  parameter or variable value does not match a value in the set. In
+  the following example, the value of the Detail parameter can only
+  be "Low," "Average," or "High."
+
+  ```PowerShell
+  param (
+      [Parameter(Mandatory=$true)]
+      [ValidateSet("Low", "Average", "High")]
+      [String[]]
+      $Detail
+  ) 
+  ```
+
+  * **ValidateNotNull** Validation Attribute
+
+  The ValidateNotNull attribute specifies that the parameter
+  value cannot be null ($null). Windows PowerShell generates an
+  error if the parameter value is null. 
+
+  The ValidateNotNull attribute is designed to be used when the
+  type of the parameter value is not specified or when the specified
+  type will accept a value of Null. (If you specify a type that will
+  not accept a null value, such as a string, the null value will be
+  rejected without the ValidateNotNull attribute, because it does not
+  match the specified type.)  
+  ```PowerShell
+  param (
+      [Parameter(Mandatory=$true)]
+      [ValidateNotNull()]
+      $ID
+  ) 
+  ```
+
+  * **ValidateNotNullOrEmpty** Validation Attribute
+
+  The ValidateNotNullOrEmpty attribute specifies that the parameter 
+  value cannot be null ($null) and cannot be an empty string ("").
+  Windows PowerShell generates an error if the parameter is used in 
+  a function call, but its value is null, an empty string, or an empty
+  array.   
+  ```PowerShell
+  param (
+      [Parameter(Mandatory=$true)]
+      [ValidateNotNullOrEmpty()]
+      [String[]]
+      $UserName
+  )
+  ```
 
 ### Security
 
@@ -624,19 +592,19 @@ More specifically, you should always take PSCredentials as a parameter (and neve
 
 Furthermore, you should use the Credential attribute as the built-in commands do, so if the user passes their user name (instead of a PSCredential object), they will be prompted for their password in a Windows secure dialog.
 
-```
-param(
-[System.Management.Automation.PSCredential]
-[System.Management.Automation.Credential()]
-$Credentials
+```PowerShell
+param (
+    [System.Management.Automation.PSCredential]
+    [System.Management.Automation.Credential()]
+    $Credentials
 )
 ```
 
 If you absolutely must pass a password in a plain string to a .Net API call or a third party library it is better to decrypt the credential as it is being passed instead of saving it in a variable.
 
 ```PowerShell
-# Get the cleartext password for a method call:
-$Insecure.SetPassword( $Credentials.GetNetworkCredential().Password )
+    # Get the cleartext password for a method call:
+    $Insecure.SetPassword( $Credentials.GetNetworkCredential().Password )
 ```
 
 #### Other Secure Strings
@@ -647,11 +615,11 @@ For other strings that may be sensitive, use the SecureString type to protect th
 Note, if you ever need to turn a SecureString into a string, you can use this method, but make sure to call ZeroFreeBSTR to avoid a memory leak:
 
 ```PowerShell
-# Decrypt a secure string.
-$BSTR = [System.Runtime.InteropServices.marshal]::SecureStringToBSTR($this);
-$plaintext = [System.Runtime.InteropServices.marshal]::PtrToStringAuto($BSTR);
-[System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR);
-return $plaintext
+    # Decrypt a secure string.
+    $BSTR = [System.Runtime.InteropServices.marshal]::SecureStringToBSTR($this);
+    $plaintext = [System.Runtime.InteropServices.marshal]::PtrToStringAuto($BSTR);
+    [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR);
+    return $plaintext
 ```
 
 * For credentials that need to be saved to disk, serialize the credential object using
@@ -660,11 +628,11 @@ string and will only be accessible to the user who generated the file on the sam
 computer where it was generated.
 
 ```PowerShell
-# Save a credential to disk
-Get-Credential | Export-CliXml -Path c:\creds\credential.xml
+    # Save a credential to disk
+    Get-Credential | Export-CliXml -Path c:\creds\credential.xml
 
-# Import the previously saved credential
-$Credential = Import-CliXml -Path c:\creds\credential.xml
+    # Import the previously saved credential
+    $Credential = Import-CliXml -Path c:\creds\credential.xml
 ```
 
 * For strings that may be sensitive and need to be saved to disk, use ConvertFrom-SecureString to encrypt it into a standard string that can be saved to disk. You can then use ConvertTo-SecureString to convert the encrypted standard string back into a SecureString. NOTE: These commands use the Windows Data Protection API (DPAPI) to encrypt the data, so the encrypted strings can only be decrypted by the same user on the same machine, but there is an option to use AES with a shared key.
@@ -682,13 +650,13 @@ $Credential = Import-CliXml -Path c:\creds\credential.xml
 
 ### PowerShell Supported Version
 
-* When working in an environment where there are multiple versions of PowerShell make sure to specify the lowest version your script will support by prividing a Requires statement at the top of the script.
+When working in an environment where there are multiple versions of PowerShell make sure to specify the lowest version your script will support by prividing a Requires statement at the top of the script.
 
 ```PowerShell
-#Requires -Version 2.0
+    #Requires -Version 2.0
 ```
-* When a module uses specific cmdlets or syntax that is only present on a specific minimun version of PowerShell in the module manifest ps1d file.
+When a module uses specific cmdlets or syntax that is only present on a specific minimun version of PowerShell in the module manifest ps1d file.
 
 ```PowerShell
-PowerShellVersion = '3.0'
+    PowerShellVersion = '3.0'
 ```
