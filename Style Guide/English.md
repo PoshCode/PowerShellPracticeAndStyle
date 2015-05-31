@@ -29,6 +29,11 @@ This document is an attempt to come to an agreement on a style-guide because we 
   - [Use full, explicit paths when possible.](#use-full-explicit-paths-when-possible)
 - [Functions](#functions)
 - [Advanced Functions](#advanced-functions)
+  - [Always use CmdletBinding attribute.](#always-use-cmdletbinding-attribute)
+  - [Always have at least a `process {}` code block if any parameters takes values from the Pipeline.](#always-have-at-least-a-process--code-block-if-any-parameters-takes-values-from-the-pipeline)
+  - [Specify an OutputType attribute if the advanced function returns](#specify-an-outputtype-attribute-if-the-advanced-function-returns)
+  - [When a ParameterSetName is used in any of the parameters, always provide a](#when-a-parametersetname-is-used-in-any-of-the-parameters-always-provide-a)
+  - [When using advanced functions or scripts with CmdletBinding attribute avoid validating parameters in the body of the script when possible and use   parameter validation attributes instead.](#when-using-advanced-functions-or-scripts-with-cmdletbinding-attribute-avoid-validating-parameters-in-the-body-of-the-script-when-possible-and-use---parameter-validation-attributes-instead)
 - [Security](#security)
   - [Always use PSCredential for credentials/passwords](#always-use-pscredential-for-credentialspasswords)
   - [Other Secure Strings](#other-secure-strings)
@@ -371,12 +376,11 @@ function Get-USCitizenCapability {
 }
 ```
 
-* Always use CmdletBinding attribute.
+#### Always use CmdletBinding attribute.
 
-* Always have at least a `Process {}` code block if any parameters takes values
-  from the Pipeline.
+#### Always have at least a `process {}` code block if any parameters takes values from the Pipeline.
 
-* Specify an OutputType attribute if the advanced function returns
+#### Specify an OutputType attribute if the advanced function returns
   an object or collection of objects. If the function returns different
   object types depending on the parameter set provide one per parameter set.
 
@@ -385,7 +389,7 @@ function Get-USCitizenCapability {
 [OutputType("<TypeNameString>", ParameterSetName="<Name>")]
 ```
 
-* If ParameterSetName is used in any of the parameter provide always a
+#### When a ParameterSetName is used in any of the parameters, always provide a
   DefaultParameterSetName in the CmdletBinding attribute.
 
 ```PowerShell
@@ -406,8 +410,7 @@ function Get-User {
 }
 ```
 
-* When using advanced functions or scripts with CmdletBinding attribute avoid
-  validating parameters in the body of the script when possible and use   parameter validation attributes instead.
+#### When using advanced functions or scripts with CmdletBinding attribute avoid validating parameters in the body of the script when possible and use   parameter validation attributes instead.
 
   * **AllowNull** Validation Attribute
 
