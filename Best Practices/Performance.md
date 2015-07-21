@@ -1,3 +1,16 @@
+# PERF-01 If performance matters, test it
+
+PowerShell comes equipped with 3.2 million performance quirks. Approximately.
+
+For example, the first line below executes a lot faster than the second:
+
+```PowerShell
+[void]Do-Something
+Do-Something | Out-Null
+```
+
+If you're aware of multiple techniques to accomplish something, and you're writing a production script that will be dealing with large data sets (meaning performance will become a cumulative factor), then test the performance using Measure-Command or some other tool.
+
 # PERF-02 Consider trade-offs between performance and readability
 
 Performance is not the only reason you write a script. If a script is expected to deal with ten pieces of data, a 30% performance improvement will not add up to a lot of actual time. It's okay to use a slower-performing technique that is easier to read, understand, and maintain - although "easier" is a very subjective term. Of the two commands above, any given person might select either of them as being "easier" to understand or read.
