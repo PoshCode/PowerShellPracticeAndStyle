@@ -4,7 +4,7 @@ PowerShell Practice and Style Guide
 * [Style Guide](Style Guide/Introduction.md)
   * [Code Layout and Formatting](Style Guide/Code Layout and Formatting.md)
   * [Function Structure](Style Guide/Function Structure.md)
-  * [Documentation and Commenting](Style Guide/Documenting and Commenting.md)
+  * [Documentation and Commenting](Style Guide/Documenting and Comments.md)
   * [Readability](Style Guide/Readability.md)
   * [Naming Conventions](Style Guide/Naming Conventions.md)
 * [Best Practices](Best Practices/Introduction.md)
