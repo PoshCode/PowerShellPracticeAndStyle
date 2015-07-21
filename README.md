@@ -55,7 +55,7 @@ The *PowerShell Style Guide* in particular is in PREVIEW, and we are still activ
 
 Please use the issues system or GitHub pull requests to make corrections, contributions, and other changes to the text - we welcome your contributions!
 
-For more information, see [CONTRIBUTING](contributing.md)
+For more information, see [CONTRIBUTING](CONTRIBUTING.md)
 
 #### Credits
 
