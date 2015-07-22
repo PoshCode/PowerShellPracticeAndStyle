@@ -1,6 +1,8 @@
 PowerShell Practice and Style Guide
 ===================================
 
+[Introduction (ReadMe)](ReadMe.md)
+
 * [Style Guide](Style Guide/Introduction.md)
   * [Code Layout and Formatting](Style Guide/Code Layout and Formatting.md)
   * [Function Structure](Style Guide/Function Structure.md)

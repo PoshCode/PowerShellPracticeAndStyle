@@ -1,6 +1,6 @@
 ## The PowerShell Best Practices and Style Guide
 
-[Table Of Contents](TableOfContents.md)
+[Table Of Contents](#table-of-contents)
 
 <p align="center"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; float: left; vertical-align: middle; margin: 10px;"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a></p>
 
@@ -14,7 +14,7 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 The authors encourage you to redistribute this content as widely as possible, but require that you give credit to the primary authors below, and that you notify us on github of any improvements you make.
 
-### Purpose
+### What are Best Practices
 
 _PowerShell Best Practices_ are what you should usually do as a starting point. They are ways of writing, thinking, and designing which make it _harder_ to get into trouble. The point of a _Best Practice_ is to help the reader to fall into the pit of success:
 
@@ -22,28 +22,28 @@ _PowerShell Best Practices_ are what you should usually do as a starting point. 
 
 > -- Rico Mariani, MS Research MindSwap Oct 2003.
 
-Like English spelling and grammar rules, PowerShell programming best practices and style rules nearly always have exceptions, but we are documenting a baseline for code structure, command design, programming, formatting, and style which will help you to avoid common problems, and even help you write more reusable, readable code -- because reusable code doesn't have to be rewritten, and readable code can be maintained.
+Like English spelling and grammar rules, PowerShell programming best practices and style rules nearly always have exceptions, but we are documenting a baseline for code structure, command design, programming, formatting, and even style which will help you to avoid common problems, and help you write more reusable, readable code -- because reusable code doesn't have to be rewritten, and readable code can be maintained.
 
 Having said that, remember: the points in the Best Practices documents and the Style Guide are referred to as _practices_ and _guidelines_, not rules. If you're having trouble getting something done because you're trying to avoid _breaking_ a style or best practice rule, you've misunderstood the point: this document is pragmatic, rather than dogmatic. We'll leave dogmatism to teams and projects that require you to meet their specific guidelines.
 
-### Organization
+### Table of Contents
 
 The guidelines are divided into these sections:
 
-* Style Guide
-  * Code Layout and Formatting
-  * Function Structure
-  * Documentation and Commenting
-  * Readability
-  * Naming Conventions
-* Best Practices
-  * Naming Conventions
-  * Building Reusable Tools
-  * Output and Formatting
-  * Error Handling
-  * Performance
-  * Language, Interop and .Net
-  * Metadata, Versioning, and Packaging
+* [Style Guide (Introduction)](Style Guide/Introduction.md)
+  * [Code Layout and Formatting](Style Guide/Code Layout and Formatting.md)
+  * [Function Structure](Style Guide/Function Structure.md)
+  * [Documentation and Commenting](Style Guide/Documenting and Commenting.md)
+  * [Readability](Style Guide/Readability.md)
+  * [Naming Conventions](Style Guide/Naming Conventions.md)
+* [Best Practices (Introduction)](Best Practices/Introduction.md)
+  * [Building Reusable Tools](Best Practices/Building Reusable Tools.md)
+  * [Output and Formatting](Best Practices/Output and Formatting.md)
+  * [Error Handling](Best Practices/Error Handling.md)
+  * [Performance](Best Practices/Performance.md)
+  * [Language, Interop and .Net](Best Practices/Language%2C Interop and .Net.md)
+  * [Naming Conventions](Best Practices/Naming Conventions.md)
+  * [Metadata, Versioning, and Packaging](Best Practices/Metadata%2C Versioning%2C and Packaging.md)
 
 ### Current State:
 
