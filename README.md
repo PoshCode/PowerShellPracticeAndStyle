@@ -33,7 +33,7 @@ The guidelines are divided into these sections:
 * [Style Guide (Introduction)](Style Guide/Introduction.md)
   * [Code Layout and Formatting](Style Guide/Code Layout and Formatting.md)
   * [Function Structure](Style Guide/Function Structure.md)
-  * [Documentation and Commenting](Style Guide/Documenting and Commenting.md)
+  * [Documentation and Comments](Style Guide/Documentation and Comments.md)
   * [Readability](Style Guide/Readability.md)
   * [Naming Conventions](Style Guide/Naming Conventions.md)
 * [Best Practices (Introduction)](Best Practices/Introduction.md)
@@ -57,7 +57,7 @@ The *PowerShell Style Guide* in particular is in PREVIEW, and we are still activ
 
 Please use the issues system or GitHub pull requests to make corrections, contributions, and other changes to the text - we welcome your contributions!
 
-For more information, see [CONTRIBUTING](contributing.md)
+For more information, see [CONTRIBUTING](CONTRIBUTING.md)
 
 #### Credits
 
