@@ -62,6 +62,12 @@ If you're writing in what is, for you, a foreign language, simpler words and sim
 
 Be complete, but be concise.
 
+##### Location
+
+In order to ensure that the documentation stays with the function, documentation comments should be placed INSIDE the function, rather than above. To make it harder to forget to update them when changing a function, you should keep them at the top of the function, rather than at the bottom.
+
+Of course, that's not to say that putting them elsewhere is wrong -- but this is easier to do, and harder to forget to update.
+
 ##### Put Details in the Notes
 
 If you want to provide detailed explanations about how your tool works, use the `Notes` section for that.
@@ -70,11 +76,11 @@ If you want to provide detailed explanations about how your tool works, use the 
 
 Every script function command should have at least a short statement describing it's function. That is the `Synopsis`.
 
-In order to ensure that the documentation stays with the function, documentation comments should be placed INSIDE the function, rather than above. To make it harder to forget to update them when changing a function, you should keep them at the top of the function, rather than at the bottom.
-
 ##### Document Each Parameter
 
-Each parameter should be documented. To make it easier to keep the comments synchronized with changes to the parameters, the parameter documentation comments may _within_ the `param` block, directly above each parameter.  It is also possible to write `.Parameter` statements with the rest of the documentation comments, but as with the rest of this
+Each parameter should be documented. To make it easier to keep the comments synchronized with changes to the parameters, the parameter documentation comments may _within_ the `param` block, directly above each parameter. 
+
+It is also possible to write `.Parameter` statements with the rest of the documentation comments, but they will be less likely to be left un-updated if you put them closer to the actual code they document.
 
 ##### Provide Usage Examples
 
