@@ -6,7 +6,7 @@ Consider this code example:
 
 ```PowerShell
 if ($this -gt $that) {
-  Do-Something -with $that
+    Do-Something -with $that
 }
 ```
 
@@ -15,7 +15,7 @@ And now consider this one:
 ```PowerShell
 if ($this -gt $that)
 {
-  Do-Something -with $that
+    Do-Something -with $that
 }
 ```
 
@@ -27,8 +27,8 @@ First, format your code properly. The convention is to indent within constructs,
 
 ```PowerShell
 ForEach ($computer in $computers) {
- Do-This
- Get-Those
+    Do-This
+    Get-Those
 }
 ```
 
@@ -45,7 +45,7 @@ Get-WmiObject -Class Win32_LogicalDisk `
               -ComputerName SERVER2
 ```
 
-In general, the community feels you should avoid using those backticks as "line continuation characters" when possible. They're hard to read, easy to miss, and easy to mis-type. Also, if you add an extra whitespace after the backtick in the above example, then the command won't work. The resulting error is hard to correlate to the actual problem, making debugging the issue harder.
+In general, the community feels you should avoid using those backticks as "line continuation characters" when possible. They're hard to read, easy to miss, and easy to mistype. Also, if you add an extra whitespace after the backtick in the above example, then the command won't work. The resulting error is hard to correlate to the actual problem, making debugging the issue harder.
 
 Here's an alternative:
 
