@@ -20,13 +20,18 @@ Let's just get this out of the way: all of your scripts should start life as som
 
 ```
 [CmdletBinding()]param()
+begin{}
 process{}
 end{}
 ```
 
-You can always ignore one of the blocks, and add `begin`, add parameters and so on, but you should never write a script without CmdletBinding, and you should never write one without at least _considering_ making it take pipeline input.
+In the above example, code in the begin{} block will be executed once, code in the process{} block will execute once per passed parameter, and code in the end{} block will run once each parameter has been passed to process{}.
 
-
+The CmdletBinding() portion of the code allows you to do four things:
+* Enhanced parameters (e.g., mandatory)
+* Use Write-Verbose or Write-Debug
+* Define -ErrorAction and -ErrorVariable
+* Use -WhatIf and -Confirm
 
 #### Open braces on the same line
 Code folding is nicer in many editors.
