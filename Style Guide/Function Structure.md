@@ -37,7 +37,7 @@ function Get-USCitizenCapability {
     )
     process {
         $Capabilities = @{
-            MilitaryService = $salse
+            MilitaryService = $false
             DrinkAlcohol = $false
             Vote = $false
         }
