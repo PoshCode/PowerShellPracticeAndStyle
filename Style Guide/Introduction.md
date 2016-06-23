@@ -10,7 +10,7 @@ This document is an attempt to come to an agreement on a style-guide because we 
 
 - [Code Layout and Formatting](Code Layout and Formatting.md)
 - [Function Structure](Function Structure.md)
-- [Documentation and Commenting](Documentation and Commenting.md)
+- [Documentation and Comments](Style Guide/Documentation and Comments.md)
 - [Readability](Readability.md)
 - [Naming Conventions](Naming Conventions.md)
 
