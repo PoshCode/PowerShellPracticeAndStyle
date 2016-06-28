@@ -5,9 +5,8 @@ Avoid using the `return` keyword in your functions. Just place the object variab
 When declaring simple functions leave a space between the function name and the parameters.
   
 ```PowerShell
-function MyFunction ($param1, $param2)
-{
-  
+function MyFunction ($param1, $param2) {
+    ...  
 }
 ```
 
