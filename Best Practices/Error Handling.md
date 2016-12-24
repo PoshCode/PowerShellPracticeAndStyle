@@ -56,7 +56,7 @@ $user = Get-ADUser -Identity DonJ
 
 if ($user) {
     $user | Do-Something
-} else [
+} else {
     Write-Warning "Could not get user $user"
 }
 ```
