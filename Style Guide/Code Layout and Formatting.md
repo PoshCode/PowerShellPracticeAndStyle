@@ -101,7 +101,7 @@ Lines should not have trailing whitespace. Extra spaces result in future edits w
 
 #### Spaces around parameters and operators
 
-You should us a single space around parameter names and operators, including comparison operators and math and assignment operators, even when the spaces are not necessary for PowerShell to correctly parse the code.
+You should use a single space around parameter names and operators, including comparison operators and math and assignment operators, even when the spaces are not necessary for PowerShell to correctly parse the code.
 
 One notable exception is when using semi-colons to pass values to switch parameters:
 
