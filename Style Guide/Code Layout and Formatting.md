@@ -3,20 +3,78 @@
 
 ### Code Layout & Formatting
 
-Please note that many of these guidelines, in particular, are purely about readability. Some of them are arbitrary rules, but they are based on decades of traditions in programming, so while you may disagree with some rules (and should always follow the rules of individual projects), when we ask you to leave an empty line after a closing function brace, or two lines before functions, we're not being capricious, we're doing so because it makes it easier for experienced developers to scan your code.
+These guidelines are about readability. Some of them are arbitrary rules, but they are based on decades of traditions in programming, so while you may disagree with some rules (and should always follow the rules of individual projects), when we ask you to leave an empty line after a closing function brace, or two lines before functions, we're not being capricious, we're doing so because it makes it easier for experienced developers to scan your code.
 
 #### Maintain consistency in layout
 
-Rules about indentation and line length are about consistency across code bases. Long practice has shown that it's easier to read and understand code when it looks familiar and you're not being distracted by details, which means that (as with the python community), it's better for everyone to follow a single set of rules.
+Rules about indentation, line length, and capitalization are about consistency across code bases. Long practice has shown that it's easier to read and understand code when it looks familiar and you're not being distracted by details, which means that it's better for everyone in the community to follow a single set of rules.
 
-We aren't trying to force the whole world to change overnight, and the code layout rules for individual projects trump these rules. Whether for legacy reasons, or to match guidelines for multiple languages in a single project, different projects may have different style guides, and since the goal is consistency, you should always abide by the rules in place on your project.
+We don't expect everyone to follow these guidelines, and rules for individual projects always trump these. Whether for legacy reasons, or to match guidelines for multiple languages in a single project, different projects may have different style guidelines. Since the goal is consistency, you should always abide by any style rules that are in place on the project you are contributing to.
 
-If you do have a legacy project that is in source control and you decide to reformat code to adopt these rules, try to make all of your whitespace changes in a single a commit that does _nothing_ but edit the whitespace. You should never reformat the whitespace on a file as _part_ of a content change.
+If you do have a legacy project that is in source control and you decide to reformat code to adopt these rules, try to make all of your whitespace changes in a single a commit that does _nothing_ but edit the whitespace. You should never reformat the whitespace on a file as _part_ of a content change because it makes the changes hard to spot.
+
+#### Capitalization Conventions
+
+PowerShell is **not** case sensitive, but we follow capitalization conventions to make code easy to read. They are based on the [capitalization conventions](https://msdn.microsoft.com/en-us/library/ms229043) Microsoft created for the .NET framework, since PowerShell is a .NET scripting language, and PowerShell cmdlets are primarily written in .NET languages following those guidelines.
+
+##### Terminology
+
+* lowercase - all lowercase, no word separation
+* UPPERCASE - all capitals, no word separation
+* PascalCase - capitalize the first letter of each word
+* camelCase - capitalize the first letter of each word _except_ the first.
+
+PowerShell uses PascalCase for _all_ public identifiers: module names, function or cmdlet names, class, enum, and attribute names, public fields or properties, global variables and constants, etc. In fact, since the _parameters_ to PowerShell commands are actually _properties_ of .Net classes, even parameters use PascalCase rather than camelCase.
+
+PowerShell language keywords are written in lower case (yes, even `foreach` and `dynamicparam`), as well as operators such as `-eq` and `-match`. The keywords in comment-based help are written in UPPERCASE to make it easy to spot them among the dense prose of documentation.
+
+```posh
+function Write-Host {
+    <#
+    .SYNOPSIS
+    Writes customized output to a host.
+    .DESCRIPTION
+    The Write-Host cmdlet customizes output. You can specify the color of text by using
+    the ForegroundColor parameter, and you can specify the background color by using the
+    BackgroundColor parameter. The Separator parameter lets you specify a string to use to
+    separate displayed objects. The particular result depends on the program that is
+    hosting Windows PowerShell.
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Position=0, ValueFromPipeline=$true, ValueFromRemainingArguments=$true)]
+        [PSObject]
+        $Object,
+
+        [Switch]
+        $NoNewline,
+
+        [PSObject]
+        $Separator,
+
+        [System.ConsoleColor]
+        $ForegroundColor,
+
+        [System.ConsoleColor]
+        $BackgroundColor
+    )
+    begin
+    {
+    ...
+```
+
+PowerShell uses PascalCase for _all_ public identifiers: module names, function or cmdlet names, class and enum names, public fields or properties, global variables and constants, etc. In fact, since the _parameters_ to PowerShell commands are actually _properties_ of .Net classes, even parameters use PascalCase rather than camelCase. Function names should follow PowerShell's `Verb-Noun` naming conventions, using PascalCase within both Verb and Noun.
+
+A special case is made for two-letter acronyms in which both letters are capitalized, as in the variable `$PSBoundParameters` or the command `Get-PSDrive`. Note that ([as specified in the .NET guidelines](https://msdn.microsoft.com/en-us/library/ms229043#Anchor_1)) this does not affect the commonly capitalized (but not acronym) words "OK" and "ID" . You should also not extend it to compound acronyms, such as when Azure's Resource Manager (RM) meets a Virtual Machine (VM) in `Start-AzureRmVM`...
+
+> We are aware that there are **many** places where these conventions have not been followed properly for various reasons -- you should consider these _exceptions_ (such as for COM interop) or _mistakes_ (such as `System.Data.SqlClient.SQLDebugging`), but not a reason for you to disregard the conventions.
+
+If you wish, you may use camelCase for variables within your functions (or modules) to distinguish _private_ variables from parameters, but this is a matter of taste. Shared variables should be distinguished by using their scope name, such as `$Script:PSBoundParameters` or `$Global:DebugPreference`.
 
 
-#### Always write CmdletBinding
+#### Always Start With CmdletBinding
 
-Let's just get this out of the way: all of your scripts should start life as something like this snippet:
+All of your scripts or functions should start life as something like this snippet:
 
 ```
 [CmdletBinding()]param()
@@ -24,9 +82,7 @@ process{}
 end{}
 ```
 
-You can always ignore one of the blocks, and add `begin`, add parameters and so on, but you should never write a script without CmdletBinding, and you should never write one without at least _considering_ making it take pipeline input.
-
-
+You can always delete or ignore one of the blocks (or add the `begin` block), add parameters and so on, but you should avoid writing scripts or functions without CmdletBinding, and you should always at least _consider_ making it take pipeline input.
 
 #### Open braces on the same line
 Code folding is nicer in many editors.
@@ -48,7 +104,7 @@ That's the order PowerShell will execute it in
 This is what PowerShell ISE does and understands, and it's the default for most code editors. As always, existing projects may have different standards, but for public code, please stick to 4 spaces, and the rest of us will try to do the same.
 
 The 4-space rule is optional for continuation lines. Hanging indents (when indenting a wrapped command which was too long) may be indented more than one indentation level, or may even be indented an odd number of spaces to line up with a method call or parameter block.
-  
+
 ```PowerShell
 
 # This is ok
@@ -58,7 +114,7 @@ $MyObj.GetData(
        $Param3,
        $Param4
     )
-   
+
 # This is better
 $MyObj.GetData($Param1,
                $Param2,
@@ -69,7 +125,7 @@ $MyObj.GetData($Param1,
 
 #### Maximum Line Length
 
-Limit lines to 115 characters when possible. 
+Limit lines to 115 characters when possible.
 
 The PowerShell console is, by default, 120 characters wide, but it allows only 119 characters on output lines, and when entering multi-line text, PowerShell uses a line continuation prompt: `>>> ` and thus limits your line length to 116 anyway.
 
@@ -78,7 +134,7 @@ Most of us work on widescreen monitors these days, and there is little reason to
 The preferred way to avoid long lines is to use splatting (see [About_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should always be used in preference to the backtick for line continuation when applicable, even for strings:
 
 ```
-Write-Host ("This is an incredibly important, and extremely long message. " + 
+Write-Host ("This is an incredibly important, and extremely long message. " +
             "We cannot afford to leave any part of it out, nor do we want line-breaks in the output. " +
             "Using string concatenation let's us use short lines here, and still get a long line in the output")
 ```
@@ -117,14 +173,14 @@ $variable = Get-Content -Path $FilePath -Wait:($ReadCount -gt 0) -TotalCount ($R
 
 White-space is (mostly) irrelevant to PowerShell, but its proper use is the key to writing easily readable code.
 
-Use a single space after commas and semicolons, and around pairs of curly braces. 
+Use a single space after commas and semicolons, and around pairs of curly braces.
 
-Avoid extra spaces inside parenthesis or square braces.  
+Avoid extra spaces inside parenthesis or square braces.
 
 Nested expressions `$( ... )` and script blocks `{ ... }` should have a single space _inside_ them to make code stand out and be more readable.
 
 Nested expressions `$( ... )` and variable delimiters `${...}` inside strings do not need spaces _outside_, since that would become a part of the string.
-  
+
 
 #### Avoid using semicolons (`;`) at the end of each line.
 
@@ -138,5 +194,5 @@ $Options = @{
     Margin = 2
     Padding = 2
     FontSize = 24
-}  
+}
 ```
