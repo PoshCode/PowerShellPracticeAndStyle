@@ -55,7 +55,7 @@ function Get-USCitizenCapability {
 function Get-USCitizenCapability {
     [CmdletBinding()]
     [OutputType([psobject])]
-    param(
+    param (
         [Parameter(Mandatory=$true,
                    ValueFromPipelineByPropertyName=$true,
                    Position=0)]
