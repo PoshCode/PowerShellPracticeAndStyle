@@ -69,7 +69,7 @@ A special case is made for two-letter acronyms in which both letters are capital
 
 > We are aware that there are **many** places where these conventions have not been followed properly for various reasons -- you should consider these _exceptions_ (such as for COM interop) or _mistakes_ (such as `System.Data.SqlClient.SQLDebugging`), but not a reason for you to disregard the conventions.
 
-If you wish, you may use camelCase for variables within your functions (or modules) to distinguish _private_ variables from parameters, but this is a matter of taste. Shared variables should be distinguished by using their scope name, such as `$Script:PSBoundParameters` or `$Global:DebugPreference`.
+If you wish, you may use camelCase for variables within your functions (or modules) to distinguish _private_ variables from parameters, but this is a matter of taste. Shared variables should be distinguished by using their scope name, such as `$Script:PSBoundParameters` or `$Global:DebugPreference`. If you are using camelCase for a variable that starts with a two-letter acronym (where both letters are capitalized), both letters should be set to lowercase (such as `adComputer`).
 
 
 #### Always Start With CmdletBinding
