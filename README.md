@@ -4,7 +4,7 @@
 
 <p align="center"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; float: left; vertical-align: middle; margin: 10px;"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a></p>
 
-This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>, please attribute to Don Jones, Matt Penny, Carlos Perez, Joel Bennett and the PowerShell Community.
+This work is licensed under a <a rel="license" href"http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>, please attribute to Don Jones, Matt Penny, Carlos Perez, Joel Bennett and the PowerShell Community.
 
 ###### You are free to:
 
@@ -30,20 +30,20 @@ Having said that, remember: the points in the Best Practices documents and the S
 
 The guidelines are divided into these sections:
 
-* [Style Guide (Introduction)](Style Guide/Introduction.md)
-  * [Code Layout and Formatting](Style Guide/Code Layout and Formatting.md)
-  * [Function Structure](Style Guide/Function Structure.md)
-  * [Documentation and Comments](Style Guide/Documentation and Comments.md)
-  * [Readability](Style Guide/Readability.md)
-  * [Naming Conventions](Style Guide/Naming Conventions.md)
-* [Best Practices (Introduction)](Best Practices/Introduction.md)
-  * [Building Reusable Tools](Best Practices/Building Reusable Tools.md)
-  * [Output and Formatting](Best Practices/Output and Formatting.md)
-  * [Error Handling](Best Practices/Error Handling.md)
-  * [Performance](Best Practices/Performance.md)
-  * [Language, Interop and .Net](Best Practices/Language%2C Interop and .Net.md)
-  * [Naming Conventions](Best Practices/Naming Conventions.md)
-  * [Metadata, Versioning, and Packaging](Best Practices/Metadata%2C Versioning%2C and Packaging.md)
+* [Style Guide (Introduction)](Style%20Guide/Introduction.md)
+  * [Code Layout and Formatting](Style%20Guide/Code%20Layout%20and%20Formatting.md)
+  * [Function Structure](Style%20Guide/Function%20Structure.md)
+  * [Documentation and Comments](Style%20Guide/Documentation%20and%20Comments.md)
+  * [Readability](Style%20Guide/Readability.md)
+  * [Naming Conventions](Style%20Guide/Naming%20Conventions.md)
+* [Best Practices (Introduction)](Best%20Practices/Introduction.md)
+  * [Building Reusable Tools](Best%20Practices/Building%20Reusable%20Tools.md)
+  * [Output and Formatting](Best%20Practices/Output%20and%20Formatting.md)
+  * [Error Handling](Best%20Practices/Error%20Handling.md)
+  * [Performance](Best%20Practices/Performance.md)
+  * [Language, Interop and .Net](Best%20Practices/Language%2C%20Interop%20and%20.Net.md)
+  * [Naming Conventions](Best%20Practices/Naming%20Conventions.md)
+  * [Metadata, Versioning, and Packaging](Best%20Practices/Metadata%2C%20Versioning%2C%20and%20Packaging.md)
 
 ### Current State:
 
