@@ -83,17 +83,16 @@ function Get-USCitizenCapability {
 
 #### Always have at least a `process {}` code block if any parameters takes values from the Pipeline.
 
-#### Specify an OutputType attribute if the advanced function returns
-  an object or collection of objects. If the function returns different
-  object types depending on the parameter set provide one per parameter set.
+#### Specify an OutputType attribute if the advanced function returns an object or collection of objects. 
+
+If the function returns different object types depending on the parameter set provide one per parameter set.
 
 ```PowerShell
 [OutputType([<TypeLiteral>], ParameterSetName="<Name>")]
 [OutputType("<TypeNameString>", ParameterSetName="<Name>")]
 ```
 
-#### When a ParameterSetName is used in any of the parameters, always provide a
-  DefaultParameterSetName in the CmdletBinding attribute.
+#### When a ParameterSetName is used in any of the parameters, always provide a DefaultParameterSetName in the CmdletBinding attribute.
 
 ```PowerShell
 function Get-User {
