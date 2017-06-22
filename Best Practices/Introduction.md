@@ -14,10 +14,10 @@ One final note about these Best Practices: the perspective of these guidelines h
 
 ## Table of Contents
 
-- [Naming Conventions](Naming Conventions.md)
-- [Building Reusable Tools](Building Reusable Tools.md)
-- [Output and Formatting](Output and Formatting.md)
-- [Error Handling](Error Handling.md)
+- [Naming Conventions](Naming%20Conventions.md)
+- [Building Reusable Tools](Building%20Reusable%20Tools.md)
+- [Output and Formatting](Output%20and%20Formatting.md)
+- [Error Handling](Error%20Handling.md)
 - [Performance](Performance.md)
-- [Language, Interop and .Net](Language, Interop and .Net.md)
-- [Metadata, Versioning, and Packaging](Metadata, Versioning, and Packaging.md)
+- [Language, Interop and .Net](Language,%20Interop%20and%20.Net.md)
+- [Metadata, Versioning, and Packaging](Metadata,%20Versioning,%20and%20Packaging.md)
