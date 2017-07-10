@@ -8,9 +8,9 @@ This document is an attempt to come to an agreement on a style-guide because we 
 
 ## Table of Contents
 
-- [Code Layout and Formatting](Code Layout and Formatting.md)
-- [Function Structure](Function Structure.md)
-- [Documentation and Comments](Documentation and Comments.md)
+- [Code Layout and Formatting](Code%20Layout%20and%20Formatting.md)
+- [Function Structure](Function%20Structure.md)
+- [Documentation and Comments](Documentation%20and%20Comments.md)
 - [Readability](Readability.md)
-- [Naming Conventions](Naming Conventions.md)
+- [Naming Conventions](Naming%20Conventions.md)
 
