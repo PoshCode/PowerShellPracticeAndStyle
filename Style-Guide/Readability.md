@@ -1,4 +1,4 @@
-TODO: This section should probably be merged to [Code Layout and Formatting](Code Layout and Formatting.md), and based on the #15, we should remove or rewrite the backticks section.
+TODO: This section should probably be merged to [Code Layout and Formatting](Code-Layout-and-Formatting.md), and based on the #15, we should remove or rewrite the backticks section.
 
 # READ-01 Indent your code
 

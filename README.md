@@ -10,7 +10,7 @@ This work is licensed under a <a rel="license" href"http://creativecommons.org/l
 
 **Share** — copy and redistribute the material in any medium or format
 
-**Adapt** — remix, transform, and build upon the material 
+**Adapt** — remix, transform, and build upon the material
 
 The authors encourage you to redistribute this content as widely as possible, but require that you give credit to the primary authors below, and that you notify us on github of any improvements you make.
 
@@ -30,20 +30,20 @@ Having said that, remember: the points in the Best Practices documents and the S
 
 The guidelines are divided into these sections:
 
-* [Style Guide (Introduction)](Style%20Guide/Introduction.md)
-  * [Code Layout and Formatting](Style%20Guide/Code%20Layout%20and%20Formatting.md)
-  * [Function Structure](Style%20Guide/Function%20Structure.md)
-  * [Documentation and Comments](Style%20Guide/Documentation%20and%20Comments.md)
-  * [Readability](Style%20Guide/Readability.md)
-  * [Naming Conventions](Style%20Guide/Naming%20Conventions.md)
-* [Best Practices (Introduction)](Best%20Practices/Introduction.md)
-  * [Building Reusable Tools](Best%20Practices/Building%20Reusable%20Tools.md)
-  * [Output and Formatting](Best%20Practices/Output%20and%20Formatting.md)
-  * [Error Handling](Best%20Practices/Error%20Handling.md)
-  * [Performance](Best%20Practices/Performance.md)
-  * [Language, Interop and .Net](Best%20Practices/Language%2C%20Interop%20and%20.Net.md)
-  * [Naming Conventions](Best%20Practices/Naming%20Conventions.md)
-  * [Metadata, Versioning, and Packaging](Best%20Practices/Metadata%2C%20Versioning%2C%20and%20Packaging.md)
+* [Style Guide (Introduction)](Style-Guide/Introduction.md)
+  * [Code Layout and Formatting](Style-Guide/Code-Layout-and-Formatting.md)
+  * [Function Structure](Style-Guide/Function-Structure.md)
+  * [Documentation and Comments](Style-Guide/Documentation-and-Comments.md)
+  * [Readability](Style-Guide/Readability.md)
+  * [Naming Conventions](Style-Guide/Naming-Conventions.md)
+* [Best Practices (Introduction)](Best-Practices/Introduction.md)
+  * [Building Reusable Tools](Best-Practices/Building-Reusable-Tools.md)
+  * [Output and Formatting](Best-Practices/Output-and-Formatting.md)
+  * [Error Handling](Best-Practices/Error-Handling.md)
+  * [Performance](Best-Practices/Performance.md)
+  * [Language, Interop and .Net](Best-Practices/Language%2C-Interop-and-.Net.md)
+  * [Naming Conventions](Best-Practices/Naming-Conventions.md)
+  * [Metadata, Versioning, and Packaging](Best-Practices/Metadata%2C-Versioning%2C-and-Packaging.md)
 
 ### Current State:
 
@@ -65,7 +65,7 @@ _The Community Book of PowerShell Practices_ was originally compiled and edited 
 
 Portions copyright (c) Don Jones, Matt Penny, 2014-2015
 
-_The PowerShell Style Guide_ was originally created by Carlos Perez, for his students, and all the good parts were written by him. 
+_The PowerShell Style Guide_ was originally created by Carlos Perez, for his students, and all the good parts were written by him.
 
 Portions copyright (c) Carlos Perez, 2015
 

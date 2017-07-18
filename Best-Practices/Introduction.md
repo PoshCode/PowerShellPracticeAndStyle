@@ -6,7 +6,7 @@ If you scan through code projects on [PoshCode](http://PoshCode.org) or the [Tec
 
 Over the years several attempts have been made to arrive at a consensus, most notably the "Great Debate" series of blog posts on [PowerShell.org](http://powershell.org/wp/category/great-debates/) following the 2013 Scripting Games, which outlined some of the more controversial issues and asked for community discussions.
 
-This project has been created, in part, as a public place to continue those debates as well as to document the consensus of the community when we _do_ arrive at a consensus. 
+This project has been created, in part, as a public place to continue those debates as well as to document the consensus of the community when we _do_ arrive at a consensus.
 
 Remember that best practices are not hard-and-fast rules. We don't even consider them as solid as the style guide rules. They are the things you should _usually_ do as a starting point, and should deviate from when it's appropriate.
 
@@ -14,10 +14,10 @@ One final note about these Best Practices: the perspective of these guidelines h
 
 ## Table of Contents
 
-- [Naming Conventions](Naming%20Conventions.md)
-- [Building Reusable Tools](Building%20Reusable%20Tools.md)
-- [Output and Formatting](Output%20and%20Formatting.md)
-- [Error Handling](Error%20Handling.md)
+- [Naming Conventions](Naming-Conventions.md)
+- [Building Reusable Tools](Building-Reusable-Tools.md)
+- [Output and Formatting](Output-and-Formatting.md)
+- [Error Handling](Error-Handling.md)
 - [Performance](Performance.md)
-- [Language, Interop and .Net](Language,%20Interop%20and%20.Net.md)
-- [Metadata, Versioning, and Packaging](Metadata,%20Versioning,%20and%20Packaging.md)
+- [Language, Interop and .Net](Language,-Interop-and-.Net.md)
+- [Metadata, Versioning, and Packaging](Metadata,-Versioning,-and-Packaging.md)

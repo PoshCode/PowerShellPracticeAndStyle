@@ -6,7 +6,7 @@ TODO: This whole document is STILL ROUGH DRAFT
 
 Previous to PowerShell 5, Write-Host has no functionality at all in non-interactive scripts. It cannot be captured or redirected, and therefore should only be used in functions which are "Show"ing or "Format"ing output, or to display something as part of an interactive prompt to the user.
 
-That is: you should not use Write-Host to create script output unless your script (or function, or whatever) uses the Show verb (as in, Show-Performance) or the Format verb (as in, Format-Hex), or has a `-Formatted` switch parameter. You may also use it to build a interactions with the user in other cases (e.g. to write extra information to the screen before prompting the user for a choice or input). 
+That is: you should not use Write-Host to create script output unless your script (or function, or whatever) uses the Show verb (as in, Show-Performance) or the Format verb (as in, Format-Hex), or has a `-Formatted` switch parameter. You may also use it to build a interactions with the user in other cases (e.g. to write extra information to the screen before prompting the user for a choice or input).
 
 Generally, you should consider the other Write-* commands first when trying to give information to the user.
 
@@ -28,11 +28,11 @@ You should use the debug output stream for output that is useful for script debu
 
 ## Use CmdletBinding if you are using output streams
 
-As we've already written elsewhere, you should probably [always use CmdletBinding](https://github.com/PoshCode/PowerShellPracticeAndStyle/blob/master/Style%20Guide/Code%20Layout%20and%20Formatting.md#always-write-cmdletbinding). 
+As we've already written elsewhere, you should probably [always use CmdletBinding](https://github.com/PoshCode/PowerShellPracticeAndStyle/blob/master/Style-Guide/Code-Layout-and-Formatting.md#always-write-cmdletbinding).
 
-However, it's particularly important when you're using Write-Verbose and Write-Debug, as the Verbose and Debug output streams are off by default, and the `[CmdletBinding()]` attribute enables the common `-Verbose` and `-Debug` switches which turn those streams on. 
+However, it's particularly important when you're using Write-Verbose and Write-Debug, as the Verbose and Debug output streams are off by default, and the `[CmdletBinding()]` attribute enables the common `-Verbose` and `-Debug` switches which turn those streams on.
 
-It also enables the switches for the Warning and Error streams, as well as ways of collecting those streams into variables. You should read the [always use CmdletBinding](https://github.com/PoshCode/PowerShellPracticeAndStyle/blob/master/Style%20Guide/Code%20Layout%20and%20Formatting.md#always-write-cmdletbinding) topic for more information.
+It also enables the switches for the Warning and Error streams, as well as ways of collecting those streams into variables. You should read the [always use CmdletBinding](https://github.com/PoshCode/PowerShellPracticeAndStyle/blob/master/Style-Guide/Code-Layout-and-Formatting.md#always-write-cmdletbinding) topic for more information.
 
 ## Use Format Files for your custom objects
 

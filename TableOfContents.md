@@ -1,7 +1,9 @@
 PowerShell Practice and Style Guide
 ===================================
 
-[Introduction](ReadMe.md)
+## Introduction
+
+* [About this Guide](ReadMe.md)
 
 ## Style Guide
 
