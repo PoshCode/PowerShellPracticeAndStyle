@@ -28,11 +28,11 @@ You should use the debug output stream for output that is useful for script debu
 
 ## Use CmdletBinding if you are using output streams
 
-As we've already written elsewhere, you should probably [always use CmdletBinding](https://github.com/PoshCode/PowerShellPracticeAndStyle/blob/master/Style%20Guide/Code%20Layout%20and%20Formatting.md#always-write-cmdletbinding). 
+As we've already written elsewhere, you should probably [always use CmdletBinding](../Style%20Guide/Code%20Layout%20and%20Formatting.md#always-start-with-cmdletbinding). 
 
 However, it's particularly important when you're using Write-Verbose and Write-Debug, as the Verbose and Debug output streams are off by default, and the `[CmdletBinding()]` attribute enables the common `-Verbose` and `-Debug` switches which turn those streams on. 
 
-It also enables the switches for the Warning and Error streams, as well as ways of collecting those streams into variables. You should read the [always use CmdletBinding](https://github.com/PoshCode/PowerShellPracticeAndStyle/blob/master/Style%20Guide/Code%20Layout%20and%20Formatting.md#always-write-cmdletbinding) topic for more information.
+It also enables the switches for the Warning and Error streams, as well as ways of collecting those streams into variables. You should read the [always use CmdletBinding](../Style%20Guide/Code%20Layout%20and%20Formatting.md#always-start-with-cmdletbinding) topic for more information.
 
 ## Use Format Files for your custom objects
 
