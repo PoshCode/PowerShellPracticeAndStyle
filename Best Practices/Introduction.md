@@ -2,9 +2,9 @@
 
 ## Foreword
 
-If you scan through code projects on [PoshCode](http://PoshCode.org) or the [Technet ScriptCenter Gallery](http://gallery.technet.microsoft.com/scriptcenter), it will be immediately apparent that people in the PowerShell community have vastly different ideas about what's "right and wrong" in the world of PowerShell scripting.
+If you scan through code projects on [PoshCode](https://github.com/PoshCode) or the [Technet ScriptCenter Gallery](http://gallery.technet.microsoft.com/scriptcenter), it will be immediately apparent that people in the PowerShell community have vastly different ideas about what's "right and wrong" in the world of PowerShell scripting.
 
-Over the years several attempts have been made to arrive at a consensus, most notably the "Great Debate" series of blog posts on [PowerShell.org](http://powershell.org/wp/category/great-debates/) following the 2013 Scripting Games, which outlined some of the more controversial issues and asked for community discussions.
+Over the years several attempts have been made to arrive at a consensus, most notably the "Great Debate" series of blog posts on [PowerShell.org](https://powershell.org/?s=great+debate) following the 2013 Scripting Games, which outlined some of the more controversial issues and asked for community discussions.
 
 This project has been created, in part, as a public place to continue those debates as well as to document the consensus of the community when we _do_ arrive at a consensus. 
 
@@ -19,5 +19,6 @@ One final note about these Best Practices: the perspective of these guidelines h
 - [Output and Formatting](Output%20and%20Formatting.md)
 - [Error Handling](Error%20Handling.md)
 - [Performance](Performance.md)
+- [Security](Security.md)
 - [Language, Interop and .Net](Language,%20Interop%20and%20.Net.md)
 - [Metadata, Versioning, and Packaging](Metadata,%20Versioning,%20and%20Packaging.md)
