@@ -3,8 +3,6 @@ PowerShell Practice and Style Guide
 
 ## Introduction
 
-* [About this Guide](ReadMe.md)
-
 ## Style Guide
 
 * [Introduction](Style-Guide/Introduction.md)
