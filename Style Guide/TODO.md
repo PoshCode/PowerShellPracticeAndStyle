@@ -1,13 +1,6 @@
 These documents are in an extremely rough state, not suitable for inclusion in the main guide yet.
 
-<!-- MarkdownTOC depth=4 autolink=true bracket=round -->
-
 - [Include Help](#include-help)
-
-<!-- /MarkdownTOC -->
-
-
-
 
 ### Include Help
 
