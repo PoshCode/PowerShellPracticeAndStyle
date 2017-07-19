@@ -2,6 +2,7 @@ PowerShell Practice and Style Guide
 ===================================
 
 ## Introduction
+* [About this Guide](README.md)
 
 ## Style Guide
 
