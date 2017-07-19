@@ -1,6 +1,3 @@
-<!-- MarkdownTOC depth=4 autolink=true bracket=round -->
-<!-- /MarkdownTOC -->
-
 ### Code Layout & Formatting
 
 These guidelines are about readability. Some of them are arbitrary rules, but they are based on decades of traditions in programming, so while you may disagree with some rules (and should always follow the rules of individual projects), when we ask you to leave an empty line after a closing function brace, or two lines before functions, we're not being capricious, we're doing so because it makes it easier for experienced developers to scan your code.
@@ -86,11 +83,11 @@ You can always delete or ignore one of the blocks (or add the `begin` block), ad
 
 #### Open braces on the same line
 Code folding is nicer in many editors.
-(TODO: This is in discussion in #24)
+(TODO: This is in discussion in [#24](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/24))
 
 #### Closing braces always on their own line
 Because that's how they're supposed to be!
-(TODO: This is in discussion in #24)
+(TODO: This is in discussion in [#24](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/24))
 
 #### Prefer: param() begin, process, end
 That's the order PowerShell will execute it in
@@ -131,7 +128,7 @@ The PowerShell console is, by default, 120 characters wide, but it allows only 1
 
 Most of us work on widescreen monitors these days, and there is little reason to keep a narrow line width, however, keeping files relatively narrow allows for side-by-side editing, so even narrower guidelines may be established by a given project. Be sure to check when you're working on someone else's project.
 
-The preferred way to avoid long lines is to use splatting (see [About_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should always be used in preference to the backtick for line continuation when applicable, even for strings:
+The preferred way to avoid long lines is to use splatting (see [About Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should always be used in preference to the backtick for line continuation when applicable, even for strings:
 
 ```
 Write-Host ("This is an incredibly important, and extremely long message. " +

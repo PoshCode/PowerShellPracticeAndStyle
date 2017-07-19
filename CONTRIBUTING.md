@@ -20,20 +20,21 @@ The *PowerShell Best Practices* are always evolving, and continue to be edited a
 
 To repeat from the ReadMe, the guidelines are divided into these sections:
 
-* Style Guide
-  * Code Layout and Formatting
-  * Function Structure
-  * Documentation and Commenting
-  * Readability
-  * Naming Conventions
-* Best Practices
-  * Naming Conventions
-  * Building Reusable Tools
-  * Output and Formatting
-  * Error Handling
-  * Performance
-  * Language, Interop and .Net
-  * Metadata, Versioning, and Packaging
+* [Style Guide (Introduction)](Style-Guide/Introduction.md)
+  * [Code Layout and Formatting](Style-Guide/Code-Layout-and-Formatting.md)
+  * [Function Structure](Style-Guide/Function-Structure.md)
+  * [Documentation and Comments](Style-Guide/Documentation-and-Comments.md)
+  * [Readability](Style-Guide/Readability.md)
+  * [Naming Conventions](Style-Guide/Naming-Conventions.md)
+* [Best Practices (Introduction)](Best-Practices/Introduction.md)
+  * [Naming Conventions](Best-Practices/Naming-Conventions.md)
+  * [Building Reusable Tools](Best-Practices/Building-Reusable-Tools.md)
+  * [Output and Formatting](Best-Practices/Output-and-Formatting.md)
+  * [Error Handling](Best-Practices/Error-Handling.md)
+  * [Performance](Best-Practices/Performance.md)
+  * [Security](Best-Practices/Security.md)
+  * [Language, Interop and .Net](Best-Practices/Language%2C-Interop-and-.Net.md)
+  * [Metadata, Versioning, and Packaging](Best-Practices/Metadata%2C-Versioning%2C-and-Packaging.md)
 
 Markdown documents on GitHub support linking within a document, but only to headers, so when editing, in addition to keeping practices and guidelines in the documents where they make sense, please use headlines for each guideline, and lower level headlines for rationale, examples, counter examples, and exceptions.
 
@@ -43,4 +44,6 @@ In general, practices and guidelines should be at least a header with an explana
 
 Style guidelines in particular should be phrased as a prescriptive guideline telling people what to do rather than a proscriptive or prohibiting rule, and should have both examples and counter examples. 
 
-When you absolutely must write a negative rule, you should start with the phrase "avoid" and end with an "instead" sentence, like: <blockquote><h6>Avoid the use of `~` to represent the home folder.</h6><p>The meaning of ~ is unfortunately dependent on the "current" provider at the time of execution. This isn't really a style issue, but it's an important rule for code you intend to share anyway. <strong>Instead</strong>, use `${Env:UserProfile}` or `(Get-PSProvider FileSystem).Home`</p></blockquote>
+When you absolutely must write a negative rule, you should start with the phrase "avoid" and end with an "instead" sentence, like:
+> ###### Avoid the use of `~` to represent the home folder.
+> The meaning of ~ is unfortunately dependent on the "current" provider at the time of execution. This isn't really a style issue, but it's an important rule for code you intend to share anyway. **Instead**, use `${Env:UserProfile}` or `(Get-PSProvider FileSystem).Home`

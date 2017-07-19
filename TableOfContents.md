@@ -2,6 +2,7 @@ PowerShell Practice and Style Guide
 ===================================
 
 ## Introduction
+* [About this Guide](README.md)
 
 ## Style Guide
 
@@ -15,10 +16,11 @@ PowerShell Practice and Style Guide
 ## Best Practices
 
 * [Introduction](Best-Practices/Introduction.md)
+* [Naming Conventions](Best-Practices/Naming-Conventions.md)
 * [Building Reusable Tools](Best-Practices/Building-Reusable-Tools.md)
 * [Output and Formatting](Best-Practices/Output-and-Formatting.md)
 * [Error Handling](Best-Practices/Error-Handling.md)
 * [Performance](Best-Practices/Performance.md)
+* [Security](Best-Practices/Security.md)
 * [Language, Interop and .Net](Best-Practices/Language-Interop-and-.Net.md)
-* [Naming Conventions](Best-Practices/Naming-Conventions.md)
 * [Metadata, Versioning, and Packaging](Best-Practices/Metadata-Versioning-and-Packaging.md)

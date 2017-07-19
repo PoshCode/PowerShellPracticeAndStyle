@@ -1,7 +1,6 @@
 These documents are in an extremely rough state, not suitable for inclusion in the main guide yet.
 
 ### Using The .Net Framework
-<!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
 - [Control what gets exported in a module](#control-what-gets-exported-in-a-module)
     - [Specify when to use a Manifest for a module](#specify-when-to-use-a-manifest-for-a-module)
@@ -42,18 +41,10 @@ These documents are in an extremely rough state, not suitable for inclusion in t
     - [AVOID appending to arrays in a loop](#avoid-appending-to-arrays-in-a-loop)
     - [EXCEPTIONS:](#exceptions)
     - [RATIONALE:](#rationale)
-    - [AVOID appending to string in a loop](#avoid-appending-to-string-in-a-loop)
-    - [EXCEPTIONS:](#exceptions-1)
-    - [RATIONALE:](#rationale-1)
 - [Strongly type parameters](#strongly-type-parameters)
 - [Don't reinvent the wheel](#dont-reinvent-the-wheel)
 - [Let's talk about Logging](#lets-talk-about-logging)
 - [Let's talk about code signing](#lets-talk-about-code-signing)
-- [Don't reinvent the wheel](#dont-reinvent-the-wheel-1)
-- [Let's talk about Logging](#lets-talk-about-logging-1)
-- [Let's talk about code signing](#lets-talk-about-code-signing-1)
-
-<!-- /MarkdownTOC -->
 
 TODO
 
@@ -282,18 +273,6 @@ The language features are always faster, and almost always more readable. Of cou
 
 ### You should understand the .Net underpinnings
 
-#### AVOID appending to arrays in a loop
-##### INSTEAD assign output from the loop
-#### EXCEPTIONS:
-* Appending to multiple collections
-* Using Lists instead of arrays
-
-#### RATIONALE:
-* Copying is slow
-* Pipeline output uses ArrayList
-* Easier to read and understand
-
-
 #### AVOID appending to string in a loop
 ##### INSTEAD assign output from the loop using $OFS
 #### EXCEPTIONS:
@@ -317,9 +296,6 @@ When passing on parameters to another command, you should be _at least_ as stron
 One notable exception is when you could accept more than one type. In PowerShell you can speficy parameter set overloads, but you can't change the type of a parameter.
 
 
-### Don't reinvent the wheel
-### Let's talk about Logging
-### Let's talk about code signing
 ### Don't reinvent the wheel
 ### Let's talk about Logging
 ### Let's talk about code signing
