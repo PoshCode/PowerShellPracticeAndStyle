@@ -1,20 +1,25 @@
 PowerShell Practice and Style Guide
 ===================================
 
-[Introduction (ReadMe)](README.md)
+## Introduction
 
-* [Style Guide (Introduction)](Style%20Guide/Introduction.md)
-  * [Code Layout and Formatting](Style%20Guide/Code%20Layout%20and%20Formatting.md)
-  * [Function Structure](Style%20Guide/Function%20Structure.md)
-  * [Documentation and Comments](Style%20Guide/Documentation%20and%20Comments.md)
-  * [Readability](Style%20Guide/Readability.md)
-  * [Naming Conventions](Style%20Guide/Naming%20Conventions.md)
-* [Best Practices (Introduction)](Best%20Practices/Introduction.md)
-  * [Naming Conventions](Best%20Practices/Naming%20Conventions.md)
-  * [Building Reusable Tools](Best%20Practices/Building%20Reusable%20Tools.md)
-  * [Output and Formatting](Best%20Practices/Output%20and%20Formatting.md)
-  * [Error Handling](Best%20Practices/Error%20Handling.md)
-  * [Performance](Best%20Practices/Performance.md)
-  * [Security](Best%20Practices/Security.md)
-  * [Language, Interop and .Net](Best%20Practices/Language%2C%20Interop%20and%20.Net.md)
-  * [Metadata, Versioning, and Packaging](Best%20Practices/Metadata%2C%20Versioning%2C%20and%20Packaging.md)
+## Style Guide
+
+* [Introduction](Style-Guide/Introduction.md)
+* [Code Layout and Formatting](Style-Guide/Code-Layout-and-Formatting.md)
+* [Function Structure](Style-Guide/Function-Structure.md)
+* [Documentation and Comments](Style-Guide/Documentation-and-Comments.md)
+* [Readability](Style-Guide/Readability.md)
+* [Naming Conventions](Style-Guide/Naming-Conventions.md)
+
+## Best Practices
+
+* [Introduction](Best-Practices/Introduction.md)
+* [Naming Conventions](Best-Practices/Naming-Conventions.md)
+* [Building Reusable Tools](Best-Practices/Building-Reusable-Tools.md)
+* [Output and Formatting](Best-Practices/Output-and-Formatting.md)
+* [Error Handling](Best-Practices/Error-Handling.md)
+* [Performance](Best-Practices/Performance.md)
+* [Security](Best-Practices/Security.md)
+* [Language, Interop and .Net](Best-Practices/Language-Interop-and-.Net.md)
+* [Metadata, Versioning, and Packaging](Best-Practices/Metadata-Versioning-and-Packaging.md)
