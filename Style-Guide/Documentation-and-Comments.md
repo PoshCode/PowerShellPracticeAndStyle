@@ -30,9 +30,9 @@ If the block is particularly long (as in the case of documentation text) it is r
   # Writing comments one-per line makes them stand out more in the console.
 
   <#  
-      .Synopsis
+      .SYNOPSIS
         Really long comment blocks are tedious to keep commented in single-line mode
-      .Description
+      .DESCRIPTION
         Particularly when the comment must be frequently edited,
         as with the help and documentation for a function or script
   #>
@@ -80,7 +80,7 @@ Every script function command should have at least a short statement describing 
 
 Each parameter should be documented. To make it easier to keep the comments synchronized with changes to the parameters, the parameter documentation comments may _within_ the `param` block, directly above each parameter. 
 
-It is also possible to write `.Parameter` statements with the rest of the documentation comments, but they will be less likely to be left un-updated if you put them closer to the actual code they document.
+It is also possible to write `.PARAMETER` statements with the rest of the documentation comments, but they will be less likely to be left un-updated if you put them closer to the actual code they document.
 
 ##### Provide Usage Examples
 
@@ -90,9 +90,9 @@ Your help should always provide an example for each major use case. A 'usage exa
 ```PowerShell
 function Test-Help {
     <#
-        .Synopsis
+        .SYNOPSIS
             An example function to display how help should be written
-        .Example
+        .EXAMPLE
             Get-Help -Name Test-Help
 
             This shows the help for the example function
