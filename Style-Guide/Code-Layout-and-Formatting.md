@@ -2,7 +2,7 @@
 
 These guidelines are about readability. Some of them are arbitrary rules, but they are based on decades of traditions in programming, so while you may disagree with some rules (and should always follow the rules of individual projects), when we ask you to leave an empty line after a closing function brace, or two lines before functions, we're not being capricious, we're doing so because it makes it easier for experienced developers to scan your code.
 
-#### Maintain consistency in layout
+#### Layout-01: Maintain consistency in layout
 
 Rules about indentation, line length, and capitalization are about consistency across code bases. Long practice has shown that it's easier to read and understand code when it looks familiar and you're not being distracted by details, which means that it's better for everyone in the community to follow a single set of rules.
 
@@ -10,7 +10,7 @@ We don't expect everyone to follow these guidelines, and rules for individual pr
 
 If you do have a legacy project that is in source control and you decide to reformat code to adopt these rules, try to make all of your whitespace changes in a single a commit that does _nothing_ but edit the whitespace. You should never reformat the whitespace on a file as _part_ of a content change because it makes the changes hard to spot.
 
-#### Capitalization Conventions
+#### Layout-02: Capitalization Conventions
 
 PowerShell is **not** case sensitive, but we follow capitalization conventions to make code easy to read. They are based on the [capitalization conventions](https://msdn.microsoft.com/en-us/library/ms229043) Microsoft created for the .NET framework, since PowerShell is a .NET scripting language, and PowerShell cmdlets are primarily written in .NET languages following those guidelines.
 
@@ -21,7 +21,15 @@ PowerShell is **not** case sensitive, but we follow capitalization conventions t
 * PascalCase - capitalize the first letter of each word
 * camelCase - capitalize the first letter of each word _except_ the first.
 
+##### Layout-02a: Use PascalCase for all public identifiers
+
 PowerShell uses PascalCase for _all_ public identifiers: module names, function or cmdlet names, class, enum, and attribute names, public fields or properties, global variables and constants, etc. In fact, since the _parameters_ to PowerShell commands are actually _properties_ of .Net classes, even parameters use PascalCase rather than camelCase.
+
+A special case is made for two-letter acronyms in which both letters are capitalized, as in the variable `$PSBoundParameters` or the command `Get-PSDrive`. Note that ([as specified in the .NET guidelines](https://msdn.microsoft.com/en-us/library/ms229043#Anchor_1)) this does not affect the commonly capitalized (but not acronym) words "OK" and "ID" . You should also not extend it to compound acronyms, such as when Azure's Resource Manager (RM) meets a Virtual Machine (VM) in `Start-AzureRmVM`...
+
+> We are aware that there are **many** places where these conventions have not been followed properly for various reasons -- you should consider these _exceptions_ (such as for COM interop) or _mistakes_ (such as `System.Data.SqlClient.SQLDebugging`), but not a reason for you to disregard the conventions.
+
+##### Layout-02b: Use lowercase for all PowerShell language keywords
 
 PowerShell language keywords are written in lower case (yes, even `foreach` and `dynamicparam`), as well as operators such as `-eq` and `-match`. The keywords in comment-based help are written in UPPERCASE to make it easy to spot them among the dense prose of documentation.
 
@@ -60,18 +68,13 @@ function Write-Host {
     ...
 ```
 
-PowerShell uses PascalCase for _all_ public identifiers: module names, function or cmdlet names, class and enum names, public fields or properties, global variables and constants, etc. In fact, since the _parameters_ to PowerShell commands are actually _properties_ of .Net classes, even parameters use PascalCase rather than camelCase. Function names should follow PowerShell's `Verb-Noun` naming conventions, using PascalCase within both Verb and Noun.
-
-A special case is made for two-letter acronyms in which both letters are capitalized, as in the variable `$PSBoundParameters` or the command `Get-PSDrive`. Note that ([as specified in the .NET guidelines](https://msdn.microsoft.com/en-us/library/ms229043#Anchor_1)) this does not affect the commonly capitalized (but not acronym) words "OK" and "ID" . You should also not extend it to compound acronyms, such as when Azure's Resource Manager (RM) meets a Virtual Machine (VM) in `Start-AzureRmVM`...
-
-> We are aware that there are **many** places where these conventions have not been followed properly for various reasons -- you should consider these _exceptions_ (such as for COM interop) or _mistakes_ (such as `System.Data.SqlClient.SQLDebugging`), but not a reason for you to disregard the conventions.
+##### Layout-02c: camelCase may be used for _private_ variables.
 
 If you wish, you may use camelCase for variables within your functions (or modules) to distinguish _private_ variables from parameters, but this is a matter of taste. Shared variables should be distinguished by using their scope name, such as `$Script:PSBoundParameters` or `$Global:DebugPreference`. If you are using camelCase for a variable that starts with a two-letter acronym (where both letters are capitalized), both letters should be set to lowercase (such as `adComputer`).
 
+#### Layout-03 Always Start With CmdletBinding
 
-#### Always Start With CmdletBinding
-
-All of your scripts or functions should start life as something like this snippet:
+The first non-comment line of your scripts or functions should be the CmdletBinding attribute as shown in this snippet:
 
 ```
 [CmdletBinding()]param()
@@ -81,22 +84,20 @@ end{}
 
 You can always delete or ignore one of the blocks (or add the `begin` block), add parameters and so on, but you should avoid writing scripts or functions without CmdletBinding, and you should always at least _consider_ making it take pipeline input.
 
-#### Open braces on the same line
+#### Layout-04:  {PENDING} Open braces on the same line
+
 Code folding is nicer in many editors.
 (TODO: This is in discussion in [#24](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/24))
 
-#### Closing braces always on their own line
+#### Layout-05: {PENDING} Closing braces always on their own line
 Because that's how they're supposed to be!
 (TODO: This is in discussion in [#24](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/24))
 
-#### Prefer: param() begin, process, end
+#### Layout-06: {PENDING} Prefer: param() begin, process, end
 That's the order PowerShell will execute it in
 (TODO)
 
-
-#### Indentation
-
-##### Use four *spaces* per indentation level.
+#### Layout-07: Use four *spaces* per indentation level.
 
 This is what PowerShell ISE does and understands, and it's the default for most code editors. As always, existing projects may have different standards, but for public code, please stick to 4 spaces, and the rest of us will try to do the same.
 
@@ -120,7 +121,7 @@ $MyObj.GetData($Param1,
 ```
 
 
-#### Maximum Line Length
+#### Layout-08: Limit lines to less than 115 characters
 
 Limit lines to 115 characters when possible.
 
@@ -136,23 +137,23 @@ Write-Host ("This is an incredibly important, and extremely long message. " +
             "Using string concatenation let's us use short lines here, and still get a long line in the output")
 ```
 
-#### Blank lines
+#### Layout-09: Blank lines
 
-Surround function and class definitions with two blank lines.
+##### Layout-09a: Surround function and class definitions with two blank lines.
 
-Method definitions within a class are surrounded by a single blank line.
+##### Layout-09b: Method definitions within a class are surrounded by a single blank line.
 
-Blank lines may be ommitted between a bunch of related one-liners (e.g. empty functions)
+##### Layout-09c: Blank lines may be ommitted between a bunch of related one-liners (e.g. empty functions)
+
+##### Layout-09d: End each file with a single blank line.
 
 Additional blank lines may be used sparingly to separate groups of related functions, or within functions to indicate logical sections (e.g. before a block comment).
 
-End each file with a single blank line.
-
-#### Trailing spaces
+#### Layout-10: Lines should not have trailing spaces
 
 Lines should not have trailing whitespace. Extra spaces result in future edits where the only change is a space being added or removed, making the analysis of the changes more difficult for no reason.
 
-#### Spaces around parameters and operators
+#### Layout-11: Spaces around parameters and operators
 
 You should use a single space around parameter names and operators, including comparison operators and math and assignment operators, even when the spaces are not necessary for PowerShell to correctly parse the code.
 
@@ -166,7 +167,7 @@ $variable=Get-Content $FilePath -Wai:($ReadCount-gt0) -First($ReadCount*5)
 $variable = Get-Content -Path $FilePath -Wait:($ReadCount -gt 0) -TotalCount ($ReadCount * 5)
 ```
 
-#### Spaces around special characters
+#### Layout-12: Spaces around special characters
 
 White-space is (mostly) irrelevant to PowerShell, but its proper use is the key to writing easily readable code.
 
@@ -179,7 +180,7 @@ Nested expressions `$( ... )` and script blocks `{ ... }` should have a single s
 Nested expressions `$( ... )` and variable delimiters `${...}` inside strings do not need spaces _outside_, since that would become a part of the string.
 
 
-#### Avoid using semicolons (`;`) at the end of each line.
+#### Layout-13: Avoid using semicolons (`;`) at the end of lines.
 
 PowerShell will not complain about extra semicolons, but they are unecessary, and get in the way when code is being edited or copy-pasted. They also result in extra do-nothing edits in source control when someone finally decides to delete them.
 
