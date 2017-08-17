@@ -78,7 +78,22 @@ Every script function command should have at least a short statement describing 
 
 ##### Document Each Parameter
 
-Each parameter should be documented. To make it easier to keep the comments synchronized with changes to the parameters, the parameter documentation comments may _within_ the `param` block, directly above each parameter. 
+Each parameter should be documented. To make it easier to keep the comments synchronized with changes to the parameters, the preferred location for parameter documentation comments is _within_ the `param` block, directly above each parameter. 
+Examples can be found in the ISE snippets:
+
+```powershell
+Param(
+    # Param1 help description
+    [Parameter(Mandatory=$true,
+                ValueFromPipelineByPropertyName=$true,
+                Position=0)]
+    $Param1,
+    
+    # Param2 help description
+    [int]
+    $Param2
+)
+```
 
 It is also possible to write `.PARAMETER` statements with the rest of the documentation comments, but they will be less likely to be left un-updated if you put them closer to the actual code they document.
 
@@ -130,6 +145,10 @@ function get-example {
 
     .PARAMETER FirstParameter
         Description of each of the parameters
+        Note:
+        To make it easier to keep the comments synchronized with changes to the parameters, 
+        the preferred location for parameter documentation comments is not here, 
+        but within the param block, directly above each parameter.
 
     .PARAMETER SecondParameter
         Description of each of the parameters
