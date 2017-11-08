@@ -2,7 +2,7 @@
 
 TODO: This whole document is STILL ROUGH DRAFT
 
-## Don't use write-host unless you really mean it
+## Don't use Write-Host unless you really mean it
 
 Previous to PowerShell 5, Write-Host has no functionality at all in non-interactive scripts. It cannot be captured or redirected, and therefore should only be used in functions which are "Show"ing or "Format"ing output, or to display something as part of an interactive prompt to the user.
 
@@ -14,7 +14,7 @@ Generally, you should consider the other Write-* commands first when trying to g
 
 When you're letting the user know how far through the script they are, or just making sure they know that _something_ is happening, Write-Progress is the right command to use. In the case of graphical hosts or remote jobs, this output can be shown to the user in real time, even when verbose and other streams are being collected and logged.
 
-However, progress output is ephemeral -- it doesn't stick around, and you should not put anything exclusively in the progress stream that the user _needs_ to see, or might want to review after the script finishes.
+Progress output is ephemeral, however, in that it doesn't stick around. You should not put anything exclusively in the progress stream that the user _needs_ to see, or might want to review after the script finishes.
 
 ## Use Write-Verbose to give details to someone running your script
 
@@ -22,7 +22,7 @@ You should use verbose output for information that contains details about the va
 
 ## Use Write-Debug to give information to someone maintaining your script
 
-You should use the debug output stream for output that is useful for script debugging ("Now entering main loop," "Result was null, skipping to end of loop"), or to display the value of a variable before a conditional statement, so the maintainer can break into the debugger if necessary.
+You should use the debug output stream for output that is useful for script debugging (ie: "Now entering main loop" or "Result was null, skipping to end of loop"), or to display the value of a variable before a conditional statement, so the maintainer can break into the debugger if necessary.
 
 > TIP: When debugging you should be aware that you can set `$DebugPreference = "Continue"` to see this information on screen without entering a breakpoint prompt.
 
@@ -30,9 +30,9 @@ You should use the debug output stream for output that is useful for script debu
 
 As we've already written elsewhere, you should probably [always use CmdletBinding](../Style-Guide/Code-Layout-and-Formatting.md#always-start-with-cmdletbinding). 
 
-However, it's particularly important when you're using Write-Verbose and Write-Debug, as the Verbose and Debug output streams are off by default, and the `[CmdletBinding()]` attribute enables the common `-Verbose` and `-Debug` switches which turn those streams on.
+Using CmdletBinding is particularly important, however, when you're using Write-Verbose and Write-Debug, as the Verbose and Debug output streams are off by default, and the `[CmdletBinding()]` attribute enables the common `-Verbose` and `-Debug` switches which turn those streams on.
 
-It also enables the switches for the Warning and Error streams, as well as ways of collecting those streams into variables. You should read the [always use CmdletBinding](../Style-Guide/Code-Layout-and-Formatting.md#always-start-with-cmdletbinding) topic for more information.
+CmdletBinding also enables the switches for the Warning and Error streams, as well as ways of collecting those streams into variables. You should read the [always use CmdletBinding](../Style-Guide/Code-Layout-and-Formatting.md#always-start-with-cmdletbinding) topic for more information.
 
 ## Use Format Files for your custom objects
 
@@ -44,11 +44,11 @@ You should avoid mixing different types of objects in the output of a single com
 
 For the sake of tools and command-search, you should indicate with the `[OutputType()]` attribute the output type(s) of your scripts, functions or cmdlets (see about_Functions_OutputTypeAttribute for more information).
 
-When you do combine the output of multiple types objects, they should generally be derived from a common basetype (like FileInfo and DirectoryInfo come from System.IO.FileSystemInfo), or should have format or type files which cause them to output the same columns. In particular, you must avoid outputting strings interspersed in your output.
+When you combine the output of multiple types objects, they should generally be derived from a common basetype (like FileInfo and DirectoryInfo come from System.IO.FileSystemInfo), or should have format or type files which cause them to output the same columns. In particular, you must avoid outputting strings interspersed in your output.
 
 ### Two important exceptions to the single-type rule
 
-**For internal functions.** it's ok to return multiple different types because they won't be "output" to the user/host, and can offer significant savings (e.g. one database call with three table joins, instead of three database calls with two or three joins each).  You can then call these functions and assign the output to multiple variables, like so:
+**For internal functions** it's ok to return multiple different types because they won't be "output" to the user/host, and can offer significant savings (e.g. one database call with three table joins, instead of three database calls with two or three joins each).  You can then call these functions and assign the output to multiple variables, like so:
 
 ```PowerShell
 $user, $group, $org = Get-UserGroupOrg
