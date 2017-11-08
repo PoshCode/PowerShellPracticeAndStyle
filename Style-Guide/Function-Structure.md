@@ -40,8 +40,7 @@ function Get-USCitizenCapability {
             DrinkAlcohol = $false
             Vote = $false
         }
-        if ($Age -ge 18)
-        {
+        if ($Age -ge 18) {
             $Capabilities['MilitaryService'] = $true
             $Capabilities['Vote'] = $true
         }
