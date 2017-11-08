@@ -95,7 +95,7 @@ Param(
 )
 ```
 
-It is also possible to write `.PARAMETER` statements with the rest of the documentation comments, but they will be less likely to be left un-updated if you put them closer to the actual code they document.
+It is also possible to write `.PARAMETER` statements with the rest of the documentation comments, but experience shows they are more likely to be kept up-to-date if you put them closer to the code they document.
 
 ##### Provide Usage Examples
 
