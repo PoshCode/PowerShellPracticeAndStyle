@@ -160,7 +160,7 @@ One notable exception is when using colons to pass values to switch parameters:
 
 ```PowerShell
 # Do not write:
-$variable=Get-Content $FilePath -Wai:($ReadCount-gt0) -First($ReadCount*5)
+$variable=Get-Content $FilePath -Wait:($ReadCount-gt0) -First($ReadCount*5)
 
 # Instead write:
 $variable = Get-Content -Path $FilePath -Wait:($ReadCount -gt 0) -TotalCount ($ReadCount * 5)
