@@ -156,7 +156,7 @@ Lines should not have trailing whitespace. Extra spaces result in future edits w
 
 You should use a single space around parameter names and operators, including comparison operators and math and assignment operators, even when the spaces are not necessary for PowerShell to correctly parse the code.
 
-One notable exception is when using colons to pass values to switch parameters:
+A notable exception is when using colons to pass values to switch parameters:
 
 ```PowerShell
 # Do not write:
@@ -164,6 +164,25 @@ $variable=Get-Content $FilePath -Wai:($ReadCount-gt0) -First($ReadCount*5)
 
 # Instead write:
 $variable = Get-Content -Path $FilePath -Wait:($ReadCount -gt 0) -TotalCount ($ReadCount * 5)
+```
+
+Another exception is when using [Unary Operators](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators#unary-operators):
+
+```PowerShell
+# Do not write:
+$yesterdaysDate = (Get-Date).AddDays( - 1)
+
+$i = 0
+$i ++
+
+# Instead write:
+$yesterdaysDate = (Get-Date).AddDays(-1)
+
+$i = 0
+$i++
+
+# Same principle should be applied when using a variable
+$yesterdaysDate = (Get-Date).AddDays(-$i)
 ```
 
 #### Spaces around special characters
