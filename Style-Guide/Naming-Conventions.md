@@ -8,10 +8,10 @@ Every PowerShell scripter learns the actual command names, but different people 
 
 ```PowerShell
 # Do not write:
-gwmi -Class win32_service
+gps -Name Explorer
 
 # Instead write:
-Get-WmiObject -Class Win32_Service
+Get-Process -Name Explorer
 ```
 
 #### Use full parameter names. 
@@ -20,10 +20,10 @@ Because there are so many commands in PowerShell, it's impossible for every scri
 
 ```PowerShell
 # Do not write:
-Get-WmiObject win32_service name,state
+Get-Process Explorer
 
 # Instead write:
-Get-WmiObject -Class win32_service -Property name,state
+Get-Process -Name Explorer
 ```
 
 #### Use full, explicit paths when possible.
