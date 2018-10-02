@@ -82,12 +82,21 @@ end{}
 You can always delete or ignore one of the blocks (or add the `begin` block), add parameters and so on, but you should avoid writing scripts or functions without CmdletBinding, and you should always at least _consider_ making it take pipeline input.
 
 #### Open braces on the same line
-Code folding is nicer in many editors.
-(TODO: This is in discussion in [#24](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/24))
+Code folding is nicer in many editors when a scriptblock is placed on the end of the same line, as in this example.
 
+````
+function Get-Noun {
+    end {
+        if($Wide) {
+            Get-Command | Sort-Object Noun -Unique | Format-Wide Noun
+        } else {
+            Get-Command | Sort-Object Noun -Unique | Select-Object -Expand Noun
+        }
+    }
+}
+````
 #### Closing braces always on their own line
-Because that's how they're supposed to be!
-(TODO: This is in discussion in [#24](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/24))
+Note the above example again, community guidelines recommend placing your closing braces on their own line.  This practice makes it easier to pair up matching opening and closing braces when looking to see where a particular scriptblock ends.
 
 #### Prefer: param() begin, process, end
 That's the order PowerShell will execute it in
