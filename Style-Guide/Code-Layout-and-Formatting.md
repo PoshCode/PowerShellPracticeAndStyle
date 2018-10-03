@@ -81,13 +81,15 @@ end{}
 
 You can always delete or ignore one of the blocks (or add the `begin` block), add parameters and so on, but you should avoid writing scripts or functions without CmdletBinding, and you should always at least _consider_ making it take pipeline input.
 
-#### Open braces on the same line
+#### Follow the one-true-brace style.
+Open braces always go on the same line
+
 Code folding is nicer in many editors when a scriptblock is placed on the end of the same line, as in this example.
 
 ````
 function Get-Noun {
     end {
-        if($Wide) {
+        if ($Wide) {
             Get-Command | Sort-Object Noun -Unique | Format-Wide Noun
         } else {
             Get-Command | Sort-Object Noun -Unique | Select-Object -Expand Noun
