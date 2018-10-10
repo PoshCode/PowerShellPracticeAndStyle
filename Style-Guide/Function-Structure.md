@@ -15,7 +15,7 @@ function MyFunction ($param1, $param2) {
 For Advanced Functions and scripts use the format of **<verb-<noun>** for
   naming. For a list of approved verbs the cmdlet `Get-Verb` will list
   them. On the noun side it can be composed of more than one joined word
-  using Camel Case and only singular nouns.
+  using Pascal Case and only singular nouns.
 
 In Advanced Functions do not use the keyword `return` to return an object.
 
