@@ -81,13 +81,28 @@ end{}
 
 You can always delete or ignore one of the blocks (or add the `begin` block), add parameters and so on, but you should avoid writing scripts or functions without CmdletBinding, and you should always at least _consider_ making it take pipeline input.
 
-#### Open braces on the same line
-Code folding is nicer in many editors.
-(TODO: This is in discussion in [#24](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/24))
+#### Brace yourself: Follow the one-true-brace style.
+Open braces always go on the same line.  
 
-#### Closing braces always on their own line
-Because that's how they're supposed to be!
-(TODO: This is in discussion in [#24](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/24))
+This style really won in the PowerShell community partly because the style is one of two used in C languages --it's a variant of the K&R (Kernighan and Ritchie) style from their book The C Programming Language-- but also because for the first few years of PowerShell's existence, this was the only style that could be typed at the command line.
+
+Code folding is nicer in many editors when a scriptblock is placed on the end of the same line, as in this example.
+
+````
+function Get-Noun {
+    end {
+        if ($Wide) {
+            Get-Command | Sort-Object Noun -Unique | Format-Wide Noun
+        } else {
+            Get-Command | Sort-Object Noun -Unique | Select-Object -Expand Noun
+        }
+    }
+}
+````
+#### Closing braces start a new line
+Note the above example again, community guidelines recommend following the ['One-True-Brace-Style'](https://www.wikiwand.com/en/Indentation_style#/K&R_style) placing your closing braces on their own line.  This practice makes it easier to pair up matching opening and closing braces when looking to see where a particular scriptblock ends, and allows one to insert new lines of code between any two lines.
+
+To reiterate, these are community best practices, and a lot of the code you'll find online from community leaders will follow these guidelines.  That doesn't mean that those who follow different style guidelines are wrong.  You may be the one to set the course for your company or your own project; we simply offer this guidance for your consideration.
 
 #### Prefer: param() begin, process, end
 That's the order PowerShell will execute it in
