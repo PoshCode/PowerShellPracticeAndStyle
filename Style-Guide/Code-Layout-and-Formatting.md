@@ -8,7 +8,7 @@ Rules about indentation, line length, and capitalization are about consistency a
 
 We don't expect everyone to follow these guidelines, and rules for individual projects always trump these. Whether for legacy reasons, or to match guidelines for multiple languages in a single project, different projects may have different style guidelines. Since the goal is consistency, you should always abide by any style rules that are in place on the project you are contributing to.
 
-If you do have a legacy project that is in source control and you decide to reformat code to adopt these rules, try to make all of your whitespace changes in a single a commit that does _nothing_ but edit the whitespace. You should never reformat the whitespace on a file as _part_ of a content change because it makes the changes hard to spot.
+If you do have a legacy project that is in source control and you decide to reformat code to adopt these rules, try to make all of your whitespace changes in a single commit that does _nothing_ but edit the whitespace. You should never reformat the whitespace on a file as _part_ of a content change because it makes the changes hard to spot.
 
 #### Capitalization Conventions
 
