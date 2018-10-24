@@ -84,9 +84,9 @@ Examples can be found in the ISE snippets:
 ```powershell
 Param(
     # Param1 help description
-    [Parameter(Mandatory=$true,
-                ValueFromPipelineByPropertyName=$true,
-                Position=0)]
+    [Parameter(Mandatory = $true,
+                ValueFromPipelineByPropertyName = $true,
+                Position = 0)]
     $Param1,
     
     # Param2 help description
@@ -116,7 +116,7 @@ function Test-Help {
     param(
         # This parameter doesn't do anything.
         # Aliases: MP
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [Alias("MP")]
         [String]$MandatoryParameter
     )

@@ -28,9 +28,9 @@ function Get-USCitizenCapability {
     [CmdletBinding()]
     [OutputType([psobject])]
     param (
-        [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=0)]
+        [Parameter(Mandatory = $true,
+                   ValueFromPipelineByPropertyName = $true,
+                   Position = 0)]
         [int16]
         $Age
     )
@@ -55,9 +55,9 @@ function Get-USCitizenCapability {
     [CmdletBinding()]
     [OutputType([psobject])]
     param (
-        [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=0)]
+        [Parameter(Mandatory = $true,
+                   ValueFromPipelineByPropertyName = $true,
+                   Position = 0)]
         [int16]
         $Age
     )
@@ -87,23 +87,23 @@ function Get-USCitizenCapability {
 If the function returns different object types depending on the parameter set provide one per parameter set.
 
 ```PowerShell
-[OutputType([<TypeLiteral>], ParameterSetName="<Name>")]
-[OutputType("<TypeNameString>", ParameterSetName="<Name>")]
+[OutputType([<TypeLiteral>], ParameterSetName = "<Name>")]
+[OutputType("<TypeNameString>", ParameterSetName = "<Name>")]
 ```
 
 #### When a ParameterSetName is used in any of the parameters, always provide a DefaultParameterSetName in the CmdletBinding attribute.
 
 ```PowerShell
 function Get-User {
-    [CmdletBinding(DefaultParameterSetName="ID")]
-    [OutputType("System.Int32", ParameterSetName="ID")]
-    [OutputType([String], ParameterSetName="Name")]
+    [CmdletBinding(DefaultParameterSetName = "ID")]
+    [OutputType("System.Int32", ParameterSetName = "ID")]
+    [OutputType([String], ParameterSetName = "Name")]
     param (      
-        [parameter(Mandatory=$true, ParameterSetName="ID")]
+        [parameter(Mandatory = $true, ParameterSetName = "ID")]
         [Int[]]
         $UserID,
 
-        [parameter(Mandatory=$true, ParameterSetName="Name")]
+        [parameter(Mandatory = $true, ParameterSetName = "Name")]
         [String[]]
         $UserName
     )     
@@ -119,7 +119,7 @@ function Get-User {
 
   ```PowerShell
   param (
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [AllowNull()]
       [String]
       $ComputerName
@@ -132,7 +132,7 @@ function Get-User {
 
   ```PowerShell
   param (
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [AllowEmptyString()]
       [String]
       $ComputerName
@@ -145,7 +145,7 @@ function Get-User {
 
   ```PowerShell
   param (
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [AllowEmptyCollection()]
       [String[]]
       $ComputerName
@@ -161,7 +161,7 @@ function Get-User {
 
   ```PowerShell
   param (
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [ValidateCount(1,5)]
       [String[]]
       $ComputerName
@@ -177,7 +177,7 @@ function Get-User {
 
   ```PowerShell
   param (
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [ValidateLength(1,10)]
       [String[]]
       $ComputerName
@@ -192,7 +192,7 @@ function Get-User {
   pattern. 
   ```PowerShell
   param (
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [ValidatePattern("[0-9][0-9][0-9][0-9]")]
       [String[]]
       $ComputerName
@@ -206,7 +206,7 @@ function Get-User {
   if any value is outside that range. 
   ```PowerShell
   param (
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [ValidateRange(0,10)]
       [Int]
       $Attempts
@@ -243,7 +243,7 @@ function Get-User {
 
   ```PowerShell
   param (
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [ValidateSet("Low", "Average", "High")]
       [String[]]
       $Detail
@@ -264,7 +264,7 @@ function Get-User {
   match the specified type.)  
   ```PowerShell
   param (
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [ValidateNotNull()]
       $ID
   ) 
@@ -279,7 +279,7 @@ function Get-User {
   array.   
   ```PowerShell
   param (
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [ValidateNotNullOrEmpty()]
       [String[]]
       $UserName
