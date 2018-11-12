@@ -2,13 +2,13 @@
 
 These guidelines are about readability. Some of them are arbitrary rules, but they are based on decades of traditions in programming, so while you may disagree with some rules (and should always follow the rules of individual projects), when we ask you to leave an empty line after a closing function brace, or two lines before functions, we're not being capricious, we're doing so because it makes it easier for experienced developers to scan your code.
 
-#### Maintain consistency in layout
+#### Maintain Consistency in Layout
 
 Rules about indentation, line length, and capitalization are about consistency across code bases. Long practice has shown that it's easier to read and understand code when it looks familiar and you're not being distracted by details, which means that it's better for everyone in the community to follow a single set of rules.
 
 We don't expect everyone to follow these guidelines, and rules for individual projects always trump these. Whether for legacy reasons, or to match guidelines for multiple languages in a single project, different projects may have different style guidelines. Since the goal is consistency, you should always abide by any style rules that are in place on the project you are contributing to.
 
-If you do have a legacy project that is in source control and you decide to reformat code to adopt these rules, try to make all of your whitespace changes in a single commit that does _nothing_ but edit the whitespace. You should never reformat the whitespace on a file as _part_ of a content change because it makes the changes hard to spot.
+If you do have a legacy project that is in source control and you decide to reformat code to adopt these rules, try to make all of your whitespace changes in a single a commit that does _nothing_ but edit the whitespace. You should never reformat the whitespace on a file as _part_ of a content change because it makes the changes hard to spot.
 
 #### Capitalization Conventions
 
@@ -25,7 +25,7 @@ PowerShell uses PascalCase for _all_ public identifiers: module names, function 
 
 PowerShell language keywords are written in lower case (yes, even `foreach` and `dynamicparam`), as well as operators such as `-eq` and `-match`. The keywords in comment-based help are written in UPPERCASE to make it easy to spot them among the dense prose of documentation.
 
-```posh
+```powershell
 function Write-Host {
     <#
     .SYNOPSIS
@@ -55,8 +55,7 @@ function Write-Host {
         [System.ConsoleColor]
         $BackgroundColor
     )
-    begin
-    {
+    begin {
     ...
 ```
 
@@ -68,72 +67,79 @@ A special case is made for two-letter acronyms in which both letters are capital
 
 If you wish, you may use camelCase for variables within your functions (or modules) to distinguish _private_ variables from parameters, but this is a matter of taste. Shared variables should be distinguished by using their scope name, such as `$Script:PSBoundParameters` or `$Global:DebugPreference`. If you are using camelCase for a variable that starts with a two-letter acronym (where both letters are capitalized), both letters should be set to lowercase (such as `adComputer`).
 
+#### Open braces on the same line
+
+This can be considered a matter of consistency; several common cmdlets in PowerShell take script blocks as _parameters_ (e.g., `ForEach-Object`), and in these cases it is functionally impossible to place the opening brace on a new line _without_ use of a line-continuator (i.e., ``` ` ```, a backtick), which should generally be avoided.
+
+```powershell
+$Data | ForEach-Object {
+    $_.Item -as [int]
+}
+```
+
+v.s.
+
+```powershell
+foreach ($Entry in $Data)
+{
+    $Entry.Item -as [int]
+}
+```
+
+As such, both native keywords and function parameters should include opening braces on the _same_ line.
+
+Code folding is also nicer in many editors.
+
+#### Closing Braces Always on Their Own Line
+
+Once again, this makes code-folding much more sensible in many editors.
+
+The exception to this rule may be in cases where the script block is a parameter, and further parameters must still be added. However, in the interests of improving code-folding, readability, and maintainability, placing such parameters _before_ the script block parameter should be considered, where possible.
 
 #### Always Start With CmdletBinding
 
 All of your scripts or functions should start life as something like this snippet:
 
+```powershell
+[CmdletBinding()]
+param()
+process {}
+end {}
 ```
-[CmdletBinding()]param()
-process{}
-end{}
-```
 
-You can always delete or ignore one of the blocks (or add the `begin` block), add parameters and so on, but you should avoid writing scripts or functions without CmdletBinding, and you should always at least _consider_ making it take pipeline input.
+You can always delete or ignore one of the blocks (or add the `begin` block), add parameters and necessary valiation and so on, but you should **avoid** writing scripts or functions without `[CmdletBinding()]`, and you should always at least _consider_ making it take pipeline input.
 
-#### Brace yourself: Follow the one-true-brace style.
-Open braces always go on the same line.  
+#### Prefer: param(), begin, process, end
 
-This style really won in the PowerShell community partly because the style is one of two used in C languages --it's a variant of the K&R (Kernighan and Ritchie) style from their book The C Programming Language-- but also because for the first few years of PowerShell's existence, this was the only style that could be typed at the command line.
+Having a script written in the order of execution makes its intent more clear. There is no functional purpose to having `begin` be declared _after_ `process`. Although it _will_ still be executed in the correct order, writing in such a fashion significantly detracts from the readability of a script.
 
-Code folding is nicer in many editors when a scriptblock is placed on the end of the same line, as in this example.
-
-````
-function Get-Noun {
-    end {
-        if ($Wide) {
-            Get-Command | Sort-Object Noun -Unique | Format-Wide Noun
-        } else {
-            Get-Command | Sort-Object Noun -Unique | Select-Object -Expand Noun
-        }
-    }
-}
-````
-#### Closing braces start a new line
-Note the above example again, community guidelines recommend following the ['One-True-Brace-Style'](https://www.wikiwand.com/en/Indentation_style#/K&R_style) placing your closing braces on their own line.  This practice makes it easier to pair up matching opening and closing braces when looking to see where a particular scriptblock ends, and allows one to insert new lines of code between any two lines.
-
-To reiterate, these are community best practices, and a lot of the code you'll find online from community leaders will follow these guidelines.  That doesn't mean that those who follow different style guidelines are wrong.  You may be the one to set the course for your company or your own project; we simply offer this guidance for your consideration.
-
-#### Prefer: param() begin, process, end
-That's the order PowerShell will execute it in
-(TODO)
-
+As a general rule, unreadable scripts are also difficult to maintain or debug.
 
 #### Indentation
 
-##### Use four *spaces* per indentation level.
+##### Use four *spaces* per indentation level
 
-This is what PowerShell ISE does and understands, and it's the default for most code editors. As always, existing projects may have different standards, but for public code, please stick to 4 spaces, and the rest of us will try to do the same.
+Usually you use the `[Tab]` key to indent, but most editors can be configured to insert spaces instead of actual tab characters when you indent. For most programming languages and editors (including PowerShell ISE) the default is four spaces, and that's what we recommend. Different teams and projects may have different standards, and you should abide by them in the interest of maintaining consistency of style in a given project.
 
-The 4-space rule is optional for continuation lines. Hanging indents (when indenting a wrapped command which was too long) may be indented more than one indentation level, or may even be indented an odd number of spaces to line up with a method call or parameter block.
-
-```PowerShell
-
-# This is ok
-$MyObj.GetData(
-       $Param1,
-       $Param2,
-       $Param3,
-       $Param4
-    )
-
-# This is better
-$MyObj.GetData($Param1,
-               $Param2,
-               $Param3,
-               $Param4)
+```powershell
+function Test-Code {
+    foreach ($exponent in 1..10) {
+        [Math]::Pow(2, $exponent)
+    }
+}
 ```
 
+Indenting more than 4-spaces is acceptable for continuation lines (when you're wrapping a line which was too long). In such cases you might indent more than one level, or even indent indent an odd number of spaces to line up with a method call or parameter block on the line before.
+
+```powershell
+function Test-Code {
+    foreach ($base in 1,2,4,8,16) {
+        foreach ($exponent in 1..10) {
+            [System.Math]::Pow($base,
+                               $exponent)
+    }
+}
+```
 
 #### Maximum Line Length
 
@@ -141,19 +147,21 @@ Limit lines to 115 characters when possible.
 
 The PowerShell console is, by default, 120 characters wide, but it allows only 119 characters on output lines, and when entering multi-line text, PowerShell uses a line continuation prompt: `>>> ` and thus limits your line length to 116 anyway.
 
+Additionally, keeping lines to a set width allows scripts to be read in _one_ direction (top to bottom) with no horizontal scrolling required. For many, having to scroll in both directions detracts from a smooth reading and comprehension of the script.
+
 Most of us work on widescreen monitors these days, and there is little reason to keep a narrow line width, however, keeping files relatively narrow allows for side-by-side editing, so even narrower guidelines may be established by a given project. Be sure to check when you're working on someone else's project.
 
-The preferred way to avoid long lines is to use splatting (see [About Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should always be used in preference to the backtick for line continuation when applicable, even for strings:
+The preferred way to avoid long lines is to use splatting (see [Get-Help about_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should **always** be used in preference to the backtick for line continuation when applicable, even for strings:
 
-```
+```powershell
 Write-Host ("This is an incredibly important, and extremely long message. " +
             "We cannot afford to leave any part of it out, nor do we want line-breaks in the output. " +
-            "Using string concatenation let's us use short lines here, and still get a long line in the output")
+            "Using string concatenation lets us use short lines here, and still get a long line in the output")
 ```
 
-#### Blank lines
+#### Blank Lines and Whitespace
 
-Surround function and class definitions with two blank lines.
+Surround function and class definitions with _two_ blank lines.
 
 Method definitions within a class are surrounded by a single blank line.
 
@@ -171,7 +179,7 @@ Lines should not have trailing whitespace. Extra spaces result in future edits w
 
 You should use a single space around parameter names and operators, including comparison operators and math and assignment operators, even when the spaces are not necessary for PowerShell to correctly parse the code.
 
-A notable exception is when using colons to pass values to switch parameters:
+One notable exception is when using colons to pass values to switch parameters:
 
 ```PowerShell
 # Do not write:
@@ -202,28 +210,34 @@ $yesterdaysDate = (Get-Date).AddDays(-$i)
 
 #### Spaces around special characters
 
-White-space is (mostly) irrelevant to PowerShell, but its proper use is the key to writing easily readable code.
+White-space is (mostly) irrelevant to PowerShell, but its proper use is key to writing easily readable code.
 
 Use a single space after commas and semicolons, and around pairs of curly braces.
 
-Avoid extra spaces inside parenthesis or square braces.
+Avoid unnecessary extra spaces inside parenthesis or square braces.
 
-Nested expressions `$( ... )` and script blocks `{ ... }` should have a single space _inside_ them to make code stand out and be more readable.
+Subexpressions `$( ... )` and script blocks `{ ... }` should have a single space _inside_ the enclosing braces or parentheses to make code stand out and be more readable.
 
-Nested expressions `$( ... )` and variable delimiters `${...}` inside strings do not need spaces _outside_, since that would become a part of the string.
+Subexpressions `$( ... )` and variable delimiters `${...}` nested inside strings should not include additional space _surrounding_ them, unless it is desired for the final string to include them.
 
+```powershell
+$Var = 1
+"This is a string with one (${Var}) delimited variable."
 
-#### Avoid using semicolons (`;`) at the end of each line.
+"This is $( 2 - 1 ) string with $( 1 + 1 ) numbers contained within."
+```
 
-PowerShell will not complain about extra semicolons, but they are unnecessary, and get in the way when code is being edited or copy-pasted. They also result in extra do-nothing edits in source control when someone finally decides to delete them.
+#### Avoid Using Semicolons (`;`) as Line Terminators
+
+PowerShell will not complain about extra semicolons, but they are unnecessary, and can get in the way when code is being edited or copy-pasted. They also result in extra do-nothing edits in source control when someone finally decides to delete them.
 
 They are also unecessary when declaring hashtables if you are already putting each element on it's own line:
 
 ```PowerShell
-# This is the preferred way to declare a hashtable if it must go past one line:
+# This is the preferred way to declare a hashtable if it extends past one line:
 $Options = @{
-    Margin = 2
-    Padding = 2
+    Margin   = 2
+    Padding  = 2
     FontSize = 24
 }
 ```
