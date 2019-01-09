@@ -260,13 +260,20 @@ Modules should be laid out in a structure that is consistent, easy for codevelop
 
 ```
 .
-+-- Private
-|   +-- Private-Function.ps1
-|   +-- Private-Function.Tests.ps1
-+-- Public
-|   +-- Public-Function.ps1
++-- src
+|   +-- Private
+|       |
+|       \-- Private-Function.ps1
+|   +-- Public
+|       |
+|       \-- Public-Function.ps1
+|
++-- Tests
+|   |
 |   +-- Public-Function.Tests.ps1
+|   \-- Private-Function.Tests.ps1
+|
 +-- SampleModule.psm1
 +-- SampleModule.psd1
-+-- readme.md (If using Github)
+\-- readme.md (If using Github)
 ```
