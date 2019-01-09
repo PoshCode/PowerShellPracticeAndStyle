@@ -254,7 +254,7 @@ $Options = @{
 
 #### Module File Layout
 
-Modules should be laid out in a structure that is consistent, easy for codevelopment, reduces merge conflicts, and makes it easier to write tests for your functions.
+Modules should be laid out in a structure that is consistent, easy for codevelopment, reduces merge conflicts, and makes it easier to write tests for your code.
 
 ##### Sample Module Layout
 
