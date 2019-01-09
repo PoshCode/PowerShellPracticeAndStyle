@@ -267,8 +267,6 @@ Modules should be laid out in a structure that is consistent, easy for codevelop
 |   +-- Public-Function.ps1
 |   +-- Public-Function.Tests.ps1
 +-- SampleModule.psm1
-|
 +-- SampleModule.psd1
-|
 +-- readme.md (If using Github)
 ```
