@@ -251,3 +251,21 @@ $Options = @{
     FontSize = 24
 }
 ```
+
+#### Module File Layout
+
+Modules should be laid out in a structure that is consistent, easy for codevelopment, reduces merge conflicts, makes it easier to write tests.
+
+##### Sample Module Layout
+
+```
+.
++-- Private
+|   +-- Private-Function.ps1
+|   +-- Private-Function.Tests.ps1
++-- Public
+|   +-- Public-Function.ps1
+|   +-- Public-Function.Tests.ps1
++-- SampleModule.psm1
++-- SampleModule.psd1
+```
