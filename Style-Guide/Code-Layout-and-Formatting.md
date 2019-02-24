@@ -69,13 +69,13 @@ If you wish, you may use camelCase for variables within your functions (or modul
 
 #### One True Brace Style
 
-This guide recommends the so-called ["One True Brace Style" variant to K&R](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/81#issuecomment-285835313), which requires that every braceable _statement_ should  have the opening brace on the _end of a line_, and the closing brace at the _beginning of a line_. 
+This guide recommends the so-called ["One True Brace Style" variant to K&R](https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/81#issuecomment-285835313), which requires that every braceable _statement_ should  have the opening brace on the _end of a line_, and the closing brace at the _beginning of a line_.
 
 There is one notable exception when passing small scriptblocks to parameters (where K&R would allow leaving off the braces entirely), we allow putting the entire statement on a single line.
 
 ```powershell
 enum Color {
-    Black, 
+    Black,
     White
 }
 
@@ -88,7 +88,7 @@ function Test-Code {
         if (10 -gt $ParameterOne) {
             "Greater"
         } else {
-            "Lesser"    
+            "Lesser"
         }
     }
 }
@@ -151,11 +151,11 @@ function Test-Code {
 
 Limit lines to 115 characters when possible.
 
-Keeping lines to a small width allows scripts to be read in _one_ direction (top to bottom) without scrolling back-and-forth horizontally. What, exactly, this width should be is a one of the favorite arguing points among developers on the internet (more splintered than emacs vs vi or gnu GPL vs MIT). 
+Keeping lines to a small width allows scripts to be read in _one_ direction (top to bottom) without scrolling back-and-forth horizontally. What, exactly, this width should be is a one of the favorite arguing points among developers on the internet (more splintered than emacs vs vi or gnu GPL vs MIT).
 
 In this guide we use two particular sources for the maximum line width:
 
-The PowerShell console is, by default, 120 characters wide, but it allows only 119 characters on output lines, and when entering multi-line text, PowerShell uses a line continuation prompt: `>>> ` and thus limits your line length to 116 anyway.  
+The PowerShell console is, by default, 120 characters wide, but it allows only 119 characters on output lines, and when entering multi-line text, PowerShell uses a line continuation prompt: `>>> ` and thus limits your line length to 116 anyway.
 
 Github's current maximum line width varies between 121 and 126 depending on your browser and OS (and thus, font). However, the 115 line length suggested by PowerShell would be enough to even allow side-by-side diffs to be displayed without scrolling or wrapping on the current "standard" 1080p monitor.
 
@@ -175,7 +175,7 @@ Surround function and class definitions with _two_ blank lines.
 
 Method definitions within a class are surrounded by a single blank line.
 
-Blank lines may be ommitted between a bunch of related one-liners (e.g. empty functions)
+Blank lines may be omitted between a bunch of related one-liners (e.g. empty functions)
 
 Additional blank lines may be used sparingly to separate groups of related functions, or within functions to indicate logical sections (e.g. before a block comment).
 
@@ -220,7 +220,7 @@ $yesterdaysDate = (Get-Date).AddDays(-$i)
 
 #### Spaces around special characters
 
-White-space is (mostly) irrelevant to PowerShell, but its proper use is key to writing easily readable code. 
+White-space is (mostly) irrelevant to PowerShell, but its proper use is key to writing easily readable code.
 
 Use a single space after commas and semicolons, and around pairs of curly braces.
 
@@ -241,7 +241,7 @@ Obviously, these rules should not be applied in such a way as to affect output.
 
 PowerShell will not complain about extra semicolons, but they are unnecessary, and can get in the way when code is being edited or copy-pasted. They also result in extra do-nothing edits in source control when someone finally decides to delete them.
 
-They are also unecessary when declaring hashtables if you are already putting each element on it's own line:
+They are also unnecessary when declaring hashtables if you are already putting each element on its own line:
 
 ```PowerShell
 # This is the preferred way to declare a hashtable if it extends past one line:

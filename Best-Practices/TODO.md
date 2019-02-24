@@ -246,7 +246,7 @@ My choice: Configuration module. Otherwise, use clixml (or XAML) to persist to A
 #### Provide aliases in your modules
 You should feel free to create and use aliases within your modules. In some cases, you can even improve readability by using an alias without the verb, or shortening command names.
 
-For exported aliases, follow the guidance of Microsoft ("ip" for import, "s" for set, "g" for get, "r" for remove, etc.), make up somethign for your nouns.
+For exported aliases, follow the guidance of Microsoft ("ip" for import, "s" for set, "g" for get, "r" for remove, etc.), make up something for your nouns.
 
 Use `New-Alias ... -ErrorAction SilentlyContinue` to avoid overwriting existing aliases.
 
@@ -293,7 +293,7 @@ Additionally, avoid using `[string]` with ParameterSets because anything can be 
 
 When passing on parameters to another command, you should be _at least_ as strongly typed as the other command, to avoid casting exceptions within your script.
 
-One notable exception is when you could accept more than one type. In PowerShell you can speficy parameter set overloads, but you can't change the type of a parameter.
+One notable exception is when you could accept more than one type. In PowerShell you can specify parameter set overloads, but you can't change the type of a parameter.
 
 
 ### Don't reinvent the wheel
