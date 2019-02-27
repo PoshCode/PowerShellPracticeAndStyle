@@ -12,7 +12,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Inter
 
 **Adapt** — remix, transform, and build upon the material
 
-The authors encourage you to redistribute this content as widely as possible, but require that you give credit to the primary authors below, and that you notify us on github of any improvements you make.
+The authors encourage you to redistribute this content as widely as possible, but require that you give credit to the primary authors below, and that you notify us on GitHub of any improvements you make.
 
 ### What are Best Practices
 
@@ -52,7 +52,7 @@ Remember [what we mean by _Best Practices_](#what-are-best-practices)
 
 The *PowerShell Best Practices* are always evolving, and continue to be edited and updated as the language and tools (and our community understanding of them) evolve. We encourage you to check back for new editions at least twice a year, by visiting [https://github.com/PoshCode/PowerShellPracticeAndStyle](https://github.com/PoshCode/PowerShellPracticeAndStyle)
 
-The *PowerShell Style Guide* in particular is in PREVIEW, and we are still actively working out our disagreements about the rules in the guide through the github issues system.
+The *PowerShell Style Guide* in particular is in PREVIEW, and we are still actively working out our disagreements about the rules in the guide through the GitHub issues system.
 
 #### Contributing
 

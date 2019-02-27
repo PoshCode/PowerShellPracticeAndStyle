@@ -2,7 +2,7 @@
 
 Comments that contradict the code are worse than no comments. Always make a priority of keeping the comments up-to-date when the code changes! 
 
-Comments should be in English, and should be complete sentences. If the comment is short, the period at the end can be ommited.  
+Comments should be in English, and should be complete sentences. If the comment is short, the period at the end can be omitted.  
 
 Remember that comments should serve to your reasoning and decision-making, not attempt to explain what a command does. With the exception of regular expressions, well-written PowerShell can be pretty self-explanatory.
 

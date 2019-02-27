@@ -8,7 +8,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Inter
 
 **Adapt** — remix, transform, and build upon the material 
 
-The authors encourage you to redistribute this content as widely as possible, but require that you give credit to the primary authors below, and that you notify us on github of any improvements you make.
+The authors encourage you to redistribute this content as widely as possible, but require that you give credit to the primary authors below, and that you notify us on GitHub of any improvements you make.
 
 
 #### Credits
@@ -29,6 +29,6 @@ Portions copyright (c) Joel Bennett, 2015
 
 The *PowerShell Best Practices* are always evolving, and continue to be edited and updated as the language and tools (and our community understanding of them) evolve. We encourage you to check back for new editions at least twice a year, by visiting [https://github.com/PoshCode/PowerShellPracticeAndStyle](https://github.com/PoshCode/PowerShellPracticeAndStyle)
 
-The *PowerShell Style Guide* in particular is in PREVIEW, and we are still actively working out our disagreements about the rules in the guide through the github issues system. Please don't be suprised if over then next few weeks we change rules to contradict what they say at this current moment.
+The *PowerShell Style Guide* in particular is in PREVIEW, and we are still actively working out our disagreements about the rules in the guide through the GitHub issues system. Please don't be surprised if over then next few weeks we change rules to contradict what they say at this current moment.
 
 <p align="center"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; float: left; vertical-align: middle; margin: 10px;"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a></p>
