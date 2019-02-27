@@ -39,7 +39,7 @@ function Write-Host {
     #>
     [CmdletBinding()]
     param(
-        [Parameter(Position=0, ValueFromPipeline=$true, ValueFromRemainingArguments=$true)]
+        [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromRemainingArguments = $true)]
         [PSObject]
         $Object,
 

@@ -149,8 +149,8 @@ It doesn't do anything, and it confuses future readers.
 When prompted for a mandatory parameter, a user can request HelpText, but can't look at the documentation. It's frequently useful to duplicate at least the first sentence or two of the parameter help.
 
 ```
-[Parameter(Position=1, Mandatory=$true, ValueFromPipeline=$true,
-ValueFromPipelineByPropertyName=$true, HelpText='The name of the file to read')]
+[Parameter(Position = 1, Mandatory = $true, ValueFromPipeline = $true,
+ValueFromPipelineByPropertyName = $true, HelpText = 'The name of the file to read')]
 [Alias('PSPath','FullName','Path')]
 [String]$File
 ```
@@ -208,7 +208,7 @@ Discuss: when is this critical (-whatif) and optional (-confirm_
 Discuss: when should you call PSCmdlet.ShouldProcess vs PSCmdlet.ShouldContinue (-Force)
 
 ```
-[CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="Medium")]
+[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
 param([Switch]$Force)
 
 $RejectAll = $false;
