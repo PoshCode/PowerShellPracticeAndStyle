@@ -159,7 +159,7 @@ The PowerShell console is, by default, 120 characters wide, but it allows only 1
 
 Github's current maximum line width varies between 121 and 126 depending on your browser and OS (and thus, font). However, the 115 line length suggested by PowerShell would be enough to even allow side-by-side diffs to be displayed without scrolling or wrapping on the current "standard" 1080p monitor.
 
-Again, this is a particularly flexible rule, and you should always follow the guidelines of projects when you're contributing to other people's pojects.  Although most of us work on widescreen monitors, not everyone can see well without magnification or extremely large fonts.
+Again, this is a particularly flexible rule, and you should always follow the guidelines of projects when you're contributing to other people's projects.  Although most of us work on widescreen monitors, not everyone can see well without magnification or extremely large fonts.
 
 The preferred way to avoid long lines is to use splatting (see [Get-Help about_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should **always** be used in preference to the backtick for line continuation when applicable, even for strings:
 
