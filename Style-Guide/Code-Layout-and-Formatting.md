@@ -25,7 +25,7 @@ PowerShell uses PascalCase for _all_ public identifiers: module names, function 
 
 PowerShell language keywords are written in lower case (yes, even `foreach` and `dynamicparam`), as well as operators such as `-eq` and `-match`. The keywords in comment-based help are written in UPPERCASE to make it easy to spot them among the dense prose of documentation.
 
-```powershell
+```PowerShell
 function Write-Host {
     <#
     .SYNOPSIS
@@ -73,7 +73,7 @@ This guide recommends the so-called ["One True Brace Style" variant to K&R](http
 
 There is one notable exception when passing small scriptblocks to parameters (where K&R would allow leaving off the braces entirely), we allow putting the entire statement on a single line.
 
-```powershell
+```PowerShell
 enum Color {
     Black,
     White
@@ -82,7 +82,7 @@ enum Color {
 function Test-Code {
     [CmdletBinding()]
     param(
-        [int]$ParameterOne
+        [Int]$ParameterOne
     )
     end {
         if (10 -gt $ParameterOne) {
@@ -113,7 +113,7 @@ end {
 }
 ```
 
-You can always delete or ignore one of the blocks (or add the `begin` block), add parameters and necessary valiation and so on, but you should **avoid** writing scripts or functions without `[CmdletBinding()]`, and you should always at least _consider_ making it take pipeline input.
+You can always delete or ignore one of the blocks (or add the `begin` block), add parameters and necessary validation and so on, but you should **avoid** writing scripts or functions without `[CmdletBinding()]`, and you should always at least _consider_ making it take pipeline input.
 
 #### Prefer: param(), begin, process, end
 
@@ -127,22 +127,22 @@ More explicit code is more maintainable. While PowerShell allows leaving off the
 
 Usually you will press the `[Tab]` key to indent, but most editors can be configured to insert spaces instead of actual tab characters. For most programming languages and editors (including PowerShell ISE) the default is four spaces, and that's what we recommend. Different teams and projects may have different standards, and when contributing to a project, you should abide by the predominant style, of course.
 
-```powershell
+```PowerShell
 function Test-Code {
-    foreach ($exponent in 1..10) {
-        [Math]::Pow(2, $exponent)
+    foreach ($Exponent in 1..10) {
+        [System.Math]::Pow(2, $Exponent)
     }
 }
 ```
 
 Indenting more than 4-spaces is acceptable for continuation lines (when you're wrapping a line which was too long). In such cases you might indent more than one level, or even indent indent an odd number of spaces to line up with a method call or parameter block on the line before.
 
-```powershell
+```PowerShell
 function Test-Code {
     foreach ($base in 1,2,4,8,16) {
         foreach ($exponent in 1..10) {
-            [System.Math]::Pow($base,
-                               $exponent)
+            [System.Math]::Pow($Base,
+                               $Exponent)
     }
 }
 ```
@@ -163,7 +163,7 @@ Again, this is a particularly flexible rule, and you should always follow the gu
 
 The preferred way to avoid long lines is to use splatting (see [Get-Help about_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should **always** be used in preference to the backtick for line continuation when applicable, even for strings:
 
-```powershell
+```PowerShell
 Write-Host ("This is an incredibly important, and extremely long message. " +
             "We cannot afford to leave any part of it out, nor do we want line-breaks in the output. " +
             "Using string concatenation lets us use short lines here, and still get a long line in the output")
@@ -193,7 +193,7 @@ One notable exception is when using colons to pass values to switch parameters:
 
 ```PowerShell
 # Do not write:
-$variable=Get-Content $FilePath -Wai:($ReadCount-gt0) -First($ReadCount*5)
+$variable=Get-Content $FilePath -Wait:($ReadCount-gt0) -First($ReadCount*5)
 
 # Instead write:
 $variable = Get-Content -Path $FilePath -Wait:($ReadCount -gt 0) -TotalCount ($ReadCount * 5)
@@ -203,19 +203,19 @@ Another exception is when using [Unary Operators](https://docs.microsoft.com/en-
 
 ```PowerShell
 # Do not write:
-$yesterdaysDate = (Get-Date).AddDays( - 1)
+$YesterdaysDate = (Get-Date).AddDays( - 1)
 
 $i = 0
 $i ++
 
 # Instead write:
-$yesterdaysDate = (Get-Date).AddDays(-1)
+$YesterdaysDate = (Get-Date).AddDays(-1)
 
 $i = 0
 $i++
 
 # Same principle should be applied when using a variable
-$yesterdaysDate = (Get-Date).AddDays(-$i)
+$YesterdaysDate = (Get-Date).AddDays(-$i)
 ```
 
 #### Spaces around special characters
@@ -228,7 +228,7 @@ Subexpressions `$( ... )` and scriptblocks `{ ... }` should have a single space 
 
 Avoid unnecessary spaces inside parenthesis or square braces.
 
-```powershell
+```PowerShell
 $Var = 1
 "This is a string with one (${Var}) delimited variable."
 
