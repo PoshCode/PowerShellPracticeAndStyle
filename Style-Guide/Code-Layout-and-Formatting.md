@@ -139,8 +139,8 @@ Indenting more than 4-spaces is acceptable for continuation lines (when you're w
 
 ```PowerShell
 function Test-Code {
-    foreach ($base in 1,2,4,8,16) {
-        foreach ($exponent in 1..10) {
+    foreach ($Base in 1,2,4,8,16) {
+        foreach ($Exponent in 1..10) {
             [System.Math]::Pow($Base,
                                $Exponent)
     }
