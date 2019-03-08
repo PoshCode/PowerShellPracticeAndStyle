@@ -82,7 +82,7 @@ enum Color {
 function Test-Code {
     [CmdletBinding()]
     param(
-        [Int]$ParameterOne
+        [int]$ParameterOne
     )
     end {
         if (10 -gt $ParameterOne) {
@@ -104,7 +104,7 @@ Because this choice was somewhat contentious in the community (about 1/3 of vote
 
 All of your scripts or functions should start life as something like this snippet:
 
-```powershell
+```PowerShell
 [CmdletBinding()]
 param()
 process {
@@ -129,8 +129,8 @@ Usually you will press the `[Tab]` key to indent, but most editors can be config
 
 ```PowerShell
 function Test-Code {
-    foreach ($Exponent in 1..10) {
-        [System.Math]::Pow(2, $Exponent)
+    foreach ($exponent in 1..10) {
+        [Math]::Pow(2, $exponent)
     }
 }
 ```
@@ -139,10 +139,10 @@ Indenting more than 4-spaces is acceptable for continuation lines (when you're w
 
 ```PowerShell
 function Test-Code {
-    foreach ($Base in 1,2,4,8,16) {
-        foreach ($Exponent in 1..10) {
-            [System.Math]::Pow($Base,
-                               $Exponent)
+    foreach ($base in 1,2,4,8,16) {
+        foreach ($exponent in 1..10) {
+            [Math]::Pow($base,
+                        $exponent)
     }
 }
 ```
@@ -203,19 +203,19 @@ Another exception is when using [Unary Operators](https://docs.microsoft.com/en-
 
 ```PowerShell
 # Do not write:
-$YesterdaysDate = (Get-Date).AddDays( - 1)
+$yesterdaysDate = (Get-Date).AddDays( - 1)
 
 $i = 0
 $i ++
 
 # Instead write:
-$YesterdaysDate = (Get-Date).AddDays(-1)
+$yesterdaysDate = (Get-Date).AddDays(-1)
 
 $i = 0
 $i++
 
 # Same principle should be applied when using a variable
-$YesterdaysDate = (Get-Date).AddDays(-$i)
+$yesterdaysDate = (Get-Date).AddDays(-$i)
 ```
 
 #### Spaces around special characters
@@ -229,8 +229,8 @@ Subexpressions `$( ... )` and scriptblocks `{ ... }` should have a single space 
 Avoid unnecessary spaces inside parenthesis or square braces.
 
 ```PowerShell
-$Var = 1
-"This is a string with one (${Var}) delimited variable."
+$var = 1
+"This is a string with one (${var}) delimited variable."
 
 "There are $( (Get-ChildItem).Count ) files."
 ```
@@ -245,7 +245,7 @@ They are also unnecessary when declaring hashtables if you are already putting e
 
 ```PowerShell
 # This is the preferred way to declare a hashtable if it extends past one line:
-$Options = @{
+$options = @{
     Margin   = 2
     Padding  = 2
     FontSize = 24
