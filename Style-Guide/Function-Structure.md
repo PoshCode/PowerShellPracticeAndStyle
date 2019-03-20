@@ -3,7 +3,7 @@
 Avoid using the `return` keyword in your functions. Just place the object variable on its own.
 
 When declaring simple functions leave a space between the function name and the parameters.
-  
+
 ```PowerShell
 function MyFunction ($param1, $param2) {
     ...  
@@ -12,14 +12,14 @@ function MyFunction ($param1, $param2) {
 
 ### Advanced Functions
 
-For Advanced Functions and scripts use the format of **<verb-<noun>** for
+For Advanced Functions and scripts use the format of **\<verb\>-\<noun\>** for
   naming. For a list of approved verbs the cmdlet `Get-Verb` will list
   them. On the noun side it can be composed of more than one joined word
   using Pascal Case and only singular nouns.
 
 In Advanced Functions do not use the keyword `return` to return an object.
 
-In Advanced Functions you return objects inside the `Process {}` block 
+In Advanced Functions you return objects inside the `Process {}` block
    and not in `Begin {}` or `End {}` since it defeats the advantage of the pipeline.
 
 ```PowerShell
@@ -82,7 +82,7 @@ function Get-USCitizenCapability {
 
 #### Always have at least a `process {}` code block if any parameters takes values from the Pipeline.
 
-#### Specify an OutputType attribute if the advanced function returns an object or collection of objects. 
+#### Specify an OutputType attribute if the advanced function returns an object or collection of objects.
 
 If the function returns different object types depending on the parameter set provide one per parameter set.
 
@@ -98,7 +98,7 @@ function Get-User {
     [CmdletBinding(DefaultParameterSetName = "ID")]
     [OutputType("System.Int32", ParameterSetName = "ID")]
     [OutputType([String], ParameterSetName = "Name")]
-    param (      
+    param (
         [parameter(Mandatory = $true, ParameterSetName = "ID")]
         [Int[]]
         $UserID,
@@ -106,14 +106,14 @@ function Get-User {
         [parameter(Mandatory = $true, ParameterSetName = "Name")]
         [String[]]
         $UserName
-    )     
+    )
     <# function body #>
 }
 ```
 
 #### When using advanced functions or scripts with CmdletBinding attribute avoid validating parameters in the body of the script when possible and use   parameter validation attributes instead.
 
-  * **AllowNull** Validation Attribute
+* **AllowNull** Validation Attribute
 
   The AllowNull attribute allows the value of a mandatory parameter to be null ($null).
 
@@ -123,10 +123,10 @@ function Get-User {
       [AllowNull()]
       [String]
       $ComputerName
-  ) 
+  )
   ```
 
-  * **AllowEmptyString** Validation Attribute
+* **AllowEmptyString** Validation Attribute
 
   The AllowEmptyString attribute allows the value of a mandatory parameter to be an empty string ("").
 
@@ -136,10 +136,10 @@ function Get-User {
       [AllowEmptyString()]
       [String]
       $ComputerName
-  ) 
+  )
   ```
 
-  * **AllowEmptyCollection** Validation Attribute
+* **AllowEmptyCollection** Validation Attribute
 
   The AllowEmptyCollection attribute allows the value of a mandatory parameter to be an empty collection (@()).
 
@@ -149,15 +149,15 @@ function Get-User {
       [AllowEmptyCollection()]
       [String[]]
       $ComputerName
-  ) 
+  )
   ```
 
-  * **ValidateCount** Validation Attribute
+* **ValidateCount** Validation Attribute
 
   The ValidateCount attribute specifies the minimum and maximum number
   of parameter values that a parameter accepts. Windows PowerShell
   generates an error if the number of parameter values in the command that
-  calls the function is outside that range. 
+  calls the function is outside that range.
 
   ```PowerShell
   param (
@@ -165,12 +165,12 @@ function Get-User {
       [ValidateCount(1,5)]
       [String[]]
       $ComputerName
-  ) 
+  )
   ```
 
-  * **ValidateLength** Validation Attribute
+* **ValidateLength** Validation Attribute
 
-  The ValidateLength attribute specifies the minimum and maximum number 
+  The ValidateLength attribute specifies the minimum and maximum number
   of characters in a parameter or variable value. Windows PowerShell generates an
   error if the length of a value specified for a parameter or a variable
   is outside of the range.
@@ -181,39 +181,41 @@ function Get-User {
       [ValidateLength(1,10)]
       [String[]]
       $ComputerName
-  ) 
+  )
   ```
 
-  * **ValidatePattern** Validation Attribute
+* **ValidatePattern** Validation Attribute
 
   The ValidatePattern attribute specifies a regular expression that
   is compared to the parameter or variable value. Windows PowerShell generates
-  an error if the value does not match the regular expression 
-  pattern. 
+  an error if the value does not match the regular expression
+  pattern.
+
   ```PowerShell
   param (
       [Parameter(Mandatory = $true)]
       [ValidatePattern("[0-9][0-9][0-9][0-9]")]
       [String[]]
       $ComputerName
-  ) 
+  )
   ```
 
-  * **ValidateRange** Validation Attribute
+* **ValidateRange** Validation Attribute
 
   The ValidateRange attribute specifies a numeric range for each
   parameter or variable value. Windows PowerShell generates an error
-  if any value is outside that range. 
+  if any value is outside that range.
+
   ```PowerShell
   param (
       [Parameter(Mandatory = $true)]
       [ValidateRange(0,10)]
       [Int]
       $Attempts
-  ) 
+  )
   ```
 
-  * **ValidateScript** Validation Attribute
+* **ValidateScript** Validation Attribute
 
   The ValidateScript attribute specifies a script that is used 
   to validate a parameter or variable value. Windows PowerShell
@@ -230,12 +232,12 @@ function Get-User {
       [ValidateScript({$_ -ge (get-date)})]
       [DateTime]
       $EventDate
-  ) 
+  )
   ```
 
-  * **ValidateSet** Attribute
+* **ValidateSet** Attribute
 
-  The ValidateSet attribute specifies a set of valid values for a 
+  The ValidateSet attribute specifies a set of valid values for a
   parameter or variable. Windows PowerShell generates an error if a
   parameter or variable value does not match a value in the set. In
   the following example, the value of the Detail parameter can only
@@ -247,36 +249,38 @@ function Get-User {
       [ValidateSet("Low", "Average", "High")]
       [String[]]
       $Detail
-  ) 
+  )
   ```
 
-  * **ValidateNotNull** Validation Attribute
+* **ValidateNotNull** Validation Attribute
 
   The ValidateNotNull attribute specifies that the parameter
   value cannot be null ($null). Windows PowerShell generates an
-  error if the parameter value is null. 
+  error if the parameter value is null.
 
   The ValidateNotNull attribute is designed to be used when the
   type of the parameter value is not specified or when the specified
   type will accept a value of Null. (If you specify a type that will
   not accept a null value, such as a string, the null value will be
   rejected without the ValidateNotNull attribute, because it does not
-  match the specified type.)  
+  match the specified type.)
+
   ```PowerShell
   param (
       [Parameter(Mandatory = $true)]
       [ValidateNotNull()]
       $ID
-  ) 
+  )
   ```
 
-  * **ValidateNotNullOrEmpty** Validation Attribute
+* **ValidateNotNullOrEmpty** Validation Attribute
 
-  The ValidateNotNullOrEmpty attribute specifies that the parameter 
+  The ValidateNotNullOrEmpty attribute specifies that the parameter
   value cannot be null ($null) and cannot be an empty string ("").
-  Windows PowerShell generates an error if the parameter is used in 
+  Windows PowerShell generates an error if the parameter is used in
   a function call, but its value is null, an empty string, or an empty
-  array.   
+  array.
+
   ```PowerShell
   param (
       [Parameter(Mandatory = $true)]
@@ -285,4 +289,3 @@ function Get-User {
       $UserName
   )
   ```
-
