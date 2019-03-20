@@ -96,6 +96,7 @@ function Test-Code {
 # An Exception case:
 Get-ChildItem | Where-Object { $_.Length -gt 10mb }
 ```
+
 The primary reason for this recommendation is practical: there are no exceptions necessary when following this rule, and when code is written following this style, _new lines_ of code can be inserted between any two lines with no risk of accidentally breaking the code by separating braces from their statement blocks. Thus, it's easier to follow, and makes errors less likely.
 
 Because this choice was somewhat contentious in the community (about 1/3 of voters opposed), it's worth adding some addition reasoning here: First: in some historical consoles, it was necessary to write this way, so much of the early PowerShell code follows this style anyway. Second: PowerShell functions which accept scriptblocks (such as `ForEach-Object` and `Where-Object`) are common, and an _inherent_ part of the syntax of important PowerShell-based domain-specific languages such as DSC. Since it's **required** to place the opening brace on the end of the line in those cases, the only _consistent_ option is to follow OTBS.
@@ -155,7 +156,7 @@ Keeping lines to a small width allows scripts to be read in _one_ direction (top
 
 In this guide we use two particular sources for the maximum line width:
 
-The PowerShell console is, by default, 120 characters wide, but it allows only 119 characters on output lines, and when entering multi-line text, PowerShell uses a line continuation prompt: `>>> ` and thus limits your line length to 116 anyway.
+The PowerShell console is, by default, 120 characters wide, but it allows only 119 characters on output lines, and when entering multi-line text, PowerShell uses a line continuation prompt: `>>>` and thus limits your line length to 116 anyway.
 
 Github's current maximum line width varies between 121 and 126 depending on your browser and OS (and thus, font). However, the 115 line length suggested by PowerShell would be enough to even allow side-by-side diffs to be displayed without scrolling or wrapping on the current "standard" 1080p monitor.
 
