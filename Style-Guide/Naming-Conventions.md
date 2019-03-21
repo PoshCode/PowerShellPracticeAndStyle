@@ -38,7 +38,7 @@ Get-Content .\README.md
 [System.IO.File]::ReadAllText(".\README.md")
 
 # Instead write:
-Get-Content (Join-Path $PSScriptRoot README.md)
+Get-Content -Path (Join-Path -Path $PSScriptRoot -ChildPath README.md)
 
 # Or even use string concatenation:
 [System.IO.File]::ReadAllText("$PSScriptRoot\README.md")
