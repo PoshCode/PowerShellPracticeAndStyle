@@ -29,13 +29,13 @@ PowerShell language keywords are written in lower case (yes, even `foreach` and 
 function Write-Host {
     <#
     .SYNOPSIS
-    Writes customized output to a host.
+        Writes customized output to a host.
     .DESCRIPTION
-    The Write-Host cmdlet customizes output. You can specify the color of text by using
-    the ForegroundColor parameter, and you can specify the background color by using the
-    BackgroundColor parameter. The Separator parameter lets you specify a string to use to
-    separate displayed objects. The particular result depends on the program that is
-    hosting Windows PowerShell.
+        The Write-Host cmdlet customizes output. You can specify the color of text by using
+        the ForegroundColor parameter, and you can specify the background color by using the
+        BackgroundColor parameter. The Separator parameter lets you specify a string to use to
+        separate displayed objects. The particular result depends on the program that is
+        hosting Windows PowerShell.
     #>
     [CmdletBinding()]
     param(
@@ -165,9 +165,11 @@ Again, this is a particularly flexible rule, and you should always follow the gu
 The preferred way to avoid long lines is to use splatting (see [Get-Help about_Splatting](https://technet.microsoft.com/en-us/library/jj672955.aspx)) and PowerShell's implied line continuation inside parentheses, brackets, and braces -- these should **always** be used in preference to the backtick for line continuation when applicable, even for strings:
 
 ```powershell
-Write-Host ("This is an incredibly important, and extremely long message. " +
-            "We cannot afford to leave any part of it out, nor do we want line-breaks in the output. " +
-            "Using string concatenation lets us use short lines here, and still get a long line in the output")
+Write-Host -InputObject ("This is an incredibly important, and extremely long message. " +
+                         "We cannot afford to leave any part of it out, " + 
+                         "nor do we want line-breaks in the output. " +
+                         "Using string concatenation lets us use short lines here, " +
+                         "and still get a long line in the output")
 ```
 
 #### Blank Lines and Whitespace
@@ -215,7 +217,7 @@ $yesterdaysDate = (Get-Date).AddDays(-1)
 $i = 0
 $i++
 
-# Same principle should be applied when using a variable
+# Same principle should be applied when using a variable.
 $yesterdaysDate = (Get-Date).AddDays(-$i)
 ```
 
