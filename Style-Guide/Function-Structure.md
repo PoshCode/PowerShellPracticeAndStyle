@@ -111,7 +111,7 @@ function Get-User {
 }
 ```
 
-#### When using advanced functions or scripts with CmdletBinding attribute avoid validating parameters in the body of the script when possible and use   parameter validation attributes instead.
+#### When using advanced functions or scripts with CmdletBinding attribute avoid validating parameters in the body of the script when possible and use parameter validation attributes instead.
 
 * **AllowNull** Validation Attribute
 
