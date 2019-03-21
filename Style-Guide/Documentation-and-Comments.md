@@ -81,7 +81,7 @@ Each parameter should be documented. To make it easier to keep the comments sync
 Examples can be found in the ISE snippets:
 
 ```PowerShell
-Param(
+param(
     # Param1 help description
     [Parameter(Mandatory = $true,
                 ValueFromPipelineByPropertyName = $true,
