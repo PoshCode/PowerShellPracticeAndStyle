@@ -14,7 +14,7 @@ gps -Name Explorer
 Get-Process -Name Explorer
 ```
 
-#### Use full parameter names. 
+#### Use full parameter names.
 
 Because there are so many commands in PowerShell, it's impossible for every scripter to know every command. Therefore it's useful to be explicit about your parameter names for the sake of readers who may be unfamiliar with the command you're using. This will also help you avoid bugs if a future change to the command alters the parameter sets.
 
@@ -44,7 +44,7 @@ Get-Content (Join-Path $PSScriptRoot README.md)
 [System.IO.File]::ReadAllText("$PSScriptRoot\README.md")
 ```
 
-##### Avoid the use of `~` to represent the home folder. 
+##### Avoid the use of `~` to represent the home folder.
 
 The meaning of ~ is unfortunately dependent on the "current" provider at the time of execution. This isn't really a style issue, but it's an important rule for code you intend to share anyway. Instead, use `${Env:UserProfile}` or `(Get-PSProvider FileSystem).Home` ...
 
@@ -58,6 +58,4 @@ At line:1 char:1
 + ~~~~
     + CategoryInfo          : InvalidOperation: (:) [Set-Location], PSInvalidOperationException
     + FullyQualifiedErrorId : InvalidOperation,Microsoft.PowerShell.Commands.SetLocationCommand
-
 ```
- 
