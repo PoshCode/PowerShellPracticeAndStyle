@@ -82,7 +82,7 @@ Each parameter should be documented. To make it easier to keep the comments sync
 Examples can be found in the ISE snippets:
 
 ```powershell
-Param(
+param (
     # Param1 help description
     [Parameter(Mandatory = $true,
                 ValueFromPipelineByPropertyName = $true,
@@ -113,7 +113,7 @@ function Test-Help {
             This shows the help for the example function
     #>
     [CmdletBinding()]
-    param(
+    param (
         # This parameter doesn't do anything.
         # Aliases: MP
         [Parameter(Mandatory = $true)]
