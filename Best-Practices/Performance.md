@@ -5,7 +5,7 @@ PowerShell comes equipped with 3.2 million performance quirks. Approximately.
 For example, the first line below executes a lot faster than the second:
 
 ```PowerShell
-[void]Do-Something
+[void](Do-Something)
 Do-Something | Out-Null
 ```
 
@@ -20,10 +20,10 @@ This is an important area for people in the PowerShell community. While everyone
 For example:
 
 ```PowerShell
-$content = Get-Content file.txt
+$content = Get-Content -Path file.txt
 
-ForEach ($line in $content) {
-  Do-Something -input $line
+foreach ($line in $content) {
+    Do-Something -Input $line
 }
 ```
 
@@ -32,9 +32,9 @@ Most folks will agree that the basic aesthetics of that example are good. This s
 Now consider this alternate approach:
 
 ```PowerShell
-Get-Content file.txt |
+Get-Content -Path file.txt |
 ForEach-Object -Process {
-  Do-Something -input $\_
+    Do-Something -Input $_
 }
 ```
 
@@ -43,25 +43,25 @@ As described elsewhere in this guide, many folks in the community would dislike 
 Some would argue that this second approach is always a poor one, and that if performance is an issue then you should devolve from a PowerShell-native approach into a lower-level .NET Framework approach:
 
 ```PowerShell
-$sr = New-Object -Type System.IO.StreamReader -Arg file.txt
+$sr = New-Object -TypeName System.IO.StreamReader -ArgumentList file.txt
 
 while ($sr.Peek() -ge 0) {
-   $line = $sr.ReadLine()
-   Do-Something -input $line
+    $line = $sr.ReadLine()
+    Do-Something -Input $line
 }
 ```
 
 There are myriad variations to this approach, of course, but it solves the performance problem by reading one line at a time, instead of buffering the entire file into memory. It maintains the structured programming approach of the first example, at the expense of using a potentially harder-to-follow .NET Framework model instead of native PowerShell commands. Many regard this third example as an intermediate step, and suggest that a truly beneficial approach would be to write PowerShell commands as "wrappers" around the .NET code. For example (noting that this fourth example uses fictional commands by way of illustration):
 
 ```PowerShell
-$handle = Open-TextFile file.txt
+$handle = Open-TextFile -Path file.txt
 
-while (-not Test-TextFile -handle $handle) {
-    Do-Something -input (Read-TextFile -handle $handle)
+while (-not (Test-TextFile -Handle $handle)) {
+    Do-Something -Input (Read-TextFile -Handle $handle)
 }
 ```
 
-This example reverts back to a native PowerShell approach, using commands and parameters. The proposed commands (Open-TextFile, Test-TextFile, and Read-TextFile) are just wrappers around .NET Framework classes, such as the StreamReader class shown in the third example.
+This example reverts back to a native PowerShell approach, using commands and parameters. The proposed commands (`Open-TextFile`, `Test-TextFile`, and `Read-TextFile`) are just wrappers around .NET Framework classes, such as the StreamReader class shown in the third example.
 
 You will generally find that it is possible to conform with the community's general aesthetic preferences while still maintaining a good level of performance. Doing so may require more work - such as writing PowerShell wrapper commands around underlying .NET Framework classes. Most would argue that, for a tool that is intended for long-term use, the additional work is a worthwhile investment.
 
