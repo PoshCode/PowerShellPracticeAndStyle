@@ -13,14 +13,18 @@ Ideally, whatever command or code you think might bomb should be dealing with on
 Try to avoid setting flags:
 
 ```PowerShell
-try {
+try
+{
     $continue = $true
     Do-Something -ErrorAction Stop
-} catch {
+}
+catch
+{
     $continue = $false
 }
 
-if ($continue) {
+if ($continue)
+{
     Do-This
     Set-That
     Get-Those
@@ -30,12 +34,15 @@ if ($continue) {
 Instead, put the entire "transaction" into the Try block:
 
 ```PowerShell
-try {
+try
+{
     Do-Something -ErrorAction Stop
     Do-This
     Set-That
     Get-Those
-} catch {
+}
+catch
+{
     Handle-Error
 }
 ```
