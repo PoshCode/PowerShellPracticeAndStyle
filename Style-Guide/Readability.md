@@ -34,7 +34,6 @@ foreach ($computer in $computers) {
 
 You will probably be reviled if you don't format carefully.
 
-
 # READ-02 Avoid backticks
 
 Consider this:
