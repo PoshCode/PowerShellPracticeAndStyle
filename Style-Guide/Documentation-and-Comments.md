@@ -80,8 +80,8 @@ Every script function command should have at least a short statement describing 
 Each parameter should be documented. To make it easier to keep the comments synchronized with changes to the parameters, the preferred location for parameter documentation comments is _within_ the `param` block, directly above each parameter.
 Examples can be found in the ISE snippets:
 
-```PowerShell
-param(
+```powershell
+param (
     # Param1 help description
     [Parameter(Mandatory = $true,
                 ValueFromPipelineByPropertyName = $true,
@@ -112,7 +112,7 @@ function Test-Help {
             This shows the help for the example function.
     #>
     [CmdletBinding()]
-    param(
+    param (
         # This parameter doesn't do anything.
         # Aliases: MP
         [Parameter(Mandatory = $true)]

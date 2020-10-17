@@ -38,7 +38,7 @@ function Write-Host {
         hosting Windows PowerShell.
     #>
     [CmdletBinding()]
-    param(
+    param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromRemainingArguments = $true)]
         [PSObject]
         $Object,
@@ -81,7 +81,7 @@ enum Color {
 
 function Test-Code {
     [CmdletBinding()]
-    param(
+    param (
         [int]$ParameterOne
     )
     end {
@@ -107,7 +107,7 @@ All of your scripts or functions should start life as something like this snippe
 
 ```powershell
 [CmdletBinding()]
-param()
+param ()
 process {
 }
 end {
@@ -116,7 +116,7 @@ end {
 
 You can always delete or ignore one of the blocks (or add the `begin` block), add parameters and necessary validation and so on, but you should **avoid** writing scripts or functions without `[CmdletBinding()]`, and you should always at least _consider_ making it take pipeline input.
 
-#### Prefer: param(), begin, process, end
+#### Prefer: param (), begin, process, end
 
 Having a script written in the order of execution makes the intent clearer. Since there is no functional reason to have these blocks out of order (they _will_ still be executed in the normal order), writing them out of order can be confusing, and makes code more difficult to maintain and debug.
 
