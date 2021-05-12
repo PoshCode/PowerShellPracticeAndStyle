@@ -1,6 +1,6 @@
 ### Naming Conventions
 
-In general, prefer the use of full explicit names for commands and parameters rather than aliases or short forms. There are tools [Expand-Alias](https://github.com/PoshCode/ModuleBuilder/blob/master/ResolveAlias.psm1) for fixing many, but not all of these issues.
+In general, prefer the use of full explicit names for commands and parameters rather than aliases or short forms. There are tools [Expand-Alias](https://github.com/PoshCode/ModuleBuilder/blob/master/PotentialContribution/ResolveAlias.psm1) for fixing many, but not all of these issues.
 
 #### Use the full name of each command.
 
