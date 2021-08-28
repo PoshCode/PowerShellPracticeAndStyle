@@ -1,6 +1,6 @@
 ### Naming Conventions
 
-In general, prefer the use of full explicit names for commands and parameters rather than aliases or short forms. There are tools [Expand-Alias](https://github.com/PoshCode/ModuleBuilder/blob/master/PotentialContribution/ResolveAlias.psm1) for fixing many, but not all of these issues.
+In general, prefer the use of full explicit names for commands and parameters rather than aliases or short forms. There are tools like [PSScriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer)'s `Invoke-Formatter` and scripts like [Expand-Alias](https://github.com/PoshCode/ModuleBuilder/blob/master/PotentialContribution/ResolveAlias.psm1) for fixing many, but not all of these issues.
 
 #### Use the full name of each command.
 
@@ -59,3 +59,10 @@ At line:1 char:1
     + CategoryInfo          : InvalidOperation: (:) [Set-Location], PSInvalidOperationException
     + FullyQualifiedErrorId : InvalidOperation,Microsoft.PowerShell.Commands.SetLocationCommand
 ```
+
+
+#### Use lowercase for keywords and operators
+
+For clarity, we recommend always using lowercase for keywords and operators, as they will be more easily distinguished from non-keyword use of the same text.
+
+PowerShell is rarely case sensitive, and certainly is not case sensitive about keywords or operators. However, keywords are frequently duplicated by methods and cmdlet names (see for example `foreach` and `ForEach-Object` and `.ForEach(...)`) which are always PascalCase. Operators are also frequently duplicated by parameters (see for example most of the parameters on `Where-Object`).
