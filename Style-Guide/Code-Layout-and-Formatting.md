@@ -38,22 +38,17 @@ function Write-Host {
         hosting Windows PowerShell.
     #>
     [CmdletBinding()]
-    param (
+    param(
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromRemainingArguments = $true)]
-        [PSObject]
-        $Object,
+        [psobject]$Object,
 
-        [Switch]
-        $NoNewline,
+        [switch]$NoNewline,
 
-        [PSObject]
-        $Separator,
+        [psobject]$Separator,
 
-        [System.ConsoleColor]
-        $ForegroundColor,
+        [System.ConsoleColor]$ForegroundColor,
 
-        [System.ConsoleColor]
-        $BackgroundColor
+        [System.ConsoleColor]$BackgroundColor
     )
     begin {
     ...
@@ -166,7 +161,7 @@ The preferred way to avoid long lines is to use splatting (see [Get-Help about_S
 
 ```powershell
 Write-Host -Object ("This is an incredibly important, and extremely long message. " +
-                         "We cannot afford to leave any part of it out, " + 
+                         "We cannot afford to leave any part of it out, " +
                          "nor do we want line-breaks in the output. " +
                          "Using string concatenation lets us use short lines here, " +
                          "and still get a long line in the output")

@@ -28,7 +28,9 @@ Get-Process -Name Explorer
 
 #### Use full, explicit paths when possible.
 
-When writing scripts, it's really only safe to use `..` or `.` in a path if you have previously explicitly set the location (within the script), and even then you should beware of using relative paths when calling .Net methods or legacy/native applications, because they will use the `[Environment]::CurrentDirectory` rather than PowerShell's present working directory (`$PWD`). Because checking for these types of errors is tedious (and because they are easy to over-look) it's best to avoid using relative paths altogether, and instead, base your paths off of $PSScriptRoot (the folder your script is in) when necessary.
+When writing scripts, it is only safe to use `..` or `.` in a path if you have previously set the location explicitly (within the current function or script). Even if you _have_ explictly set the path, you must beware of using relative paths when calling .Net methods or legacy/native applications, because they will use `[Environment]::CurrentDirectory` which is not automatically updated to PowerShell's present working directory (`$PWD`).
+
+Because troubleshooting these types of errors is tedious (and they are easy to over-look) it's best to avoid using relative paths altogether, and instead, base your paths off of $PSScriptRoot (the folder your script is in) when necessary.
 
 ```PowerShell
 # Do not write:
@@ -37,11 +39,23 @@ Get-Content .\README.md
 # Especially do not write:
 [System.IO.File]::ReadAllText(".\README.md")
 
-# Instead write:
-Get-Content -Path (Join-Path -Path $PSScriptRoot -ChildPath README.md)
 
-# Or even use string concatenation:
+# Although you can write:
+Push-Location $PSScriptRoot
+Get-Content README.md
+
+# It would be better to write:
+Get-Content -Path (Join-Path -Path $PSScriptRoot -ChildPath README.md)
+# Or to use string concatenation:
+Get-Content "$PSScriptRoot\README.md"
+
+# For calling .net methods, pass full paths:
 [System.IO.File]::ReadAllText("$PSScriptRoot\README.md")
+
+# Optionally by calling Convert-Path
+Push-Location $PSScriptRoot
+[System.IO.File]::ReadAllText((Convert-Path README.md))
+
 ```
 
 ##### Avoid the use of `~` to represent the home folder.
@@ -52,7 +66,7 @@ The meaning of ~ is unfortunately dependent on the "current" provider at the tim
 PS C:\Windows\system32> cd ~
 PS C:\Users\Name> cd HKCU:\Software
 PS HKCU:\Software> cd ~
-cd : Home location for this provider is not set. To set the home location, call "(get-psprovider 'Registry').Home = 'path'".
+cd : Home location for this provider is not set. To set the home location, call "(Get-PSProvider 'Registry').Home = 'path'".
 At line:1 char:1
 + cd ~
 + ~~~~
@@ -61,8 +75,6 @@ At line:1 char:1
 ```
 
 
-#### Use lowercase for keywords and operators
+#### See also the Capitalization Conventions
 
-For clarity, we recommend always using lowercase for keywords and operators, as they will be more easily distinguished from non-keyword use of the same text.
-
-PowerShell is rarely case sensitive, and certainly is not case sensitive about keywords or operators. However, keywords are frequently duplicated by methods and cmdlet names (see for example `foreach` and `ForEach-Object` and `.ForEach(...)`) which are always PascalCase. Operators are also frequently duplicated by parameters (see for example most of the parameters on `Where-Object`).
+In the Code Layout and Formatting chapter, there is a section on [capitalization conventions](\PowerShellPracticeAndStyle\Style-Guide\Code-Layout-and-Formatting.md#Capitalization-Conventions) which are
