@@ -16,6 +16,7 @@ One final note about these Best Practices: the perspective of these guidelines h
 
 - [Naming Conventions](Naming-Conventions.md)
 - [Building Reusable Tools](Building-Reusable-Tools.md)
+- [Writing Parameter Blocks](Writing-Parameter-Blocks.md)
 - [Output and Formatting](Output-and-Formatting.md)
 - [Error Handling](Error-Handling.md)
 - [Performance](Performance.md)
