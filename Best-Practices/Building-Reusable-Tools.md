@@ -1,54 +1,58 @@
-# TOOL-01 Decide whether you're coding a 'tool' or a 'controller' script
+# TOOL-01 Decide whether you're coding a 'command' or a 'script'
 
-For this discussion, it's important to have some agreed-upon terminology. While the terminology here isn't used universally, the community generally agrees that several types of "script" exist:
+For this discussion, it's important to have some agreed-upon terminology. While these terms aren't used universally, and have evolved over time, the PowerShell community generally agrees that at least a couple of different types of powershell code exist.
 
-1. Some scripts contain tools, when are meant to be reusable. These are typically functions or advanced functions, and they are typically contained in a script module or in a function library of some kind. These tools are designed for a high level of re-use.
-2. Some scripts are controllers, meaning they are intended to utilize one or more tools (functions, commands, etc) to automate a specific business process. A script is not intended to be reusable; it is intended to make use of reuse by leveraging functions and other commands
+1. Reusable commands. Sometimes we create (advanced) functions and package them in script modules. Functions are usually small and granular, and perform a single action. Like a PowerShell cmdlet, they can support the pipeline, and output objects which might be passed to other commands. PowerShell modules are the primary way of redistributing reusable commands, as they support packaging, publishing for discovery, and installing.
+2. Replayable scripts. Sometimes we create scripts to automate a business processes in a reliable, repeatable way. Scripts leverage functions and cmdlets from PowerShell modules, or even native command-line interface (CLI) tools, but aren't necessarily intended to be reused the same way. Common examples are CI/CD build and deployment scripts, provisioning scripts, and scheduled tasks for maintenance or reporting.
 
-For example, you might write a "New-CorpUser" script, which provisions new users. In it, you might call numerous commands and functions to create a user account, mailbox-enable them, provision a home folder, and so on. Those discrete tasks might also be used in other processes, so you build them as functions. The script is only intended to automate that one process, and so it doesn't need to exhibit reusability concepts. It's a standalone thing.
-
-Controllers, on the other hand, often produce output directly to the screen (when designed for interactive use), or may log to a file (when designed to run unattended).
-
+Let's take an example. You might write a "New-ContosoUser.ps1" script to automate part of the on-boarding process for new employees. In it, you might validate business rules about the user's name, call a command like `New-ADUser` to create a user account, enable their email with another command, provision a home folder, and turn on backups, etc. Those discrete tasks might also be used in other processes, so you build them as functions in modules (or you might use commands from modules provided by your email server, or written by third parties). The script, however, is only intended to automate the process of on-boarding new users at your company. It's not "generic" and not necessarily reusable by someone at another company or even another team.
 
 # TOOL-02 Make your code modular
 
-Generally, people tend to feel that most working code - that is, your code which does things - should be modularized into functions and ideally stored in script modules.
+Most working code should be broken down into functions (or compiled "cmdlets") performing a single action, accepting input only via parameters and producing output only as objects of a single type.
 
-That makes those functions more easily re-used. Those functions should exhibit a high level of reusability, such as accepting input only via parameters and producing output only as objects to the pipeline
+# TOOL-03 Make commands as re-usable as possible
 
+When writing script functions or compiled cmdlets, you should accept input only from parameters and should produce any output as objects to the pipeline. This not only makes functions easy to re-use, but also easy to test. When possible, avoid creating or reading global or environment variables.
 
-# TOOL-03 Make tools as re-usable as possible
+# TOOL-04 Use PowerShell standard command names
 
-Tools should accept input from parameters and should (in most cases) produce any output to the pipeline; this approach helps maximize reusability.
+Follow the verb-noun naming convention, using singular nouns and the standard PowerShell verbs.
 
-# TOOL-04 Use PowerShell standard cmdlet naming 
+You can get a list of the verbs by running `Get-Verb` at the command line.
 
-Use the verb-noun convention, and use the PowerShell standard verbs.
+# TOOL-05 Use PowerShell standard parameter naming
 
-You can get a list of the verbs by typing 'get-verb' at the command line.
+Commands should be consistent with PowerShell native cmdlets in regards to parameter naming. This means capitalizing with PascalCase, using singular names, and matching the property name of related objects or similar names on other commands. It also means being sensitive to fact when using your command, people have to type enough to distinguish between parameters, so unique first letters are valued.
 
-# TOOL-05 Use PowerShell standard parameter naming 
+For example, credentials are always `$Credential` and not `$UserCreds` or `$Creds`, the server name is always `$ComputerName` even when it accepts a lot of servers, rather than `$ServerName` or `$Servers` or `$Computers` ...
 
-Tools should be consistent with PowerShell native cmdlets in regards parameter naming.
+# TOOL-06 Commands should output raw data
 
-For example, use $ComputerName and $ServerInstance rather than something like $Param_Computer or $InstanceName
+The PowerShell community generally agrees that tools should output raw data. That is, the output from internal APIs you're calling should be manipulated as little as possible. If a tool retrieves information represented as a number of bytes, it should output bytes, rather than converting that value to megabytes or some other unit of measure. Having a tool output less-manipulated data helps the tool remain reusable in a larger number of situations, and avoids confusing users who are familiar with the underlying APIs.
 
-# TOOL-06 Tools should output raw data
+# TOOL-07 Scripts may output formatted data
 
-The community generally agrees that tools should output raw data. That is, their output should be manipulated as little as possible. If a tool retrieves information represented in bytes, it should output bytes, rather than converting that value to another unit of measure. Having a tool output less-manipulated data helps the tool remain reusable in a larger number of situations.
+Scripts, on the other hand, may reformat or manipulate data because their goal is not to reusability, and they need only be consistent, and produce human-readable output.
 
-# TOOL-07 Controllers should typically output formatted data
+For example, a function named Get-DiskInfo ought to return disk size information in bytes, because that's the very granular unit of measurement that the operating system offers. A script that was creating an inventory of free disk space might only output the formatted gigabyte value, because that unit of measurement is the most convenient for the people who will view the inventory report.
 
-Controllers, on the other hand, may reformat or manipulate data because controllers do not aim to be reusable; they instead aim to do as good a job as possible at a particular task.
+# TOOL-08 Leverage the formatting engine for formatted data
 
-For example, a function named Get-DiskInfo would return disk sizing information in bytes, because that's the most-granular unit of measurement the operating system offers. A controller that was creating an inventory of free disk space might translate that into gigabytes, because that unit of measurement is the most convenient for the people who will view the inventory report.
+PowerShell supports formatting via configuration in format files. When creating a module, you can specify in the manifest a `.format.ps1xml` file which defines views, and those can manipulate the data and control the default view used by PowerShell to display the output. The format file does not manipulate the underlying data, so the raw data is available for any purpose.
 
-An intermediate step is useful for tools that are packaged in script modules: views. By building a manifest for the module, you can have the module also include a custom .format.ps1xml view definition file. The view can specify manipulated data values, such as the default view used by PowerShell to display the output of Get-Process. The view does not manipulate the underlying data, leaving the raw data available for any purpose.
+# TOOL-09 Leverage extensibility for enhancing data
+
+PowerShell also supports extending objects via configuration in type files. When creating a module, you can specify in the manifest a `.types.ps1xml` file which defines new properties and methods to be applied to specific types. You can use this when you want to create a whole new property to summarize or reformat information available in the object. See for example the "Mode" column on PowerShell Get-ChildItem output, or the "ParametersString" property on Azures ResourceGroupDeployment objects.
+
+# TOOL-10 Leverage Modules for Distribution
+
+The built-in PowerShellGet commands support publishing and installing to and from not just the public [PowerShellGallery](https://PowerShellGallery.com), but also internal fileshares or private package servers such as [ProGet](https://inedo.com/proget), [Sonatype nexus](https://www.sonatype.com/products/repository-oss), or Azure and Github's NuGet package repositoris (PowerShell packages are NuGet compatible).
 
 
 # WAST-01 Don't re-invent the wheel
 
-There are a number of approaches in PowerShell that will "get the job done." In some cases, other community members may have already written the code to achieve your objectives. If that code meets your needs, then you might save yourself some time by leveraging it, instead of writing it yourself.
+There are a number of approaches in PowerShell that will "get the job done." In some cases, other community members may have already written the code to achieve your objectives. If that code meets your needs, then you can save yourself some time by leveraging it, instead of writing it yourself.
 
 For example:
 
@@ -78,29 +82,6 @@ It has been argued by some that, "I didn't know such-and-such existed, so I wrot
 On the flip side, it's important to note that writing your own code from the ground up can be useful if you are trying to learn a particular concept, or if you have specific needs that are not offered by another existing solution.
 
 
-# WAST-02 Report bugs to Microsoft
+# WAST-02 Report bugs to Microsoft (and third party module authors)
 
 An exception: if you know that a built-in technique doesn't work properly (e.g., it is buggy or doesn't accomplish the exact task), then obviously it's fine to re-invent the wheel. However, in cases where you're doing so to avoid a bug or design flaw, then you should - as an upstanding member of the community - report the bug on [github.com/powershell](https://github.com/PowerShell/PowerShell/issues) also.
-
-
-TODO: The "PURE" section is dubious at best. We need to discuss it.
-
-
-# PURE-01 Use native PowerShell where possible
-
-This means not using COM, .NET Framework classes, and so on when there is a native Windows PowerShell command or technique that gets the job done.
-
-# PURE-03 Document why you haven't used PowerShell
-
-So when is it okay to move from one item on this list to another? Obviously, if a task can't be accomplished with a more-preferred way, you move on to a less-preferred way.
-
-If a less-preferred approach offers far superior performance, and performance is a potential issue, then go for the better-performing approach. For example, Robocopy is superior in nearly every way to Copy-Item, and there are probably numerous circumstances where Robocopy would do a much better job.
-
-Document the reason for using tools other than PowerShell in your comments.
-
-# PURE-04 Wrap other tools in an advanced function or cmdlet
-
-That said, you truly become a better PowerShell person if you take the time to wrap a less-preferred way in an advanced function or cmdlet. Then you get the best of both worlds: the ability to reach outside the shell itself for functionality, while keeping the advantages of native commands.
-
-Ignorance, however, is no excuse. If you've written some big wrapper function around Ping.exe simply because you were unaware of Test-Connection, then you've wasted a lot of time, and that is not commendable. Before you move on to a less-preferred approach, make sure the shell doesn't already have a way to do what you're after.
-

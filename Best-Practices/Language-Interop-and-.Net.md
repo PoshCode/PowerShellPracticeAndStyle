@@ -1,44 +1,44 @@
-# VER-01 Write for the lowest version of PowerShell that you can
+# VER-01 Write for as many versions of PowerShell as you can
 
-As a rule, write for the lowest PowerShell version that you can, especially with scripts that you plan to share with others. Doing so provides the broadest compatibility for other folks.
+The advice here has changed much since the advent of PowerShell "Core" and the new [lifecycle of PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/powershell-support-lifecycle?view=powershell-7.1#lifecycle-of-powershell-7).
 
-That said, don't sacrifice functionality or performance just to stick with an older version. If you can safely write for a higher version (meaning you've deployed it everywhere the script will need to run), then take advantage of that version. Keep in mind that some newer features that seem like window dressing might actually have underlying performance benefits. For example, in PowerShell v3:
+> Since the open sourcing of PowerShell, PowerShell no longer ships with Windows, which means that "Windows PowerShell 5.1" remains in service long after it should otherwise have been replaced. All versions previous to that are long out of mainstream support (although 5.0 will technically be in "extended" support until at least October of 2023).
+
+Because of this change, we highly recommend that you write code targeting both Windows PowerShell 5.1 and the latest LTS release of PowerShell (as of this writting, that's PowerShell 7.0). Of course, you should also test your code on at least Windows and Linux as well (try WSL!), which means testing in a minimum of three versions (5.1 on Windows, 7.0 on Windows and Linux), and ideally on OS X. It's not too hard with GitHub actions.
+
+Don't sacrifice functionality or performance just to maintain compatibility with an older version. If you can safely write for a higher version in your environment (meaning you've deployed it everywhere the script will need to run), feel free to take advantage of that version. Keep in mind that many features that seem like window dressing actually have underlying performance benefits.
+
+For example, in PowerShell v3 the "simple" syntax for `Where-Object` was introduced, and it's not just cleaner, it's also much faster.
+
+Then in PowerShell v5, the "Where" method was introduced, which is faster still, despite using the old FilterScript syntax.
 
 ```PowerShell
-Get-Service | Where-Object -FilterScript { $\_.Status -eq 'Running' }
+Get-Service | Where-Object -FilterScript { $_.Status -eq 'Running' }
 ```
 
-Will run significantly slower than:
+Runs slower than:
 
 ```PowerShell
 Get-Service | Where Status -eq Running
 ```
 
-because of the way the two different syntaxes have to be processed under the hood.
-
-_Further information:_ You can get some detail on the differences between versions of Powershell by typing `help about\Windows\PowerShell\2.0` (or 3.0 or 4.0) in Powershell
-
-# VER-02 Document the version of PowerShell the script was written for
-
-All that said, make sure you specify the version of PowerShell you wrote for by using an appropriate `#requires` statement:
+Runs slower than:
 
 ```PowerShell
-#requires -version 3.0
+(Get-Service).Where{ $_.Status -eq 'Running' }
 ```
 
-The `#requires` statement will prevent the script from running on the wrong version of PowerShell.
+# VER-02 Document the versions and platforms of PowerShell that you've tested
 
-### PowerShell Supported Version
+All that said, make sure you specify the minimum version of PowerShell you wrote.
 
-When working in an environment where there are multiple versions of PowerShell make sure to specify the lowest version your script will support by prividing a Requires statement at the top of the script.
+For scripts, this means using an appropriate `#requires` statement:
 
 ```PowerShell
-    #Requires -Version 2.0
+#requires -version 5.1 -PSEdition Core, Desktop
 ```
 
-When a _module_ uses specific cmdlets or syntax that is only present on a specific minimum version of PowerShell in the module manifest ps1d file.
+For modules, there are `PowerShellVersion` and `CompatiblePSEditions` properties in the module manifest.
 
-```PowerShell
-    PowerShellVersion = '3.0'
-```
+Note that the version and PSEdition are somewhat redundant. The PSEdition can only be "Core" (meaning PowerShell 6+) or "Desktop" (meaning Windows PowerShell), and there's no version of "Desktop" edition higher than 5.1.x, and no version of "Core" lower than 6.0. Worse, you cannot require a specific OS -- except for Windows by requiring `PSEdition` to be `Desktop`. It is possible to use the magic variables `$IsLinux`, `$IsWindows`, and `$IsMacOS` to test for an OS and throw an exception on load, but there is no metadata for that, so most people assume that if you support `PSEdition` = `Core` then you're cross-platform as well.
 
