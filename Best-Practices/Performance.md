@@ -2,14 +2,16 @@
 
 PowerShell comes equipped with 3.2 million performance quirks. Approximately.
 
-For example, the first line below executes a lot faster than the second:
+If you're aware of multiple techniques to accomplish something, and you're writing a production script that will be dealing with large data sets (meaning performance will become a cumulative factor), then test the performance using Measure-Command or the Profiler module, or some other tool.
+
+For example:
 
 ```PowerShell
-[void](Do-Something)
-Do-Something | Out-Null
+foreach($result in Do-Something) { $result.PropertyOne + $result.PropertyTwo }
+Do-Something | ForEach-Object { $_.PropertyOne + $_.PropertyTwo }
 ```
 
-If you're aware of multiple techniques to accomplish something, and you're writing a production script that will be dealing with large data sets (meaning performance will become a cumulative factor), then test the performance using Measure-Command or some other tool.
+In this case, the `foreach` language construct is faster than piping to the `ForEach-Object` cmdlet -- but the point is that you should measure, and do so on the hardware and PowerShell version where the performance matters to you.
 
 # PERF-02 Consider trade-offs between performance and readability
 
@@ -66,3 +68,14 @@ This example reverts back to a native PowerShell approach, using commands and pa
 You will generally find that it is possible to conform with the community's general aesthetic preferences while still maintaining a good level of performance. Doing so may require more work - such as writing PowerShell wrapper commands around underlying .NET Framework classes. Most would argue that, for a tool that is intended for long-term use, the additional work is a worthwhile investment.
 
 The moral here is that both aesthetic and performance are important considerations, and without some work context, neither is inherently more important than the other. It is often possible, with the right technique, to satisfy both. As a general practice, you should avoid giving up on aesthetics solely because of performance concerns - when possible, make the effort to satisfy both performance and aesthetics.
+
+# PERF-03 Language > Framework > Script > Pipeline
+
+This is just a rough guideline, but as a general rule:
+
+1. Language features are faster than features of the .net framework
+2. Compiled methods on objects and .net classes are still faster than script
+3. Simple PowerShell script is still faster than calling functions or cmdlets
+
+It's counter-intuitive that script is faster than calling cmdlets that are compiled, but it's frequently true, unless there is a lot of work being done by each cmdlet. The overhead of calling cmdlets and passing data around is significant. Of course, this is just a guideline, and you should always **measure**.
+
