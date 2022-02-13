@@ -77,4 +77,4 @@ At line:1 char:1
 
 #### See also the Capitalization Conventions
 
-In the Code Layout and Formatting chapter, there is a section on [capitalization conventions](\PowerShellPracticeAndStyle\Style-Guide\Code-Layout-and-Formatting.md#Capitalization-Conventions) which are
+In the Code Layout and Formatting chapter, there is a section on [capitalization conventions](Code-Layout-and-Formatting.md#Capitalization-Conventions).
