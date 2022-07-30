@@ -30,7 +30,7 @@ The `#requires` statement will prevent the script from running on the wrong vers
 
 ### PowerShell Supported Version
 
-When working in an environment where there are multiple versions of PowerShell make sure to specify the lowest version your script will support by prividing a Requires statement at the top of the script.
+When working in an environment where there are multiple versions of PowerShell make sure to specify the lowest version your script will support by providing a Requires statement at the top of the script.
 
 ```PowerShell
     #Requires -Version 2.0
