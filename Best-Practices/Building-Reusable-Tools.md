@@ -13,7 +13,7 @@ Controllers often produce output directly to the screen (when designed for inter
 
 Generally, people tend to feel that most working code - that is, your code which does things - should be modularized into functions and ideally stored in script modules.
 
-That makes those functions more easily reused. Those functions should exhibit a high level of reusability, such as accepting input only via parameters and producing output only as objects to the pipeline
+That makes those functions more easily reused. Those functions should exhibit a high level of reusability, such as accepting input only via parameters and producing output only as objects to the pipeline.
 
 # TOOL-03 Make tools as re-usable as possible
 
@@ -29,7 +29,7 @@ You can get a list of the verbs by typing 'get-verb' at the command line.
 
 Tools should be consistent with PowerShell native cmdlets in regards parameter naming.
 
-For example, use $ComputerName and $ServerInstance rather than something like $Param_Computer or $InstanceName
+For example, use $ComputerName and $ServerInstance rather than something like $Param_Computer or $InstanceName.
 
 # TOOL-06 Tools should output raw data
 
