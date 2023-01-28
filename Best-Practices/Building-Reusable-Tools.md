@@ -9,13 +9,11 @@ For example, you might write a "New-CorpUser" script, which provisions new users
 
 Controllers often produce output directly to the screen (when designed for interactive use), or may log to a file (when designed to run unattended).
 
-
 # TOOL-02 Make your code modular
 
 Generally, people tend to feel that most working code - that is, your code which does things - should be modularized into functions and ideally stored in script modules.
 
 That makes those functions more easily reused. Those functions should exhibit a high level of reusability, such as accepting input only via parameters and producing output only as objects to the pipeline
-
 
 # TOOL-03 Make tools as re-usable as possible
 
@@ -44,7 +42,6 @@ Controllers, on the other hand, may reformat or manipulate data because controll
 For example, a function named Get-DiskInfo would return disk sizing information in bytes, because that's the most-granular unit of measurement the operating system offers. A controller that was creating an inventory of free disk space might translate that into gigabytes, because that unit of measurement is the most convenient for the people who will view the inventory report.
 
 An intermediate step is useful for tools that are packaged in script modules: views. By building a manifest for the module, you can have the module also include a custom .format.ps1xml view definition file. The view can specify manipulated data values, such as the default view used by PowerShell to display the output of Get-Process. The view does not manipulate the underlying data, leaving the raw data available for any purpose.
-
 
 # WAST-01 Don't re-invent the wheel
 
@@ -77,14 +74,11 @@ It has been argued by some that, "I didn't know such-and-such existed, so I wrot
 
 On the flip side, it's important to note that writing your own code from the ground up can be useful if you are trying to learn a particular concept, or if you have specific needs that are not offered by another existing solution.
 
-
 # WAST-02 Report bugs to Microsoft
 
 An exception: if you know that a built-in technique doesn't work properly (e.g., it is buggy or doesn't accomplish the exact task), then obviously it's fine to re-invent the wheel. However, in cases where you're doing so to avoid a bug or design flaw, then you should - as an upstanding member of the community - report the bug on [github.com/powershell](https://github.com/PowerShell/PowerShell/issues) also.
 
-
 TODO: The "PURE" section is dubious at best. We need to discuss it.
-
 
 # PURE-01 Use native PowerShell where possible
 
@@ -103,4 +97,3 @@ Document the reason for using tools other than PowerShell in your comments.
 That said, you truly become a better PowerShell person if you take the time to wrap a less-preferred way in an advanced function or cmdlet. Then you get the best of both worlds: the ability to reach outside the shell itself for functionality, while keeping the advantages of native commands.
 
 Ignorance, however, is no excuse. If you've written some big wrapper function around Ping.exe simply because you were unaware of Test-Connection, then you've wasted a lot of time, and that is not commendable. Before you move on to a less-preferred approach, make sure the shell doesn't already have a way to do what you're after.
-
