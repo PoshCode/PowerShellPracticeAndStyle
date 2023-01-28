@@ -94,7 +94,7 @@ Get-ChildItem | Where-Object { $_.Length -gt 10mb }
 
 The primary reason for this recommendation is practical: there are no exceptions necessary when following this rule, and when code is written following this style, _new lines_ of code can be inserted between any two lines with no risk of accidentally breaking the code by separating braces from their statement blocks. Thus, it's easier to follow, and makes errors less likely.
 
-Because this choice was somewhat contentious in the community (about 1/3 of voters opposed), it's worth adding some additional reasoning here: First: in some historical consoles, it was necessary to write this way, so much of the early PowerShell code follows this style anyway. Second: PowerShell functions which accept scriptblocks (such as `ForEach-Object` and `Where-Object`) are common, and an _inherent_ part of the syntax of important PowerShell-based domain-specific languages such as DSC. Since it's **required** to place the opening brace on the end of the line in those cases, the only _consistent_ option is to follow OTBS.
+Because this choice was somewhat contentious in the community (about 1/3 of voters opposed), it's worth adding some additional reasoning here. First, in some historical consoles, it was necessary to write this way, so much of the early PowerShell code follows this style anyway. Second, PowerShell functions which accept scriptblocks (such as `ForEach-Object` and `Where-Object`) are common, and an _inherent_ part of the syntax of important PowerShell-based domain-specific languages such as DSC. Since it's **required** to place the opening brace on the end of the line in those cases, the only _consistent_ option is to follow OTBS.
 
 #### Always Start With CmdletBinding
 
