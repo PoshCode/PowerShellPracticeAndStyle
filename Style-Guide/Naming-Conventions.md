@@ -30,7 +30,7 @@ Get-Process -Name Explorer
 
 When writing scripts, it is only safe to use `..` or `.` in a path if you have previously set the location explicitly (within the current function or script). Even if you _have_ explictly set the path, you must beware of using relative paths when calling .NET methods or legacy/native applications, because they will use `[Environment]::CurrentDirectory` which is not automatically updated to PowerShell's present working directory (`$PWD`).
 
-Because troubleshooting these types of errors is tedious (and they are easy to over-look) it's best to avoid using relative paths altogether, and instead, base your paths off of $PSScriptRoot (the folder your script is in) when necessary.
+Because troubleshooting these types of errors is tedious (and they are easy to over-look), it's best to avoid using relative paths altogether, and instead, base your paths off of $PSScriptRoot (the folder your script is in) when necessary.
 
 ```PowerShell
 # Do not write:
