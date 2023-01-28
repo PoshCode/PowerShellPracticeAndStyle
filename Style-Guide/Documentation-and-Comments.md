@@ -73,7 +73,7 @@ If you want to provide detailed explanations about how your tool works, use the 
 
 ##### Describe The Function
 
-Every script function command should have at least a short statement describing it's function. That is the `Synopsis`.
+Every script function command should have at least a short statement describing its function. That is the `Synopsis`.
 
 ##### Document Each Parameter
 
