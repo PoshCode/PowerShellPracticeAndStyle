@@ -155,7 +155,7 @@ function Get-User {
 * **ValidateCount** Validation Attribute
 
   The ValidateCount attribute specifies the minimum and maximum number
-  of parameter values that a parameter accepts. Windows PowerShell
+  of parameter values that a parameter accepts. PowerShell
   generates an error if the number of parameter values in the command that
   calls the function is outside that range.
 
@@ -171,7 +171,7 @@ function Get-User {
 * **ValidateLength** Validation Attribute
 
   The ValidateLength attribute specifies the minimum and maximum number
-  of characters in a parameter or variable value. Windows PowerShell generates an
+  of characters in a parameter or variable value. PowerShell generates an
   error if the length of a value specified for a parameter or a variable
   is outside of the range.
 
@@ -187,7 +187,7 @@ function Get-User {
 * **ValidatePattern** Validation Attribute
 
   The ValidatePattern attribute specifies a regular expression that
-  is compared to the parameter or variable value. Windows PowerShell generates
+  is compared to the parameter or variable value. PowerShell generates
   an error if the value does not match the regular expression
   pattern.
 
@@ -203,7 +203,7 @@ function Get-User {
 * **ValidateRange** Validation Attribute
 
   The ValidateRange attribute specifies a numeric range for each
-  parameter or variable value. Windows PowerShell generates an error
+  parameter or variable value. PowerShell generates an error
   if any value is outside that range.
 
   ```PowerShell
@@ -218,7 +218,7 @@ function Get-User {
 * **ValidateScript** Validation Attribute
 
   The ValidateScript attribute specifies a script that is used 
-  to validate a parameter or variable value. Windows PowerShell
+  to validate a parameter or variable value. PowerShell
   pipes the value to the script, and generates an error if the
   script returns "false" or if the script throws an exception.
 
@@ -238,7 +238,7 @@ function Get-User {
 * **ValidateSet** Attribute
 
   The ValidateSet attribute specifies a set of valid values for a
-  parameter or variable. Windows PowerShell generates an error if a
+  parameter or variable. PowerShell generates an error if a
   parameter or variable value does not match a value in the set. In
   the following example, the value of the Detail parameter can only
   be "Low," "Average," or "High."
@@ -255,7 +255,7 @@ function Get-User {
 * **ValidateNotNull** Validation Attribute
 
   The ValidateNotNull attribute specifies that the parameter
-  value cannot be null ($null). Windows PowerShell generates an
+  value cannot be null ($null). PowerShell generates an
   error if the parameter value is null.
 
   The ValidateNotNull attribute is designed to be used when the
@@ -277,7 +277,7 @@ function Get-User {
 
   The ValidateNotNullOrEmpty attribute specifies that the parameter
   value cannot be null ($null) and cannot be an empty string ("").
-  Windows PowerShell generates an error if the parameter is used in
+  PowerShell generates an error if the parameter is used in
   a function call, but its value is null, an empty string, or an empty
   array.
 
