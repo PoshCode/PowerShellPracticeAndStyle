@@ -60,7 +60,7 @@ Push-Location $PSScriptRoot
 
 ##### Avoid the use of `~` to represent the home folder.
 
-The meaning of ~ is unfortunately dependent on the "current" provider at the time of execution. This isn't really a style issue, but it's an important rule for code you intend to share anyway. Instead, use `${Env:UserProfile}` or `(Get-PSProvider -PSProvider FileSystem).Home` ...
+The meaning of ~ is unfortunately dependent on the "current" provider at the time of execution. This isn't really a style issue, but it's an important rule for code you intend to share anyway. Instead, use `${Env:UserProfile}` or `(Get-PSProvider -PSProvider FileSystem).Home`.
 
 ```PowerShell
 PS C:\Windows\system32> cd ~
