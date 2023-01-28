@@ -49,7 +49,7 @@ Get-Content -Path (Join-Path -Path $PSScriptRoot -ChildPath README.md)
 # Or to use string concatenation:
 Get-Content "$PSScriptRoot\README.md"
 
-# For calling .net methods, pass full paths:
+# For calling .NET methods, pass full paths:
 [System.IO.File]::ReadAllText("$PSScriptRoot\README.md")
 
 # Optionally by calling Convert-Path
