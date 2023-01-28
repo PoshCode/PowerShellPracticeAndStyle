@@ -98,7 +98,7 @@ It is also possible to write `.PARAMETER` statements with the rest of the docume
 
 ##### Provide Usage Examples
 
-Your help should always provide an example for each major use case. A 'usage example' is just an example of what you would type in to Powershell to run the script - you can even cut and paste one from the command line while you're testing your function.
+Your help should always provide an example for each major use case. A 'usage example' is just an example of what you would type in to PowerShell to run the script - you can even cut and paste one from the command line while you're testing your function.
 
 ```PowerShell
 function Test-Help {
@@ -171,4 +171,4 @@ Comment-based help is displayed when the user types `help Get-Example` or `Get-E
 
 Your help should be helpful. That is, if you've written a tool called `Get-LOBAppUser`, don't write help that merely says, "Gets LOB App Users." Duh.
 
-**Further information:** You can get more on the use of comment-based help by typing `help about_Comment_Based_Help` within Powershell.
+**Further information:** You can get more on the use of comment-based help by typing `help about_Comment_Based_Help` within PowerShell.
