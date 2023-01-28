@@ -260,7 +260,7 @@ function Get-User {
 
   The ValidateNotNull attribute is designed to be used when the
   type of the parameter value is not specified or when the specified
-  type will accept a value of Null. (If you specify a type that will
+  type will accept a value of null. (If you specify a type that will
   not accept a null value, such as a string, the null value will be
   rejected without the ValidateNotNull attribute, because it does not
   match the specified type.)
