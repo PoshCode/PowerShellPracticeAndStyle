@@ -27,7 +27,7 @@ You can get a list of the verbs by typing 'get-verb' at the command line.
 
 # TOOL-05 Use PowerShell standard parameter naming 
 
-Tools should be consistent with PowerShell native cmdlets in regards parameter naming.
+Tools should be consistent with PowerShell native cmdlets in regard to parameter naming.
 
 For example, use $ComputerName and $ServerInstance rather than something like $Param_Computer or $InstanceName.
 
