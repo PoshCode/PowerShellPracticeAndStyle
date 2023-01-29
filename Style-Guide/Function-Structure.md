@@ -80,7 +80,7 @@ function Get-USCitizenCapability {
 
 #### Always use CmdletBinding attribute.
 
-#### Always have at least a `process {}` code block if any parameters takes values from the Pipeline.
+#### Always have at least a `process {}` code block if any parameters takes values from the pipeline.
 
 #### Specify an OutputType attribute if the advanced function returns an object or collection of objects.
 
