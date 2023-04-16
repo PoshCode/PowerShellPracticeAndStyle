@@ -6,7 +6,7 @@ TODO: This whole document is STILL ROUGH DRAFT
 
 Previous to PowerShell 5, Write-Host has no functionality at all in non-interactive scripts. It cannot be captured or redirected, and therefore should only be used in functions which are "Show"ing or "Format"ing output, or to display something as part of an interactive prompt to the user.
 
-That is: you should not use Write-Host to create script output unless your script (or function, or whatever) uses the Show verb (as in, Show-Performance) or the Format verb (as in, Format-Hex), or has a `-Formatted` switch parameter. You may also use it to build a interactions with the user in other cases (e.g. to write extra information to the screen before prompting the user for a choice or input).
+That is: you should not use Write-Host to create script output unless your script (or function, or whatever) uses the Show verb (as in, Show-Performance) or the Format verb (as in, Format-Hex), or has a `-Formatted` switch parameter. You may also use it to build interactions with the user in other cases (e.g. to write extra information to the screen before prompting the user for a choice or input).
 
 Generally, you should consider the other Write-* commands first when trying to give information to the user.
 
@@ -22,7 +22,7 @@ You should use verbose output for information that contains details about the va
 
 ## Use Write-Debug to give information to someone maintaining your script
 
-You should use the debug output stream for output that is useful for script debugging (ie: "Now entering main loop" or "Result was null, skipping to end of loop"), or to display the value of a variable before a conditional statement, so the maintainer can break into the debugger if necessary.
+You should use the debug output stream for output that is useful for script debugging (e.g.: "Now entering main loop" or "Result was null, skipping to end of loop"), or to display the value of a variable before a conditional statement, so the maintainer can break into the debugger if necessary.
 
 > TIP: When debugging you should be aware that you can set `$DebugPreference = "Continue"` to see this information on screen without entering a breakpoint prompt.
 
