@@ -48,7 +48,7 @@ When you combine the output of multiple types objects, they should generally be 
 
 ### Two important exceptions to the single-type rule
 
-**For internal functions** it's ok to return multiple different types because they won't be "output" to the user/host, and can offer significant savings (e.g. one database call with three table joins, instead of three database calls with two or three joins each).  You can then call these functions and assign the output to multiple variables, like so:
+**For internal functions** it's ok to return multiple different types because they won't be "output" to the user/host, and can offer significant savings (e.g., one database call with three table joins, instead of three database calls with two or three joins each).  You can then call these functions and assign the output to multiple variables, like so:
 
 ```PowerShell
 $user, $group, $org = Get-UserGroupOrg
