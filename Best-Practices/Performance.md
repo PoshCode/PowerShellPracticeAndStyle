@@ -78,4 +78,3 @@ This is just a rough guideline, but as a general rule:
 3. Simple PowerShell script is still faster than calling functions or cmdlets
 
 It's counter-intuitive that script is faster than calling cmdlets that are compiled, but it's frequently true, unless there is a lot of work being done by each cmdlet. The overhead of calling cmdlets and passing data around is significant. Of course, this is just a guideline, and you should always **measure**.
-
