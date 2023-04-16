@@ -36,7 +36,7 @@ function Test-Help {
 ```
 ### Always Document Every Parameter
 
-You should always provide at least a brief explanation of each parameter, what it's expected or allowed values are, etc.
+You should always provide at least a brief explanation of each parameter, what its expected or allowed values are, etc.
 
 The best place for this is a simple comment directly above the parameter (inside the param block) so you don't forget to update it if you remove, rename, or otherwise change the parameter, but you can also place them in the comment help block by using `.PARAMETER ParameterName` and writing the help on the next line.
 
@@ -50,9 +50,9 @@ There are a few specific advanced cases where you might want to write an old-fas
 
 If you have more than one ParameterSetName on your parameters, you should specify one of them as the `DefaultParameterSetName` in the CmdletBinding.
 
-## You should support --whatif
+## You should support -WhatIf
 
-If you write a command that changes state, you should probably add `SupportsShouldProcess` to your CmdletBinding. This allows users to specify `-WhatIf` and `-Confirm` when calling your command, so you'll need to actually support those by using `$PSCmdlet.ShouldProcess(...)` or `$PSCmdlet.ShouldContinue(...)` or by passing the preference variable on to other commands you're calling (e.g. `-Whatif:$WhatIfPreference`).
+If you write a command that changes state, you should probably add `SupportsShouldProcess` to your CmdletBinding. This allows users to specify `-WhatIf` and `-Confirm` when calling your command, so you'll need to actually support those by using `$PSCmdlet.ShouldProcess(...)` or `$PSCmdlet.ShouldContinue(...)` or by passing the preference variable on to other commands you're calling (e.g., `-Whatif:$WhatIfPreference`).
 
 Here's an example of what that might look like:
 
@@ -63,13 +63,13 @@ Here's an example of what that might look like:
 param([switch]$Force)
 
 # You need to pre-define these (because they're passed by [ref])
-$RejectAll = $false;
-$ConfirmAll = $false;
+$RejectAll = $false
+$ConfirmAll = $false
 
 # Note: please don't actually do this with services, restarting them in non-dependency order would be a nightmare...
 foreach ($service in Get-Service | Where Status -eq "Running") {
     # This will normally automatically be TRUE. It will only query if the user:
-    # 1. Has their $ConfirmPreference (default High) set LOWER or equal to the ConfirmImpact in the cmdlet binding (default Medium)
+    # 1. Has their $ConfirmPreference (default High) set LOWER than or equal to the ConfirmImpact in the cmdlet binding (default Medium)
     # 2. Passes -Confirm, which sets the $ConfirmPreference in the function's scope to Low
     if ($PSCmdlet.ShouldProcess( "Restarted the service '$($service.Name)'",
                                  "Restart the '$($service.DisplayName)' service ($($service.Name))?",
@@ -93,13 +93,11 @@ foreach ($service in Get-Service | Where Status -eq "Running") {
 
 Although PowerShell is a dynamic language, we can specify types, and in parameters, it's particularly useful.
 
-
 First, because it hints to users what sort of values they can pass to your command. Is it numeric? Text? An object?
 
 Second, because using types on parameters helps validate the input, which is crucial because parameters are where you get your user input. Strong types can help you avoid code injection and other problems with user inputs, and will allow failures to happen as early as possible (even before your command is called).
 
-Additionally, when passing on parameters to another command, you should be _at least_ as strongly typed as the other command, to avoid casting exceptions within your script.
-
+Additionally, when passing on parameters to another command, they should be _at least_ as strongly typed as the other command, to avoid casting exceptions within your script.
 
 ### Be careful with `[string]` or `[object]` (and `[PSObject]`)
 
@@ -121,7 +119,6 @@ Parameters of type `[switch]` support passing as switches (without a value), and
 - Switch parameters should be designed so that setting them moves a command from its default functionality to a less common or more complicated mode.
 - Switch parameters should be treated as boolean values in your scripts. Corrolary: you should not write logic that depends on whether or not the user explicitly passed a value to a switch -- do not attempt to treat a switch as having three states!
 - When you need to pass the value of a switch on to another command, you can either splat it, or specify it using the colon syntax for parameters, as in `-TheirSwitch:$MySwitch`
-
 
 ## Be generous with accept ValueFromPipelineByPropertyName
 
