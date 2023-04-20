@@ -7,7 +7,7 @@ If you're aware of multiple techniques to accomplish something, and you're writi
 For example:
 
 ```PowerShell
-foreach($result in Do-Something) { $result.PropertyOne + $result.PropertyTwo }
+foreach ($result in Do-Something) { $result.PropertyOne + $result.PropertyTwo }
 Do-Something | ForEach-Object { $_.PropertyOne + $_.PropertyTwo }
 ```
 
@@ -40,7 +40,7 @@ ForEach-Object -Process {
 }
 ```
 
-As described elsewhere in this guide, many folks in the community would dislike this approach for aesthetic reasons. However, this approach has the advantage of utilizing PowerShell's pipeline to "stream" the content in file.txt. Provided that the fictional "Do-Something" command isn't blocking the pipeline (a la Sort-Object), the shell can send lines of content (String objects, technically) through the pipeline in a continuous stream, rather than having to buffer them all into memory.
+As described elsewhere in this guide, many folks in the community would dislike this approach for aesthetic reasons. However, this approach has the advantage of utilizing PowerShell's pipeline to "stream" the content in file.txt. Provided that the fictional "Do-Something" command isn't blocking the pipeline (à la Sort-Object), the shell can send lines of content (String objects, technically) through the pipeline in a continuous stream, rather than having to buffer them all into memory.
 
 Some would argue that this second approach is always a poor one, and that if performance is an issue then you should devolve from a PowerShell-native approach into a lower-level .NET Framework approach:
 
@@ -73,9 +73,8 @@ The moral here is that both aesthetic and performance are important consideratio
 
 This is just a rough guideline, but as a general rule:
 
-1. Language features are faster than features of the .net framework
-2. Compiled methods on objects and .net classes are still faster than script
+1. Language features are faster than features of the .NET Framework
+2. Compiled methods on objects and .NET classes are still faster than script
 3. Simple PowerShell script is still faster than calling functions or cmdlets
 
 It's counter-intuitive that script is faster than calling cmdlets that are compiled, but it's frequently true, unless there is a lot of work being done by each cmdlet. The overhead of calling cmdlets and passing data around is significant. Of course, this is just a guideline, and you should always **measure**.
-

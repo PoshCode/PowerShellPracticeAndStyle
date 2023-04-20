@@ -16,11 +16,11 @@ param (
 )
 ```
 
-If you absolutely must pass a password in a plain string to a .Net API call or a third party library it is better to decrypt the credential as it is being passed instead of saving it in a variable.
+If you absolutely must pass a password in a plain string to a .NET API call or a third party library, it is better to decrypt the credential as it is being passed instead of saving it in a variable.
 
 ```PowerShell
     # Get the cleartext password for a method call:
-    $Insecure.SetPassword( $Credentials.GetNetworkCredential().Password )
+    $Insecure.SetPassword($Credentials.GetNetworkCredential().Password)
 ```
 
 #### Other Secure Strings
@@ -32,10 +32,10 @@ Note, if you ever need to turn a SecureString into a string, you can use this me
 
 ```PowerShell
     # Decrypt a secure string.
-    $BSTR = [System.Runtime.InteropServices.marshal]::SecureStringToBSTR($this);
-    $plaintext = [System.Runtime.InteropServices.marshal]::PtrToStringAuto($BSTR);
-    [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR);
-    return $plaintext
+    $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($this)
+    $plaintext = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
+    [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR)
+    $plaintext
 ```
 
 * For credentials that need to be saved to disk, serialize the credential object using
@@ -63,4 +63,3 @@ computer where it was generated.
     # Read the Standard String from disk and convert to a SecureString
     $Secure = Get-Content -Path "${Env:AppData}\Sec.bin" | ConvertTo-SecureString
 ```
-

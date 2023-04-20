@@ -28,9 +28,9 @@ Get-Process -Name Explorer
 
 #### Use full, explicit paths when possible.
 
-When writing scripts, it is only safe to use `..` or `.` in a path if you have previously set the location explicitly (within the current function or script). Even if you _have_ explictly set the path, you must beware of using relative paths when calling .Net methods or legacy/native applications, because they will use `[Environment]::CurrentDirectory` which is not automatically updated to PowerShell's present working directory (`$PWD`).
+When writing scripts, it is only safe to use `..` or `.` in a path if you have previously set the location explicitly (within the current function or script). Even if you _have_ explictly set the path, you must beware of using relative paths when calling .NET methods or legacy/native applications, because they will use `[Environment]::CurrentDirectory` which is not automatically updated to PowerShell's present working directory (`$PWD`).
 
-Because troubleshooting these types of errors is tedious (and they are easy to over-look) it's best to avoid using relative paths altogether, and instead, base your paths off of $PSScriptRoot (the folder your script is in) when necessary.
+Because troubleshooting these types of errors is tedious (and they are easy to over-look), it's best to avoid using relative paths altogether, and instead, base your paths off of $PSScriptRoot (the folder your script is in) when necessary.
 
 ```PowerShell
 # Do not write:
@@ -49,7 +49,7 @@ Get-Content -Path (Join-Path -Path $PSScriptRoot -ChildPath README.md)
 # Or to use string concatenation:
 Get-Content "$PSScriptRoot\README.md"
 
-# For calling .net methods, pass full paths:
+# For calling .NET methods, pass full paths:
 [System.IO.File]::ReadAllText("$PSScriptRoot\README.md")
 
 # Optionally by calling Convert-Path
@@ -60,7 +60,7 @@ Push-Location $PSScriptRoot
 
 ##### Avoid the use of `~` to represent the home folder.
 
-The meaning of ~ is unfortunately dependent on the "current" provider at the time of execution. This isn't really a style issue, but it's an important rule for code you intend to share anyway. Instead, use `${Env:UserProfile}` or `(Get-PSProvider -PSProvider FileSystem).Home` ...
+The meaning of ~ is unfortunately dependent on the "current" provider at the time of execution. This isn't really a style issue, but it's an important rule for code you intend to share anyway. Instead, use `${Env:UserProfile}` or `(Get-PSProvider -PSProvider FileSystem).Home`.
 
 ```PowerShell
 PS C:\Windows\system32> cd ~

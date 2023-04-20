@@ -21,7 +21,7 @@ PowerShell is **not** case sensitive, but we follow capitalization conventions t
 * PascalCase - capitalize the first letter of each word
 * camelCase - capitalize the first letter of each word _except_ the first.
 
-PowerShell uses PascalCase for _all_ public identifiers: module names, function or cmdlet names, class, enum, and attribute names, public fields or properties, global variables and constants, etc. In fact, since the _parameters_ to PowerShell commands are actually _properties_ of .Net classes, even parameters use PascalCase rather than camelCase.
+PowerShell uses PascalCase for _all_ public identifiers: module names, function or cmdlet names, class, enum, and attribute names, public fields or properties, global variables and constants, etc. In fact, since the _parameters_ to PowerShell commands are actually _properties_ of .NET classes, even parameters use PascalCase rather than camelCase.
 
 PowerShell language keywords are written in lower case (yes, even `foreach` and `dynamicparam`), as well as operators such as `-eq` and `-match`. The keywords in comment-based help are written in UPPERCASE to make it easy to spot them among the dense prose of documentation.
 
@@ -94,7 +94,7 @@ Get-ChildItem | Where-Object { $_.Length -gt 10mb }
 
 The primary reason for this recommendation is practical: there are no exceptions necessary when following this rule, and when code is written following this style, _new lines_ of code can be inserted between any two lines with no risk of accidentally breaking the code by separating braces from their statement blocks. Thus, it's easier to follow, and makes errors less likely.
 
-Because this choice was somewhat contentious in the community (about 1/3 of voters opposed), it's worth adding some additional reasoning here: First: in some historical consoles, it was necessary to write this way, so much of the early PowerShell code follows this style anyway. Second: PowerShell functions which accept scriptblocks (such as `ForEach-Object` and `Where-Object`) are common, and an _inherent_ part of the syntax of important PowerShell-based domain-specific languages such as DSC. Since it's **required** to place the opening brace on the end of the line in those cases, the only _consistent_ option is to follow OTBS.
+Because this choice was somewhat contentious in the community (about 1/3 of voters opposed), it's worth adding some additional reasoning here. First, in some historical consoles, it was necessary to write this way, so much of the early PowerShell code follows this style anyway. Second, PowerShell functions which accept scriptblocks (such as `ForEach-Object` and `Where-Object`) are common, and an _inherent_ part of the syntax of important PowerShell-based domain-specific languages such as DSC. Since it's **required** to place the opening brace on the end of the line in those cases, the only _consistent_ option is to follow OTBS.
 
 #### Always Start With CmdletBinding
 
