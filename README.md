@@ -48,7 +48,7 @@ The guidelines are divided into these sections:
 
 ### Current State:
 
-Remember [what we mean by _Best Practices_](#what-are-best-practices)
+Remember [what we mean by _Best Practices_](#what-are-best-practices).
 
 The *PowerShell Best Practices* are always evolving, and continue to be edited and updated as the language and tools (and our community understanding of them) evolve. We encourage you to check back for new editions at least twice a year, by visiting [https://github.com/PoshCode/PowerShellPracticeAndStyle](https://github.com/PoshCode/PowerShellPracticeAndStyle).
 
