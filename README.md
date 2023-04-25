@@ -43,7 +43,7 @@ The guidelines are divided into these sections:
   * [Error Handling](Best-Practices/Error-Handling.md)
   * [Performance](Best-Practices/Performance.md)
   * [Security](Best-Practices/Security.md)
-  * [Language, Interop and .Net](Best-Practices/Language-Interop-and-.Net.md)
+  * [Language, Interop and .Net](Best-Practices/Language-Interop-and-.NET.md)
   * [Metadata, Versioning, and Packaging](Best-Practices/Metadata-Versioning-and-Packaging.md)
 
 ### Current State:
