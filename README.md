@@ -50,7 +50,7 @@ The guidelines are divided into these sections:
 
 Remember [what we mean by _Best Practices_](#what-are-best-practices)
 
-The *PowerShell Best Practices* are always evolving, and continue to be edited and updated as the language and tools (and our community understanding of them) evolve. We encourage you to check back for new editions at least twice a year, by visiting [https://github.com/PoshCode/PowerShellPracticeAndStyle](https://github.com/PoshCode/PowerShellPracticeAndStyle)
+The *PowerShell Best Practices* are always evolving, and continue to be edited and updated as the language and tools (and our community understanding of them) evolve. We encourage you to check back for new editions at least twice a year, by visiting [https://github.com/PoshCode/PowerShellPracticeAndStyle](https://github.com/PoshCode/PowerShellPracticeAndStyle).
 
 The *PowerShell Style Guide* in particular is in PREVIEW, and we are still actively working out our disagreements about the rules in the guide through the GitHub issues system.
 
@@ -58,11 +58,11 @@ The *PowerShell Style Guide* in particular is in PREVIEW, and we are still activ
 
 Please use the issues system or GitHub pull requests to make corrections, contributions, and other changes to the text - we welcome your contributions!
 
-For more information, see [CONTRIBUTING](CONTRIBUTING.md)
+For more information, see [CONTRIBUTING](CONTRIBUTING.md).
 
 #### Credits
 
-_The Community Book of PowerShell Practices_ was originally compiled and edited by Don Jones and Matt Penny with input from the Windows PowerShell community on PowerShell.org
+_The Community Book of PowerShell Practices_ was originally compiled and edited by Don Jones and Matt Penny with input from the Windows PowerShell community on PowerShell.org.
 
 Portions copyright (c) Don Jones, Matt Penny, 2014-2015
 
