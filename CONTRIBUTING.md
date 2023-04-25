@@ -1,6 +1,6 @@
 ## Contributing
 
-Are you interested in helping create the style guide, or do you just want to change a specific rule? You may use the issues system or Github pull requests freely to suggests corrections and simple changes to rules. However, if you want to add a completely new rule, or totally change a rule, please open an issue and let us discuss it!
+Are you interested in helping create the style guide, or do you just want to change a specific rule? You may use the issues system or Github pull requests freely to suggest corrections and simple changes to rules. However, if you want to add a completely new rule, or totally change a rule, please open an issue and let us discuss it!
 
 ### Tone
 
