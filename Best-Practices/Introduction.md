@@ -21,5 +21,5 @@ One final note about these Best Practices: the perspective of these guidelines h
 - [Error Handling](Error-Handling.md)
 - [Performance](Performance.md)
 - [Security](Security.md)
-- [Language, Interop and .Net](Language-Interop-and-.Net.md)
+- [Language, Interop, and .NET](Language-Interop-and-.NET.md)
 - [Metadata, Versioning, and Packaging](Metadata-Versioning-and-Packaging.md)
