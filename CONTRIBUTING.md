@@ -33,7 +33,7 @@ To repeat from the ReadMe, the guidelines are divided into these sections:
   * [Error Handling](Best-Practices/Error-Handling.md)
   * [Performance](Best-Practices/Performance.md)
   * [Security](Best-Practices/Security.md)
-  * [Language, Interop and .Net](Best-Practices/Language-Interop-and-.Net.md)
+  * [Language, Interop, and .NET](Best-Practices/Language-Interop-and-.NET.md)
   * [Metadata, Versioning, and Packaging](Best-Practices/Metadata-Versioning-and-Packaging.md)
 
 Markdown documents on GitHub support linking within a document, but only to headers, so when editing, in addition to keeping practices and guidelines in the documents where they make sense, please use headlines for each guideline, and lower level headlines for rationale, examples, counter examples, and exceptions.
